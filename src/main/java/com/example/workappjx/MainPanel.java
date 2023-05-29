@@ -5,14 +5,19 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDate;
-
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class MainPanel{
@@ -41,16 +46,17 @@ public class MainPanel{
     public DatePicker dateTime;
     public Person person;
 
-    public LocalDate getLocalDate;
+    public static LocalDate getLocalDate;
+
+    @FXML
+    public VBox workTimeDataPanel;
+
+
 
     public Person getPerson() {
         return person;
     }
 
-    public void returnData(){
-        System.out.println("Data: " + getLocalDate);
-//        return getLocalDate;
-    }
 
     public void mainPanel() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
@@ -115,34 +121,56 @@ public class MainPanel{
 
     }
 
-    public void createWorkPanel() throws IOException {
-//        try {
-//            FXMLLoader fxmlLoader = new FXMLLoader();
-//            fxmlLoader.setLocation(getClass().getResource("addWorkTime.fxml"));
-//            /*
-//             * if "fx:controller" is not set in fxml
-//             * fxmlLoader.setController(NewWindowController);
-//             */
-//            Stage stage = (Stage) addWorkTimeButton.getScene().getWindow();
-//            Scene scene = new Scene(fxmlLoader.load(), 300, 400);
-//            stage.setTitle("New Window");
-//            stage.setScene(scene);
-//            stage.show();
-//        } catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
-//        FXMLLoader fxmlLoader = new FXMLLoader();
-//        fxmlLoader.setLocation(getClass().getResource("addWorkTime.fxml"));
-//        Scene secondScene = new Scene(fxmlLoader.load(), 300, 400);
-//        Stage Secondstage = new Stage();
-//        Secondstage.setTitle("Add Work Time");
-//        Secondstage.setScene(secondScene);
-//        Secondstage.show();
+    public void showWorkTimeData(){
+        Person person = LoginPanelController.getPersonData();
+        LocalDate localDate = dateTime.getValue();
+        if(localDate == null) return;
+        System.out.println("Person ID: " + person.getId());
+        LoadWorkTimeData loadWorkTimeData = new LoadWorkTimeData();
+        List<WorkTime> workTimeList = loadWorkTimeData.dbConnection(person.getId());
+        System.out.println("Dlugość tablicy workTime: " + workTimeList.size());
+        workTimeDataPanel.getChildren().clear();
+        for (WorkTime workTime : workTimeList) {
+            if(localDate.isEqual(workTime.getDate())){
+                FlowPane pane = new FlowPane();
+                Text data = new Text("DATA \n" + workTime.getDate());
+                Text startTime = new Text("START \n" + workTime.getStart_time());
+                Text endTime = new Text("END \n" + workTime.getEnd_time());
+                pane.getChildren().add(data);
+                pane.getChildren().add(startTime);
+                pane.getChildren().add(endTime);
+                workTimeDataPanel.getChildren().add(pane);
+            }
 
-        AddWorkTime workTimePanel = new AddWorkTime();
-        workTimePanel.testLocalDate = dateTime.getValue();
-        System.out.println("workTimePanel: " + workTimePanel.testLocalDate);
-
-        workTimePanel.addWorkTimeWindow();
+        }
     }
+
+    public void createWorkPanel() throws IOException {
+
+//        AddWorkTime workTimePanel = new AddWorkTime();
+////        workTimePanel.testLocalDate = dateTime.getValue();
+////        System.out.println("workTimePanel: " + workTimePanel.testLocalDate);
+//        getLocalDate = dateTime.getValue();
+//        workTimePanel.addWorkTimeWindow();
+
+
+//
+//        System.out.println("PANEL PRÓBUJE SIĘ DODAĆ!");
+//
+//        Text test1 = new Text("Test text");
+//        Text test2 = new Text("Test2 \n test");
+//        pane.getChildren().add(test1);
+//        pane.getChildren().add(test2);
+//        workTimeDataPanel.getChildren().add(pane);
+//
+//        FlowPane pane2 = new FlowPane();
+//        Text test3 = new Text("Kolejny text");
+//        Text test4 = new Text("test text");
+//        pane2.getChildren().add(test3);
+//        pane2.getChildren().add(test4);
+//        workTimeDataPanel.getChildren().add(pane2);
+
+    }
+
+
 }

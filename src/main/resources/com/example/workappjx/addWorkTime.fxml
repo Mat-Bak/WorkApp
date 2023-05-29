@@ -25,7 +25,7 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <Button layoutX="97.0" layoutY="345.0" mnemonicParsing="false" onAction="#showData" prefHeight="41.0" prefWidth="110.0" text="Submit" />
+      <Button fx:id="addDataButton" layoutX="97.0" layoutY="345.0" mnemonicParsing="false" onAction="#getWorkTime" prefHeight="41.0" prefWidth="110.0" text="Submit" />
       <ComboBox fx:id="startMinutsBox" layoutX="177.0" layoutY="49.0" prefHeight="32.0" prefWidth="80.0" promptText="Minuts" visibleRowCount="5" />
       <ComboBox fx:id="startHourBox" layoutX="52.0" layoutY="49.0" prefHeight="32.0" prefWidth="80.0" promptText="Hour" visibleRowCount="5" />
       <ComboBox fx:id="endMinutsBox" layoutX="175.0" layoutY="145.0" prefHeight="32.0" prefWidth="80.0" promptText="Minuts" visibleRowCount="5" />

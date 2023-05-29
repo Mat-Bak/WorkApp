@@ -5,6 +5,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -12,7 +14,6 @@ import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class AddWorkTime implements Initializable {
@@ -37,15 +38,12 @@ public class AddWorkTime implements Initializable {
 
     public LocalDate testLocalDate;
 
-    SaveTimeWorkData saveTimeWorkData = new SaveTimeWorkData();
+    @FXML
+    public Pane dataPane;
 
+    @FXML public Button addDataButton;
 
-    public AddWorkTime(int startHour, int startMinuts, int endHour, int endMinuts) {
-        this.startHour = startHour;
-        this.startMinuts = startMinuts;
-        this.endHour = endHour;
-        this.endMinuts = endMinuts;
-    }
+    SaveWorkTimeData saveTimeWorkData = new SaveWorkTimeData();
 
     public AddWorkTime() {
 
@@ -73,7 +71,9 @@ public class AddWorkTime implements Initializable {
     }
 
     public void showData(){
-        System.out.println("Date: " + testLocalDate);
+        MainPanel mainPanel = new MainPanel();
+        System.out.println("Get date from main panel: " + MainPanel.getLocalDate);
+
     }
 
     public void getWorkTime(){
@@ -85,10 +85,10 @@ public class AddWorkTime implements Initializable {
 
 
         String address = "test";
+        MainPanel mainPanel = new MainPanel();
 //        LocalDate localDate = dateTime.getValue();
         String comment = commentField.getText();
-        MainPanel mainPanel = new MainPanel();
-        LocalDate localDate = mainPanel.dateTime.getValue();
+        LocalDate localDate = MainPanel.getLocalDate;
         Person person = LoginPanelController.getPersonData();
         int user_id = person.getId();
 
@@ -101,6 +101,17 @@ public class AddWorkTime implements Initializable {
         long minuts = duration.toMinutes()%60;
         WorkTime workTime = new WorkTime(address,localDate,startWork, endWork,comment,user_id);
         saveTimeWorkData.connectWorkTimeDatabase(workTime);
+
+        dataPane = new Pane();
+        dataPane.prefWidth(400);
+        dataPane.prefHeight(54);
+        Text start_H = new Text(startWork.toString());
+        Text end_H = new Text(endWork.toString());
+        dataPane.getChildren().add(start_H);
+        dataPane.getChildren().add(end_H);
+
+
+
 
         System.out.println("Work Time Saved!");
     }
