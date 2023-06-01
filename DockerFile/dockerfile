@@ -1,0 +1,13 @@
+# Ustawiamy obraz bazowy
+FROM mysql:latest
+
+# Ustawiamy zmienne środowiskowe
+ENV MYSQL_ROOT_PASSWORD=1234qwer
+ENV MYSQL_DATABASE=workapp-mysql
+ENV MYSQL_USER=admin
+ENV MYSQL_PASSWORD=admin
+
+COPY init.sql /docker-entrypoint-initdb.d/
+
+# Port, na którym nasłuchuje baza danych
+EXPOSE 3306
