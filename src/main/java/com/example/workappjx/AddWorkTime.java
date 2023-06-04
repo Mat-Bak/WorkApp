@@ -17,10 +17,6 @@ import java.time.LocalTime;
 import java.util.ResourceBundle;
 
 public class AddWorkTime implements Initializable {
-    public int startHour;
-    public int startMinuts;
-    public int endHour;
-    public int endMinuts;
 
     @FXML
     public ComboBox startHourBox;
@@ -30,13 +26,10 @@ public class AddWorkTime implements Initializable {
     public ComboBox startMinutsBox;
     @FXML
     public ComboBox endMinutsBox;
-    @FXML
-    public DatePicker dateTime;
 
     @FXML
     public TextArea commentField;
 
-    public LocalDate testLocalDate;
 
     @FXML
     public Pane dataPane;
@@ -110,7 +103,8 @@ public class AddWorkTime implements Initializable {
         dataPane.getChildren().add(start_H);
         dataPane.getChildren().add(end_H);
 
-
+        Stage stage = (Stage) addDataButton.getScene().getWindow();
+        stage.close();
 
 
         System.out.println("Work Time Saved!");

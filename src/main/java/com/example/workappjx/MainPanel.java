@@ -109,17 +109,12 @@ public class MainPanel{
 
     public void getDataTime(){
 
-//        getLocalDate = dateTime.getValue();
         getLocalDate = dateTime.getValue();
         System.out.println("MainPanel Data: " + getLocalDate);
-//        if(localDate != null){
-//            System.out.println("Data: " + localDate);
-//            System.out.println("Day: " + localDate.getDayOfMonth());
-//            System.out.println("Month: " + localDate.getMonth().toString());
-//            System.out.println("Year: " +localDate.getYear());
-//        }
+
 
     }
+
 
     public void showWorkTimeData(){
         Person person = LoginPanelController.getPersonData();
@@ -147,29 +142,9 @@ public class MainPanel{
 
     public void createWorkPanel() throws IOException {
 
-//        AddWorkTime workTimePanel = new AddWorkTime();
-////        workTimePanel.testLocalDate = dateTime.getValue();
-////        System.out.println("workTimePanel: " + workTimePanel.testLocalDate);
-//        getLocalDate = dateTime.getValue();
-//        workTimePanel.addWorkTimeWindow();
-
-
-//
-//        System.out.println("PANEL PRÓBUJE SIĘ DODAĆ!");
-//
-//        Text test1 = new Text("Test text");
-//        Text test2 = new Text("Test2 \n test");
-//        pane.getChildren().add(test1);
-//        pane.getChildren().add(test2);
-//        workTimeDataPanel.getChildren().add(pane);
-//
-//        FlowPane pane2 = new FlowPane();
-//        Text test3 = new Text("Kolejny text");
-//        Text test4 = new Text("test text");
-//        pane2.getChildren().add(test3);
-//        pane2.getChildren().add(test4);
-//        workTimeDataPanel.getChildren().add(pane2);
-
+        AddWorkTime workTimePanel = new AddWorkTime();
+        getLocalDate = dateTime.getValue();
+        workTimePanel.addWorkTimeWindow();
     }
 
 

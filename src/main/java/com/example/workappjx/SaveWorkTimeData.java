@@ -16,6 +16,7 @@ public class SaveWorkTimeData {
             Connection connection = DriverManager.getConnection(url, username, password);
             LocalDate testLocalDate = worktime.getLocalDate();
             System.out.println("SaveTimeWorkData Data: " + testLocalDate);
+            System.out.println("Start time: " + worktime.getStart_time());
             String sql = "INSERT INTO workhours (address, data, start_time, end_time, comment, user_id) VALUES (?, ?, ?, ?, ?, ?)";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -30,6 +31,7 @@ public class SaveWorkTimeData {
             if (rowsInserted > 0) {
                 System.out.println("Dane zostały dodane do bazy.");
             }
+            MainPanel mainPanel = new MainPanel();
 
             statement.close();
             connection.close();
