@@ -109,16 +109,9 @@ public class MainPanel{
 
     public void getDataTime(){
 
-//        getLocalDate = dateTime.getValue();
         getLocalDate = dateTime.getValue();
         System.out.println("MainPanel Data: " + getLocalDate);
 
-//        if(localDate != null){
-//            System.out.println("Data: " + localDate);
-//            System.out.println("Day: " + localDate.getDayOfMonth());
-//            System.out.println("Month: " + localDate.getMonth().toString());
-//            System.out.println("Year: " +localDate.getYear());
-//        }
 
     }
 

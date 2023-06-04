@@ -1,18 +1,12 @@
 package com.example.workappjx;
 
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import javafx.stage.Window;
 
 import java.io.IOException;
-import java.math.BigInteger;
 import java.security.MessageDigest;
-import java.sql.SQLException;
 import java.util.List;
-import java.util.Objects;
 
 public class LoginPanelController {
     @FXML
@@ -75,19 +69,12 @@ public class LoginPanelController {
                 System.out.println("Login succesful!");
                 personData = person;
                 System.out.println("ID: " + personData.getId());
-//                personInfo.setText("Hello!");
 
-//                getPerson = new Person(person.getLogin(), person.getPassword(), person.getFirstName(), person.getLastName(), person.getPesel(), person.getPhoneNumber());
                 MainPanel createMainPanel = new MainPanel();
                 Stage stage = (Stage) logInButton.getScene().getWindow();
                 stage.close();
                 createMainPanel.mainPanel();
-//                createMainPanel.setPersonData(person.getFirstName(), person.getLastName(), person.getPhoneNumber(), person.getPesel());
-//                personInfo.setText("First Name: " + person.getFirstName() +
-//                        "\n Last Name: " + person.getLastName() +
-//                        "\n Phone Number: " + person.getPhoneNumber() +
-//                        "\n Pesel: " + person.getPesel()
-//                );
+
 
                 break;
             }else{
@@ -96,7 +83,6 @@ public class LoginPanelController {
         }
 
 
-//       return getPerson;
     }
 
 }
