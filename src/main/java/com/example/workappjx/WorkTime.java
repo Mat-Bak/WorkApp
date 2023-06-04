@@ -70,7 +70,7 @@ public class WorkTime {
 
     public LocalDate getLocalDate(){
         MainPanel mainPanel = new MainPanel();
-        LocalDate testData = mainPanel.getLocalDate;
+        LocalDate testData = MainPanel.getLocalDate;
         System.out.println("Data: " + testData);
         return testData;
     }
