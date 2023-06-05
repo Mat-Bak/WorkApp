@@ -3,6 +3,13 @@ package com.example.workappjx;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/*
+
+The class allow to create new object with work time data.
+The class contain getters and setters for every data. It's also contain getLocalDate() method that return LocalTime from mainPanel
+
+ */
+
 public class WorkTime {
     private String address;
     private LocalDate date;
@@ -69,7 +76,7 @@ public class WorkTime {
     }
 
     public LocalDate getLocalDate(){
-        MainPanel mainPanel = new MainPanel();
+//        MainPanel mainPanel = new MainPanel();
         LocalDate testData = MainPanel.getLocalDate;
         System.out.println("Data: " + testData);
         return testData;

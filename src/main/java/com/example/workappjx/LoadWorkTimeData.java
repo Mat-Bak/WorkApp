@@ -1,7 +1,5 @@
 package com.example.workappjx;
 
-import java.math.BigInteger;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -9,11 +7,20 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+
+Methods:
+    * List<WorkTime> dbConnection(int userID) - get work time of specific user
+
+This class is made to connect with work time database and get data for specific user
+
+ */
+
 public class LoadWorkTimeData {
 
 
     public List<WorkTime> dbConnection(int userID){
-        // Inicjalizacja połączenia z bazą danych
+        // Initialize database connection
         DatabaseConnector connector = new DatabaseConnector();
 
         String address;
@@ -26,11 +33,11 @@ public class LoadWorkTimeData {
 
         List<WorkTime> workTimeList = new ArrayList<>();
 
-        // Przykładowe zapytanie SQL
+        // SQL query to select work time when user_id is equal userID
         String query = "SELECT * FROM workhours WHERE user_id = " + userID;
 
         try {
-            // Wykonaj zapytanie i odczytaj wyniki
+            // execute query and get result
             ResultSet resultSet = connector.executeQuery(query);
             while (resultSet.next()) {
                 address = resultSet.getString("address");
@@ -48,7 +55,7 @@ public class LoadWorkTimeData {
             e.printStackTrace();
         }
 
-        // Zamknij połączenie z bazą danych
+        // close connection
         try {
             connector.close();
         } catch (SQLException e) {

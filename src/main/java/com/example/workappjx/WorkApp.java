@@ -6,6 +6,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
 
+/*
+
+Main file to start application. In the start() method is created new panel with scene.
+
+ */
+
 
 public class WorkApp extends Application {
 

@@ -2,6 +2,12 @@ package com.example.workappjx;
 
 import java.math.BigInteger;
 
+/*
+
+The class is made to create new person. In this class exist getters and setters for every data.
+
+ */
+
 public class Person {
     int id;
     String login;

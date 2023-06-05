@@ -5,19 +5,31 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextArea;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+
+/*
+
+Methods:
+    * void mainPanel() - create main menu panel with general options
+    * void showPersonInfo() - set person info panel visible and hide main menu panel
+    * void personPanelBack() - hide person info panel and show main menu panel
+    * void showWorkPanel() - show panel with calendar and work data, hide main menu panel
+    * void workPanelBack() - hide work data panel and show main menu panel
+    * void setPersonData() - set user data to info panel
+    * void getDataTime() - get selected data time from calendar
+    * void showWorkTimeData() - show every work data for selected data time and selected user
+    * void createWorkPanel() - create new work panel where user can add new work time data
+
+The class manages main menu where user can switch between: main panel, user info panel, work time panel (in the future will be more panels).
+
+ */
 
 
 public class MainPanel{
@@ -25,8 +37,6 @@ public class MainPanel{
     public Pane mainPanel;
     @FXML
     public Pane personInfoPanel;
-    @FXML
-    public TextArea personInfo;
 
     @FXML
     public Text firstNameLabel;

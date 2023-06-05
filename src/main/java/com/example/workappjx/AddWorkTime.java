@@ -16,6 +16,16 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ResourceBundle;
 
+/*
+Methods:
+    * Void initialize() - Initialize time numbers in panel where user can add new work time
+    * Void addWorkTimeWindow() - Create panel where user can add work time
+    * Void getWorkTime() - Get data from panel and add it to database
+
+Main functionality of this class is created new panel where user can set work time (start and end) on selected date and add this data to database
+
+ */
+
 public class AddWorkTime implements Initializable {
 
     @FXML
@@ -63,13 +73,8 @@ public class AddWorkTime implements Initializable {
         Secondstage.show();
     }
 
-    public void showData(){
-        MainPanel mainPanel = new MainPanel();
-        System.out.println("Get date from main panel: " + MainPanel.getLocalDate);
-
-    }
-
     public void getWorkTime(){
+        //get start and end time from panel
         int startH = (int) startHourBox.getValue();
         int startM = (int) startMinutsBox.getValue();
         int endH = (int) endHourBox.getValue();
@@ -77,32 +82,39 @@ public class AddWorkTime implements Initializable {
 
 
 
+        //  temporarily set address
         String address = "test";
-        MainPanel mainPanel = new MainPanel();
-//        LocalDate localDate = dateTime.getValue();
+        //        LocalDate localDate = dateTime.getValue();
+        // get comment from panel
         String comment = commentField.getText();
+        // get selected date
         LocalDate localDate = MainPanel.getLocalDate;
+
+        // get user id
         Person person = LoginPanelController.getPersonData();
         int user_id = person.getId();
 
-
+        // transform time from panel to LocalTime
         LocalTime startWork = LocalTime.of(startH, startM);
         LocalTime endWork = LocalTime.of(endH, endM);
 
+        // calculate work time duration
         Duration duration = Duration.between(startWork, endWork);
-        long hours = duration.toHours();
-        long minuts = duration.toMinutes()%60;
+
+        // create new WorkTime from data and save it to database
         WorkTime workTime = new WorkTime(address,localDate,startWork, endWork,comment,user_id);
         saveTimeWorkData.connectWorkTimeDatabase(workTime);
 
-        dataPane = new Pane();
-        dataPane.prefWidth(400);
-        dataPane.prefHeight(54);
-        Text start_H = new Text(startWork.toString());
-        Text end_H = new Text(endWork.toString());
-        dataPane.getChildren().add(start_H);
-        dataPane.getChildren().add(end_H);
+//
+//        dataPane = new Pane();
+//        dataPane.prefWidth(400);
+//        dataPane.prefHeight(54);
+//        Text start_H = new Text(startWork.toString());
+//        Text end_H = new Text(endWork.toString());
+//        dataPane.getChildren().add(start_H);
+//        dataPane.getChildren().add(end_H);
 
+        // close panel after add new data to database
         Stage stage = (Stage) addDataButton.getScene().getWindow();
         stage.close();
 
