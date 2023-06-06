@@ -1,0 +1,5 @@
+.workPane{
+    -fx-padding:15;
+    -fx-vgap:20;
+    -fx-hgap: 20;
+}

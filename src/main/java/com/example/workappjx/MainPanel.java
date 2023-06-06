@@ -2,12 +2,12 @@ package com.example.workappjx;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
-import javafx.scene.layout.FlowPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
@@ -73,6 +73,7 @@ public class MainPanel{
         fxmlLoader.setLocation(getClass().getResource("mainPanel.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 450, 400);
         Stage stage = new Stage();
+        //E:/Nauka/Java/workApp/workAppJX/src/main/resources/
         stage.setTitle("WorkApp");
         stage.setScene(scene);
         stage.show();
@@ -138,12 +139,37 @@ public class MainPanel{
         for (WorkTime workTime : workTimeList) {
             if(localDate.isEqual(workTime.getDate())){
                 FlowPane pane = new FlowPane();
+                pane.setHgap(20);
+                pane.setPadding(new Insets(10));
                 Text data = new Text("DATA \n" + workTime.getDate());
                 Text startTime = new Text("START \n" + workTime.getStart_time());
                 Text endTime = new Text("END \n" + workTime.getEnd_time());
+                long hours = workTime.getHoursWork().toHours();
+                long min = workTime.getHoursWork().toMinutes() - (hours*60);
+                Text workHours = new Text("Hours: \n" + hours + "h " + min + "m");
+                Button showDetails = new Button("D");
+                Button edit = new Button("E");
+                Button delete = new Button("R");
                 pane.getChildren().add(data);
                 pane.getChildren().add(startTime);
                 pane.getChildren().add(endTime);
+                pane.getChildren().add(workHours);
+                pane.getChildren().add(showDetails);
+                pane.getChildren().add(edit);
+                pane.getChildren().add(delete);
+//                FlowPane.setMargin(data, new Insets(10, 10, 10, 10));
+//                FlowPane.setMargin(startTime, new Insets(10, 10, 10, 10));
+//                FlowPane.setMargin(endTime, new Insets(10, 10, 10, 10));
+//                FlowPane.setMargin(workHours, new Insets(10, 10, 10, 10));
+//                pane.setHgap(20);
+                BorderStroke borderStroke = new BorderStroke(
+                        Color.GREY, // Kolor obramowania
+                        BorderStrokeStyle.SOLID, // Styl obramowania
+                        CornerRadii.EMPTY, // Promienie rogów (w tym przypadku brak promieni)
+                        BorderWidths.DEFAULT // Szerokości obramowania
+                );
+                Border border = new Border(borderStroke);
+                pane.setBorder(border);
                 workTimeDataPanel.getChildren().add(pane);
             }
 
