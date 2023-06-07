@@ -6,13 +6,20 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Methods:
+    * List<Person> dbConnection() - Connect to employers database and get every person data from this base
+
+The class contains only one method that allows you to connect to the database where the employer's data is located
+
+ */
+
 public class LoadPersonData {
-    private DatabaseConnector connector;
 
 
     public List<Person> dbConnection(){
-        // Inicjalizacja połączenia z bazą danych
-        connector = new DatabaseConnector();
+        // Initialize connection to database
+        DatabaseConnector connector = new DatabaseConnector();
 
         int id;
         String login;
@@ -24,11 +31,11 @@ public class LoadPersonData {
 
         List<Person> personList = new ArrayList<>();
 
-        // Przykładowe zapytanie SQL
+        // SQL query
         String query = "SELECT * FROM workers";
 
         try {
-            // Wykonaj zapytanie i odczytaj wyniki
+            // Execute query and get result
             ResultSet resultSet = connector.executeQuery(query);
             while (resultSet.next()) {
                 login = resultSet.getString("login");
@@ -46,7 +53,7 @@ public class LoadPersonData {
             e.printStackTrace();
         }
 
-        // Zamknij połączenie z bazą danych
+        // Close database connection
         try {
             connector.close();
         } catch (SQLException e) {

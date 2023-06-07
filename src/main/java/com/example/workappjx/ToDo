@@ -2,9 +2,25 @@ Work Panels:
     - Edit button to work panels
     - Delet button to work panels
     - "Eye" button to work panels (allow to show more details)
+    - In the AddWorkTimePanel add filed where user can choose or write address
+    - In the AddWorkTimePanel add choose box that user can chose time (PM or AM)
+    -
 
-Main Menu Panel"
+Main Menu Panel
     - Options to add vacation and sickness days
 
 Summary:
     - Panel show summary in one month (Hours, money etc)
+
+New DataBase contains every address (every address should have boolean options that it's still active or not)
+
+Edit user database and add new variable "admin" which will be information if login user is have admin permissions or not
+
+Add to MainPanel new options that only Admin will have permissions.
+(New panels: add new address or change status, show every employees, add or remove employees)
+
+Add new panel for every user where you can choose month, set tax and app will automatically calculate your earnings (netto and brutto)
+
+Make this app more pretty
+
+

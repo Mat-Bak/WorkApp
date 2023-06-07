@@ -3,11 +3,12 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="300.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workappjx.AddWorkTime">
+<AnchorPane prefHeight="460.0" prefWidth="309.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workappjx.AddWorkTime">
    <children>
       <Text layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start work" textAlignment="CENTER" wrappingWidth="304.0">
          <font>
@@ -19,16 +20,22 @@
             <Font size="24.0" />
          </font>
       </Text>
-      <TextArea fx:id="commentField" layoutX="24.0" layoutY="242.0" prefHeight="90.0" prefWidth="256.0" />
-      <Text layoutY="235.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comment" textAlignment="CENTER" wrappingWidth="304.0">
+      <TextArea fx:id="commentField" layoutX="29.0" layoutY="302.0" prefHeight="90.0" prefWidth="256.0" />
+      <Text layoutX="5.0" layoutY="295.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Comment" textAlignment="CENTER" wrappingWidth="304.0">
          <font>
             <Font size="24.0" />
          </font>
       </Text>
-      <Button fx:id="addDataButton" layoutX="97.0" layoutY="345.0" mnemonicParsing="false" onAction="#getWorkTime" prefHeight="41.0" prefWidth="110.0" text="Submit" />
+      <Button fx:id="addDataButton" layoutX="102.0" layoutY="405.0" mnemonicParsing="false" onAction="#getWorkTime" prefHeight="41.0" prefWidth="110.0" text="Submit" />
       <ComboBox fx:id="startMinutsBox" layoutX="177.0" layoutY="49.0" prefHeight="32.0" prefWidth="80.0" promptText="Minuts" visibleRowCount="5" />
       <ComboBox fx:id="startHourBox" layoutX="52.0" layoutY="49.0" prefHeight="32.0" prefWidth="80.0" promptText="Hour" visibleRowCount="5" />
       <ComboBox fx:id="endMinutsBox" layoutX="175.0" layoutY="145.0" prefHeight="32.0" prefWidth="80.0" promptText="Minuts" visibleRowCount="5" />
       <ComboBox fx:id="endHourBox" layoutX="50.0" layoutY="145.0" prefHeight="32.0" prefWidth="80.0" promptText="Hour" visibleRowCount="5" />
+      <TextField fx:id="addressField" layoutX="29.0" layoutY="230.0" prefHeight="41.0" prefWidth="256.0" />
+      <Text layoutX="8.0" layoutY="223.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address" textAlignment="CENTER" wrappingWidth="304.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

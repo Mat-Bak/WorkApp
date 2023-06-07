@@ -8,28 +8,28 @@ import java.io.IOException;
 import java.security.MessageDigest;
 import java.util.List;
 
+/*
+
+Methods:
+    * String getMd5(String source) - (Message Digest Algorithm 5) encryption method String to bytes. It is helpful in encrypting passwords
+    * String getString( byte[] bytes ) - convert byte array to String
+    * Person getPersonData() - just return person data
+    * void logIn() - get data from the login panel and check whether these data exist in the employee database. If it exists and everything is OK, log into the system
+
+The main task of this class is logging into the system using the data from the fields of the login panel. It also uses MDA5 to encrypt the password, making it harder to break
+
+ */
+
 public class LoginPanelController {
     @FXML
-
     public TextField loginField;
-    @FXML
-    private Label welcomeText;
     @FXML
     private PasswordField passwordField;
     @FXML
     private Button logInButton;
 
-    @FXML
-    public TextArea personInfo;
-
     public static Person personData;
     public int user_id;
-
-
-
-
-
-
 
     public static String getMd5( String source ) {
         try {

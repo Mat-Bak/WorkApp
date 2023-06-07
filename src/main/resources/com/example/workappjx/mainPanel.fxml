@@ -3,6 +3,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -70,30 +71,37 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="workPanel" layoutY="-1.0" prefHeight="400.0" prefWidth="450.0">
+      <Pane fx:id="workPanel" layoutY="-1.0" prefHeight="414.0" prefWidth="450.0">
          <children>
             <DatePicker fx:id="dateTime" layoutX="36.0" layoutY="23.0" onAction="#showWorkTimeData" onMouseClicked="#getDataTime" prefHeight="35.0" prefWidth="247.0" />
             <Line endX="203.0" layoutX="230.0" layoutY="79.0" startX="-212.0" />
-            <ScrollPane fx:id="testScrollPane" layoutX="17.0" layoutY="87.0" prefHeight="267.0" prefWidth="416.0">
+            <ScrollPane fx:id="testScrollPane" layoutX="17.0" layoutY="87.0" prefHeight="270.0" prefWidth="416.0">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="266.0" prefWidth="415.0">
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="264.0" prefWidth="414.0">
                      <children>
-                        <VBox fx:id="workTimeDataPanel" layoutY="-1.0" prefHeight="256.0" prefWidth="410.0">
+                        <VBox fx:id="workTimeDataPanel" layoutY="-2.0" prefHeight="270.0" prefWidth="420.0">
                            <children>
-                              <Pane fx:id="testPanel" prefHeight="59.0" prefWidth="416.0" style="-fx-border-width: 2; -fx-border-color: AAAAAA;">
-                                 <children>
-                                    <Text layoutX="25.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="START \n test" />
-                                    <Text layoutX="176.0" layoutY="23.0" strokeType="OUTSIDE" strokeWidth="0.0" text="END" />
-                                    <Button layoutX="252.0" layoutY="10.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="69.0" text="show" />
-                                    <Button layoutX="337.0" layoutY="10.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="35.0" text="D" />
-                                 </children>
-                              </Pane>
-                           </children>
-                        </VBox>
+                              <SplitPane dividerPositions="0.7177033492822966" prefHeight="74.0" prefWidth="420.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <Text layoutX="126.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address:" />
+                                          <Text layoutX="65.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Przykładowy address do testów" />
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <Text layoutX="40.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hours:" />
+                                          <Text layoutX="50.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0h" />
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
+                           </children></VBox>
                      </children></AnchorPane>
               </content>
             </ScrollPane>
-            <Button fx:id="backButton" layoutX="167.0" layoutY="351.0" mnemonicParsing="false" onAction="#workPanelBack" prefHeight="35.0" prefWidth="116.0" text="Back" />
+            <Button fx:id="backButton" layoutX="167.0" layoutY="365.0" mnemonicParsing="false" onAction="#workPanelBack" prefHeight="35.0" prefWidth="116.0" text="Back" />
             <Button fx:id="addWorkTimeButton" layoutX="303.0" layoutY="23.0" mnemonicParsing="false" onAction="#createWorkPanel" prefHeight="35.0" prefWidth="116.0" text="Add +" />
          </children>
       </Pane>
