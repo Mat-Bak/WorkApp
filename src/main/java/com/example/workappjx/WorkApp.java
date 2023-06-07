@@ -14,7 +14,6 @@ Main file to start application. In the start() method is created new panel with 
 
 
 public class WorkApp extends Application {
-
     @Override
     public void start(Stage primaryStage) throws IOException {
 

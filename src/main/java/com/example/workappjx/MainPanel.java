@@ -3,15 +3,18 @@ package com.example.workappjx;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.SplitPane;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -138,25 +141,89 @@ public class MainPanel{
         workTimeDataPanel.getChildren().clear();
         for (WorkTime workTime : workTimeList) {
             if(localDate.isEqual(workTime.getDate())){
-                FlowPane pane = new FlowPane();
-                pane.setHgap(20);
-                pane.setPadding(new Insets(10));
-                Text data = new Text("DATA \n" + workTime.getDate());
-                Text startTime = new Text("START \n" + workTime.getStart_time());
-                Text endTime = new Text("END \n" + workTime.getEnd_time());
-                long hours = workTime.getHoursWork().toHours();
-                long min = workTime.getHoursWork().toMinutes() - (hours*60);
-                Text workHours = new Text("Hours: \n" + hours + "h " + min + "m");
-                Button showDetails = new Button("D");
-                Button edit = new Button("E");
-                Button delete = new Button("R");
-                pane.getChildren().add(data);
-                pane.getChildren().add(startTime);
-                pane.getChildren().add(endTime);
-                pane.getChildren().add(workHours);
-                pane.getChildren().add(showDetails);
-                pane.getChildren().add(edit);
-                pane.getChildren().add(delete);
+//                FlowPane pane = new FlowPane();
+//                pane.setAlignment(Pos.CENTER);
+////                TilePane pane = new TilePane();
+////                pane.setPrefColumns(4); // Liczba kolumn
+////                pane.setHgap(40); // Odstęp poziomy
+//                pane.setHgap(40);
+//                pane.setPadding(new Insets(10));
+////                addresPane.setPadding(new Insets(10));
+////                buttonsPane.setPadding(new Insets(10));
+//                Text address = new Text("Address: \n " + workTime.getAddress());
+//                Text data = new Text("DATA \n" + workTime.getDate());
+//                Text startTime = new Text("START \n" + workTime.getStart_time());
+//                Text endTime = new Text("END \n" + workTime.getEnd_time());
+//                long hours = workTime.getHoursWork().toHours();
+//                long min = workTime.getHoursWork().toMinutes() - (hours*60);
+//                Text workHours = new Text("Hours: \n" + hours + "h " + min + "m");
+//                Button showDetails = new Button("D");
+//                Button edit = new Button("E");
+//                Button delete = new Button("R");
+//                pane.getChildren().add(address);
+                SplitPane pane = new SplitPane();
+                // Top ? Down ?
+//                pane.setDividerPosition(1,1);
+                AnchorPane firstArchonPane = new AnchorPane();
+                AnchorPane secondArchonPane = new AnchorPane();
+                firstArchonPane.setPadding(new Insets(20));
+                secondArchonPane.setPadding(new Insets(20));
+
+                Text addressText = new Text("Address: ");
+//                addressText.setLayoutX(126);
+                addressText.setLayoutY(27);
+
+                Text exampelAddress = new Text("Example Address");
+//                exampelAddress.setLayoutX(65);
+                exampelAddress.setLayoutY(49);
+
+                firstArchonPane.getChildren().add(addressText);
+                firstArchonPane.getChildren().add(exampelAddress);
+
+                Text hoursText = new Text("Hours: ");
+//                hoursText.setLayoutX(40);
+                hoursText.setLayoutY(27);
+
+                Text hoursTime = new Text("Example Address");
+//                hoursTime.setLayoutX(50);
+                hoursTime.setLayoutY(49);
+
+                secondArchonPane.getChildren().add(hoursText);
+                secondArchonPane.getChildren().add(hoursTime);
+
+                AnchorPane.setLeftAnchor(firstArchonPane, 0.0);
+
+                pane.getItems().addAll(firstArchonPane,secondArchonPane);
+
+
+                /*
+
+                <SplitPane dividerPositions="0.7177033492822966" prefHeight="74.0" prefWidth="420.0">
+                                <items>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <Text layoutX="126.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address:" />
+                                          <Text layoutX="65.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Przykładowy address do testów" />
+                                       </children>
+                                    </AnchorPane>
+                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <Text layoutX="40.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hours:" />
+                                          <Text layoutX="50.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0h" />
+                                       </children>
+                                    </AnchorPane>
+                                </items>
+                              </SplitPane>
+
+                 */
+
+//                pane.getChildren().add(data);
+//                pane.getChildren().add(startTime);
+//                pane.getChildren().add(endTime);
+//                pane.getChildren().add(workHours);
+//                pane.getChildren().add(showDetails);
+//                pane.getChildren().add(edit);
+//                pane.getChildren().add(delete);
 //                FlowPane.setMargin(data, new Insets(10, 10, 10, 10));
 //                FlowPane.setMargin(startTime, new Insets(10, 10, 10, 10));
 //                FlowPane.setMargin(endTime, new Insets(10, 10, 10, 10));
