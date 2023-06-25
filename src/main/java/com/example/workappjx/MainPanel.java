@@ -2,10 +2,12 @@ package com.example.workappjx;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.*;
@@ -13,9 +15,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ResourceBundle;
 
 /*
 
@@ -35,9 +39,12 @@ The class manages main menu where user can switch between: main panel, user info
  */
 
 
-public class MainPanel{
+public class MainPanel implements Initializable {
     @FXML
     public Pane mainPanel;
+
+    @FXML
+    public Pane salaryPanel;
     @FXML
     public Pane personInfoPanel;
 
@@ -63,6 +70,11 @@ public class MainPanel{
 
     @FXML
     public VBox workTimeDataPanel;
+
+    @FXML
+    public ComboBox monthList;
+
+    private String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
 
 
@@ -108,6 +120,11 @@ public class MainPanel{
     public void workPanelBack(){
         mainPanel.setVisible(true);
         workPanel.setVisible(false);
+    }
+    
+    public void showSalaryPanel(){
+        mainPanel.setVisible(false);
+        salaryPanel.setVisible(true);
     }
 
     // set data in person info panel
@@ -250,5 +267,25 @@ public class MainPanel{
         workTimePanel.addWorkTimeWindow();
     }
 
+
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1){
+
+        for(int i = 0; i < months.length; ++i){
+            monthList.getItems().add(months[i]);
+        }
+    }
+
+    public int getMonth(){
+        System.out.println("id3: " + monthList.getValue());
+        for (int i = 0; i < months.length; ++i){
+            if(months[i].equals(monthList.getValue())){
+                ++i;
+                System.out.println("Month: " + i);
+                return i;
+            }
+        }
+        return 0;
+    }
 
 }
