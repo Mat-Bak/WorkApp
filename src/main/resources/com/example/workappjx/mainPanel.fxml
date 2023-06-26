@@ -124,21 +124,22 @@
                   <Font size="22.0" />
                </font>
             </Text>
-            <Text layoutX="68.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hours:">
+            <Text fx:id="SalaryHours" layoutX="68.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hours:">
                <font>
                   <Font size="30.0" />
                </font>
             </Text>
-            <Text layoutX="66.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brutto:">
+            <Text fx:id="SalaryBrutto" layoutX="66.0" layoutY="206.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Brutto:">
                <font>
                   <Font size="30.0" />
                </font>
             </Text>
-            <Text layoutX="66.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Netto:">
+            <Text fx:id="SalaryNetto" layoutX="66.0" layoutY="264.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Netto:">
                <font>
                   <Font size="30.0" />
                </font>
             </Text>
+            <Button fx:id="SalaryPanelBack" layoutX="159.0" layoutY="335.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="139.0" text="Back" />
          </children>
       </Pane>
    </children>

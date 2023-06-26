@@ -16,7 +16,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -73,6 +75,13 @@ public class MainPanel implements Initializable {
 
     @FXML
     public ComboBox monthList;
+
+    @FXML
+    public Text SalaryHours;
+    @FXML
+    public Text SalaryBrutto;
+    @FXML
+    public Text SalaryNetto;
 
     private String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
@@ -276,16 +285,39 @@ public class MainPanel implements Initializable {
         }
     }
 
-    public int getMonth(){
+    public void getMonth(){
+        int month = 0;
+        Person person = LoginPanelController.getPersonData();
+        System.out.println("Person id: " + person.getId());
+        LoadWorkTimeData loadWorkTimeData = new LoadWorkTimeData();
+        List<WorkTime> workTimeList = loadWorkTimeData.dbConnection(person.getId());
         System.out.println("id3: " + monthList.getValue());
         for (int i = 0; i < months.length; ++i){
             if(months[i].equals(monthList.getValue())){
                 ++i;
+                month=i;
                 System.out.println("Month: " + i);
-                return i;
+                break;
             }
         }
-        return 0;
+        long hours = workTimeList.get(0).getHoursWork().toHours();
+        long min = workTimeList.get(0).getHoursWork().toMinutes() - (hours*60);
+        long SumOfHours = 0;
+        for(int j = 0; j < workTimeList.size(); ++j){
+            if(workTimeList.get(j).getDate().getMonthValue() == month){
+                LocalTime time1 = workTimeList.get(j).getStart_time();  // Pierwsza godzina
+                LocalTime time2 = workTimeList.get(j).getEnd_time();  // Druga godzina
+                Duration duration = Duration.between(time1, time2);
+//                long hours = duration.toHours();  // Różnica w godzinach
+//                long minutes = duration.toMinutes() % 60;  // Różnica w minutach
+                SumOfHours += duration.toMinutes();  // Różnica w minutach
+            }
+        }
+        SalaryHours.setText("");
+        SalaryHours.setText("Hours: " + SumOfHours/60 + "h " + SumOfHours%60 + "min");
+        System.out.println("WorkTime data getMonthValue: " + workTimeList.get(0).getDate().getMonthValue());
+        System.out.println("WorkTime work hours: " + hours + "h " + min + "min");
+        System.out.println("WorkTime start time: " + workTimeList.get(0).getStart_time() + " | end time: "+ workTimeList.get(0).getEnd_time());
     }
 
 }
