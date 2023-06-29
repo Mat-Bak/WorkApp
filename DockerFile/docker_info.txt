@@ -1,8 +1,0 @@
-docker run --name mysql-container -e MYSQL_ROOT_PASSWORD=your_password -v /path/to/sql/file:/docker-entrypoint-initdb.d/ mysql:latest
-
-
-Zastąp your_password odpowiednim hasłem, a /path/to/sql/file ścieżką do skopiowanego pliku SQL na Twoim komputerze.
-
-Powyższe polecenie uruchomi kontener Docker z najnowszą wersją MySQL i skonfiguruje plik SQL jako skrypt inicjalizacyjny, który zostanie wykonany podczas uruchamiania kontenera.
-
-Poczekaj, aż kontener Docker MySQL zostanie uruchomiony i zainicjalizowany na podstawie pliku SQL. To może chwilę potrwać w zależności od rozmiaru bazy danych.

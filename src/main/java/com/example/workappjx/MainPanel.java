@@ -285,7 +285,7 @@ public class MainPanel implements Initializable {
         }
     }
 
-    public void getMonth(){
+    public void summaryOfTheMonth(){
         int month = 0;
         Person person = LoginPanelController.getPersonData();
         System.out.println("Person id: " + person.getId());
@@ -315,8 +315,12 @@ public class MainPanel implements Initializable {
         }
         SalaryHours.setText("");
         SalaryHours.setText("Hours: " + SumOfHours/60 + "h " + SumOfHours%60 + "min");
+        SalaryBrutto.setText("");
+        SalaryBrutto.setText("Brutto: " + (SumOfHours/60)*person.getSalaryPerHour());
+        SalaryNetto.setText("");
+        SalaryNetto.setText("Netto: " +  (SumOfHours/60)*person.getSalaryPerHour()*person.getTax());
         System.out.println("WorkTime data getMonthValue: " + workTimeList.get(0).getDate().getMonthValue());
-        System.out.println("WorkTime work hours: " + hours + "h " + min + "min");
+//        System.out.println("WorkTime work hours: " + hours + "h " + min + "min");
         System.out.println("WorkTime start time: " + workTimeList.get(0).getStart_time() + " | end time: "+ workTimeList.get(0).getEnd_time());
     }
 

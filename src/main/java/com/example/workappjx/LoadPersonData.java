@@ -28,23 +28,30 @@ public class LoadPersonData {
         String lastName;
         BigInteger pesel;
         int phoneNumber;
+        int SalaryPerHour;
+        int tax;
 
         List<Person> personList = new ArrayList<>();
 
         // SQL query
-        String query = "SELECT * FROM workers";
+//        String query = "SELECT * FROM workers";
+        String query = "SELECT * FROM Persons.workers;";
 
         try {
             // Execute query and get result
             ResultSet resultSet = connector.executeQuery(query);
             while (resultSet.next()) {
+                id = resultSet.getInt("id");
                 login = resultSet.getString("login");
                 password = resultSet.getString("password");
                 firstName = resultSet.getString("firstName");
                 lastName = resultSet.getString("lastName");
-                pesel = BigInteger.valueOf(resultSet.getLong("pesel"));
                 phoneNumber = resultSet.getInt("phoneNumber");
-                id = resultSet.getInt("id");
+                pesel = BigInteger.valueOf(resultSet.getLong("pesel"));
+//                SalaryPerHour = resultSet.getInt("SalaryPerHour");
+//                tax = resultSet.getInt("tax");
+
+//                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber, SalaryPerHour, tax);
                 Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber);
                 personList.add(person);
             }

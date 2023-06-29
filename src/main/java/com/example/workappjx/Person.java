@@ -16,6 +16,8 @@ public class Person {
     String lastName;
     BigInteger pesel;
     int phoneNumber;
+    int SalaryPerHour;
+    int tax;
 
     public Person(int id, String login, String password, String firstName, String lastName, BigInteger pesel, int phoneNumber) {
         this.id = id;
@@ -25,6 +27,8 @@ public class Person {
         this.lastName = lastName;
         this.pesel = pesel;
         this.phoneNumber = phoneNumber;
+//        this.SalaryPerHour = SalaryPerHour;
+//        this.tax = tax;
     }
 
     public Person() {
@@ -81,6 +85,22 @@ public class Person {
 
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public int getSalaryPerHour() {
+        return SalaryPerHour;
+    }
+
+    public void setSalaryPerHour(int salaryPerHour) {
+        SalaryPerHour = salaryPerHour;
+    }
+
+    public int getTax() {
+        return tax;
+    }
+
+    public void setTax(int tax) {
+        this.tax = tax;
     }
 }
 

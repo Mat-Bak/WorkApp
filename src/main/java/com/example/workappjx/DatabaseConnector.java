@@ -23,7 +23,7 @@ public class DatabaseConnector {
     public DatabaseConnector() {
         try {
             // connect to database
-            String url = "jdbc:mysql://localhost/persons";
+            String url = "jdbc:mysql://localhost/Persons";
             String user = "root";
             String password = "1234qwer";
             connection = DriverManager.getConnection(url, user, password);
