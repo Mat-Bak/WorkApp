@@ -10,10 +10,15 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.net.URL;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 /*
@@ -46,6 +51,9 @@ public class AddWorkTime implements Initializable {
 
     @FXML public Button addDataButton;
 
+    @FXML
+    public ComboBox addressComboBox;
+
     SaveWorkTimeData saveTimeWorkData = new SaveWorkTimeData();
 
     public AddWorkTime() {
@@ -61,6 +69,43 @@ public class AddWorkTime implements Initializable {
             startMinutsBox.getItems().add(j);
             endMinutsBox.getItems().add(j);
         }
+        List<String> ListOfAddress = addressList();
+        for(int k = 0; k<ListOfAddress.size(); ++k ){
+            addressComboBox.getItems().add(ListOfAddress.get(k));
+        }
+
+    }
+
+    public List<String> addressList(){
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        String address;
+        int id;
+
+        List<String> addressList = new ArrayList<>();
+
+        String query = "SELECT * FROM Persons.address;";
+
+        try {
+            // Execute query and get result
+            ResultSet resultSet = databaseConnector.executeQuery(query);
+            while (resultSet.next()) {
+                id = resultSet.getInt("id");
+                address = resultSet.getString("address");
+                addressList.add(address);
+            }
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Close database connection
+        try {
+            databaseConnector.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return addressList;
+
     }
 
     public void addWorkTimeWindow() throws IOException {
@@ -83,7 +128,7 @@ public class AddWorkTime implements Initializable {
 
 
         //  temporarily set address
-        String address = "test";
+        String address = (String)addressComboBox.getValue();
         //        LocalDate localDate = dateTime.getValue();
         // get comment from panel
         String comment = commentField.getText();

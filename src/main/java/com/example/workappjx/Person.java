@@ -19,7 +19,7 @@ public class Person {
     int SalaryPerHour;
     int tax;
 
-    public Person(int id, String login, String password, String firstName, String lastName, BigInteger pesel, int phoneNumber) {
+    public Person(int id, String login, String password, String firstName, String lastName, BigInteger pesel, int phoneNumber, int SalaryPerHour, int tax) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -27,8 +27,8 @@ public class Person {
         this.lastName = lastName;
         this.pesel = pesel;
         this.phoneNumber = phoneNumber;
-//        this.SalaryPerHour = SalaryPerHour;
-//        this.tax = tax;
+        this.SalaryPerHour = SalaryPerHour;
+        this.tax = tax;
     }
 
     public Person() {

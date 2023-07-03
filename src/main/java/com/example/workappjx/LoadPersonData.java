@@ -48,11 +48,11 @@ public class LoadPersonData {
                 lastName = resultSet.getString("lastName");
                 phoneNumber = resultSet.getInt("phoneNumber");
                 pesel = BigInteger.valueOf(resultSet.getLong("pesel"));
-//                SalaryPerHour = resultSet.getInt("SalaryPerHour");
-//                tax = resultSet.getInt("tax");
+                SalaryPerHour = resultSet.getInt("SalaryPerHour");
+                tax = resultSet.getInt("tax");
 
-//                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber, SalaryPerHour, tax);
-                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber);
+                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber, SalaryPerHour, tax);
+//                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber);
                 personList.add(person);
             }
             resultSet.close();

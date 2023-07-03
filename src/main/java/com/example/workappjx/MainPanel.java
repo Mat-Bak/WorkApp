@@ -318,7 +318,9 @@ public class MainPanel implements Initializable {
         SalaryBrutto.setText("");
         SalaryBrutto.setText("Brutto: " + (SumOfHours/60)*person.getSalaryPerHour());
         SalaryNetto.setText("");
-        SalaryNetto.setText("Netto: " +  (SumOfHours/60)*person.getSalaryPerHour()*person.getTax());
+        float tax = 1 - (float)person.getTax()/100;
+        System.out.println("PersonTax: " + person.getTax() + "\n tax: " + tax);
+        SalaryNetto.setText("Netto: " +  (SumOfHours/60)*person.getSalaryPerHour()*tax);
         System.out.println("WorkTime data getMonthValue: " + workTimeList.get(0).getDate().getMonthValue());
 //        System.out.println("WorkTime work hours: " + hours + "h " + min + "min");
         System.out.println("WorkTime start time: " + workTimeList.get(0).getStart_time() + " | end time: "+ workTimeList.get(0).getEnd_time());
