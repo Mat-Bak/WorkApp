@@ -4,7 +4,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.ScrollPane?>
-<?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -16,7 +15,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workappjx.MainPanel">
    <children>
-      <Pane fx:id="mainPanel" prefHeight="400.0" prefWidth="450.0">
+      <Pane fx:id="mainPanel" prefHeight="400.0" prefWidth="450.0" visible="false">
          <children>
             <Button fx:id="personPanelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="50.0" mnemonicParsing="false" onAction="#showPersonInfo" prefHeight="100.0" prefWidth="100.0" textAlignment="CENTER">
                <graphic>
@@ -82,38 +81,17 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="workPanel" layoutY="-1.0" prefHeight="414.0" prefWidth="450.0" visible="false">
+      <Pane fx:id="workPanel" layoutY="-1.0" prefHeight="414.0" prefWidth="450.0">
          <children>
             <DatePicker fx:id="dateTime" layoutX="36.0" layoutY="23.0" onAction="#showWorkTimeData" onMouseClicked="#getDataTime" prefHeight="35.0" prefWidth="247.0" />
             <Line endX="203.0" layoutX="230.0" layoutY="79.0" startX="-212.0" />
-            <ScrollPane fx:id="testScrollPane" layoutX="17.0" layoutY="87.0" prefHeight="270.0" prefWidth="416.0">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="264.0" prefWidth="414.0">
-                     <children>
-                        <VBox fx:id="workTimeDataPanel" layoutY="-2.0" prefHeight="270.0" prefWidth="420.0">
-                           <children>
-                              <SplitPane dividerPositions="0.7177033492822966" prefHeight="74.0" prefWidth="420.0">
-                                <items>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                       <children>
-                                          <Text layoutX="126.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Address:" />
-                                          <Text layoutX="65.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Przykładowy address do testów" />
-                                       </children>
-                                    </AnchorPane>
-                                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
-                                       <children>
-                                          <Text layoutX="40.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hours:" />
-                                          <Text layoutX="50.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0h" />
-                                       </children>
-                                    </AnchorPane>
-                                </items>
-                              </SplitPane>
-                           </children></VBox>
-                     </children></AnchorPane>
-              </content>
-            </ScrollPane>
             <Button fx:id="backButton" layoutX="167.0" layoutY="365.0" mnemonicParsing="false" onAction="#workPanelBack" prefHeight="35.0" prefWidth="116.0" text="Back" />
             <Button fx:id="addWorkTimeButton" layoutX="303.0" layoutY="23.0" mnemonicParsing="false" onAction="#createWorkPanel" prefHeight="35.0" prefWidth="116.0" text="Add +" />
+            <ScrollPane layoutX="26.0" layoutY="89.0" prefHeight="253.0" prefWidth="395.0">
+               <content>
+                  <VBox fx:id="workTimeDataPanel" maxHeight="240.0" maxWidth="380.0" prefHeight="240.0" prefWidth="380.0" />
+               </content>
+            </ScrollPane>
          </children>
       </Pane>
       <Pane fx:id="salaryPanel" layoutX="-6.0" layoutY="-2.0" prefHeight="413.0" prefWidth="456.0" visible="false">

@@ -54,6 +54,12 @@ public class AddWorkTime implements Initializable {
     @FXML
     public ComboBox addressComboBox;
 
+    @FXML public Text date;
+
+    @FXML public DatePicker dateTime;
+
+    private Text dupa = new Text("dupa");
+
     SaveWorkTimeData saveTimeWorkData = new SaveWorkTimeData();
 
     public AddWorkTime() {
@@ -70,6 +76,7 @@ public class AddWorkTime implements Initializable {
             endMinutsBox.getItems().add(j);
         }
         List<String> ListOfAddress = addressList();
+        date.setText(dupa.getText().toString());
         for(int k = 0; k<ListOfAddress.size(); ++k ){
             addressComboBox.getItems().add(ListOfAddress.get(k));
         }
@@ -108,17 +115,37 @@ public class AddWorkTime implements Initializable {
 
     }
 
-    public void addWorkTimeWindow() throws IOException {
+    public void addWorkTimeWindow(LocalDate localDate) throws IOException {
+//        setDateText(date.toString());
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("addWorkTime.fxml"));
         Scene secondScene = new Scene(fxmlLoader.load(), 300, 400);
         Stage Secondstage = new Stage();
         Secondstage.setTitle("Add Work Time");
+//        date.setText(localDate.toString());
+//        date.setText("dupa");
+
+
         Secondstage.setScene(secondScene);
         Secondstage.show();
+//        System.out.println("get Date1: " + localDate.toString());
+//
+//        System.out.println("Dupa 2 : " + date.getText().toString());
+
+//        dupa = new Text(localDate.toString());
+//        dupa.setText(localDate.toString());
+//        System.out.println("Dupa: " + dupa.getText());
+//        date.setText(dupa.getText());
+    }
+
+    public void setDateText(String text){
+
+        date.setText(text);
+        System.out.println("Data changed: " + date.toString());
     }
 
     public void getWorkTime(){
+        //MainPanel mainPanel = new MainPanel();
         //get start and end time from panel
         int startH = (int) startHourBox.getValue();
         int startM = (int) startMinutsBox.getValue();
@@ -144,11 +171,19 @@ public class AddWorkTime implements Initializable {
         LocalTime endWork = LocalTime.of(endH, endM);
 
         // calculate work time duration
-        Duration duration = Duration.between(startWork, endWork);
+        //Duration duration = Duration.between(startWork, endWork);
 
         // create new WorkTime from data and save it to database
         WorkTime workTime = new WorkTime(address,localDate,startWork, endWork,comment,user_id);
         saveTimeWorkData.connectWorkTimeDatabase(workTime);
+       //MainPanel mainPanel1 = new MainPanel();
+
+//        mainPanel.showWorkTimeData();
+
+//
+//        MainPanel mainPanel = new MainPanel();
+//        mainPanel.clearDataPicker();
+
 
 //
 //        dataPane = new Pane();
