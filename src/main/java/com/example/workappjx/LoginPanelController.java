@@ -62,13 +62,13 @@ public class LoginPanelController {
         LoadPersonData getPersonData = new LoadPersonData();
         List<Person> personList = getPersonData.dbConnection();
 
-        System.out.println("Login: " + loginField.getText() + "\n Password: " + getMd5(passwordField.getText()));
+//        System.out.println("Login: " + loginField.getText() + "\n Password: " + getMd5(passwordField.getText()));
         for (Person person : personList) {
-            System.out.println("Person Login: " + person.getLogin() + "| Person Password: " + getMd5(person.getPassword()));
+//            System.out.println("Person Login: " + person.getLogin() + "| Person Password: " + getMd5(person.getPassword()));
             if (person.getLogin().equals(loginField.getText()) && person.getPassword().equals(getMd5(passwordField.getText()))){
                 System.out.println("Login succesful!");
                 personData = person;
-                System.out.println("ID: " + personData.getId());
+//                System.out.println("ID: " + personData.getId());
 
                 MainPanel createMainPanel = new MainPanel();
                 Stage stage = (Stage) logInButton.getScene().getWindow();

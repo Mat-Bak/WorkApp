@@ -19,6 +19,9 @@ public class WorkTime {
     private String comment = "";
     private int user_id;
 
+    public WorkTime() {
+    }
+
     public WorkTime(String address, LocalDate date, LocalTime start_time, LocalTime end_time, String comment, int user_id) {
         this.address = address;
         this.date = date;
@@ -79,11 +82,18 @@ public class WorkTime {
     public LocalDate getLocalDate(){
 //        MainPanel mainPanel = new MainPanel();
         LocalDate testData = MainPanel.getLocalDate;
-        System.out.println("Data: " + testData);
+//        System.out.println("Data: " + testData);
         return testData;
     }
 
     public Duration getHoursWork(){
         return Duration.between(start_time, end_time);
+    }
+
+    public String timeToStrikg(){
+        int hours = (int) getHoursWork().toHours();
+        int minutes = (int) getHoursWork().toMinutes()-(hours*60);
+
+        return hours + "H " + minutes + "M";
     }
 }
