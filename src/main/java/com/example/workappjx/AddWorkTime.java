@@ -82,8 +82,8 @@ public class AddWorkTime implements Initializable {
             endMinutsBox.getItems().add(j);
         }
         List<String> ListOfAddress = addressList();
-//        date.setText(MainPanel.getLocalDate.toString());
-date.setText("Dupa2");
+        date.setText(MainPanel.getLocalDate.toString());
+//date.setText("Dupa2");
         for(int k = 0; k<ListOfAddress.size(); ++k ){
             addressComboBox.getItems().add(ListOfAddress.get(k));
         }
@@ -217,7 +217,7 @@ date.setText("Dupa2");
     }
 
     @FXML
-    private void testButton(ActionEvent event) throws IOException {
+    private void submitButton(ActionEvent event) throws IOException, InterruptedException {
 
 
         //MainPanel mainPanel = new MainPanel();
@@ -256,13 +256,10 @@ date.setText("Dupa2");
         // close panel after add new data to database
         Stage stage = (Stage) addDataButton.getScene().getWindow();
 
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("mainPanel.fxml"));
-//        Parent root = loader.load();
-//        MainPanel mainPanel = (MainPanel)loader.getController();
-//        mainPanel.testButtonFire();
-
-
         stage.close();
+
+
+
 
     }
 

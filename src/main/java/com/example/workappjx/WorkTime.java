@@ -12,6 +12,8 @@ The class contain getters and setters for every data. It's also contain getLocal
  */
 
 public class WorkTime {
+
+    private int id;
     private String address;
     private LocalDate date;
     private LocalTime start_time;
@@ -30,6 +32,17 @@ public class WorkTime {
         this.comment = comment;
         this.user_id = user_id;
     }
+    public WorkTime(int id, String address, LocalDate date, LocalTime start_time, LocalTime end_time, String comment, int user_id) {
+        this.id = id;
+        this.address = address;
+        this.date = date;
+        this.start_time = start_time;
+        this.end_time = end_time;
+        this.comment = comment;
+        this.user_id = user_id;
+    }
+
+    public int getId(){return id;}
 
     public String getAddress() {
         return address;

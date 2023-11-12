@@ -29,6 +29,7 @@ public class LoadWorkTimeData {
         LocalTime end_time;
         String comment;
         int user_id;
+        int id;
 
 
         List<WorkTime> workTimeList = new ArrayList<>();
@@ -46,8 +47,9 @@ public class LoadWorkTimeData {
                 end_time = resultSet.getTime("end_time").toLocalTime();
                 comment = resultSet.getString("comment");
                 user_id = resultSet.getInt("user_id");
+                id = resultSet.getInt("id");
 
-                WorkTime workTime = new WorkTime(address, date, start_time, end_time, comment, user_id);
+                WorkTime workTime = new WorkTime(id, address, date, start_time, end_time, comment, user_id);
                 workTimeList.add(workTime);
             }
             resultSet.close();

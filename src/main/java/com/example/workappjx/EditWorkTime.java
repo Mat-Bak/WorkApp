@@ -17,6 +17,7 @@ import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -62,12 +63,22 @@ public class EditWorkTime implements Initializable {
             endMinutsBox.getItems().add(j);
         }
         List<String> ListOfAddress = addressList();
-//        date.setText(MainPanel.getLocalDate.toString());
+        date.setText("EDIT\n" + MainPanel.getLocalDate.toString());
 //        date.setText("DDUPA");
 //        startHourBox.setValue(1);
         for(int k = 0; k<ListOfAddress.size(); ++k ){
             addressComboBox.getItems().add(ListOfAddress.get(k));
         }
+    }
+
+    public void setData(int startH, int startM, int endH, int endM, String address, String comm){
+        startHourBox.setValue(startH);
+        startMinutsBox.setValue(startM);
+        endHourBox.setValue(endH);
+        endMinutsBox.setValue(endM);
+        addressComboBox.setValue(address);
+        commentField.setText(comm);
+
     }
 
 //    public void setEndHour(int hour){
@@ -148,8 +159,52 @@ public class EditWorkTime implements Initializable {
         this.startHourBox.setValue(start);
     }
 
+    public void addNewWorkTime(){
+        int startH = (int) startHourBox.getValue();
+        int startM = (int) startMinutsBox.getValue();
+        int endH = (int) endHourBox.getValue();
+        int endM = (int) endMinutsBox.getValue();
+
+
+
+
+        //  temporarily set address
+        String address = (String)addressComboBox.getValue();
+        //        LocalDate localDate = dateTime.getValue();
+        // get comment from panel
+        String comment = commentField.getText();
+        // get selected date
+        LocalDate localDate = MainPanel.getLocalDate;
+
+        // get user id
+        Person person = LoginPanelController.getPersonData();
+        int user_id = person.getId();
+
+        // transform time from panel to LocalTime
+        LocalTime startWork = LocalTime.of(startH, startM);
+        LocalTime endWork = LocalTime.of(endH, endM);
+
+        // calculate work time duration
+        //Duration duration = Duration.between(startWork, endWork);
+
+        // create new WorkTime from data and save it to database
+        WorkTime workTime = new WorkTime(address,localDate,startWork, endWork,comment,user_id);
+        SaveWorkTimeData saveTimeWorkData = new SaveWorkTimeData();
+        saveTimeWorkData.connectWorkTimeDatabase(workTime);
+
+        // close panel after add new data to database
+        Stage stage = (Stage) addDataButton.getScene().getWindow();
+
+        stage.close();
+    }
+
     public void testEditButton(){
-        System.out.println("Edit!");
+        addNewWorkTime();
+        SaveWorkTimeData saveWorkTimeData = new SaveWorkTimeData();
+        int id = MainPanel.workTimeID;
+        System.out.println("get id worktime: " + id);
+        saveWorkTimeData.removeDataFromDataBase(id);
+//        System.out.println("Edit!");
     }
 
 

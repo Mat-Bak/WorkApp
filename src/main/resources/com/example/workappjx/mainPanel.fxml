@@ -92,7 +92,7 @@
                   <VBox fx:id="workTimeDataPanel" maxHeight="250.0" maxWidth="394.0" prefHeight="250.0" prefWidth="393.0" />
                </content>
             </ScrollPane>
-            <Button fx:id="refreshData" layoutX="60.0" layoutY="370.0" mnemonicParsing="false" onAction="#testButtonFire" text="Button" />
+            <Button fx:id="refreshData" layoutX="60.0" layoutY="370.0" mnemonicParsing="false" onAction="#showWorkTimeData" text="Button" />
          </children>
       </Pane>
       <Pane fx:id="salaryPanel" layoutX="-6.0" layoutY="-2.0" prefHeight="413.0" prefWidth="456.0" visible="false">
