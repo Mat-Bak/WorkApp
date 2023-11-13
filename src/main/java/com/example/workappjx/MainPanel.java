@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -13,6 +14,7 @@ import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -347,6 +349,44 @@ public class MainPanel implements Initializable{
 //                System.out.println("ID worktime: " + workTime.getId());
                 workTimeID = workTime.getId();
 
+
+            });
+            delete.setOnMouseClicked(event -> {
+                Stage popupWindow = new Stage();
+                popupWindow.initModality(Modality.APPLICATION_MODAL);
+                popupWindow.setTitle("Delete");
+
+                StackPane popupRoot = new StackPane();
+                VBox popupVBox = new VBox(10);
+                popupVBox.setPadding(new Insets(10));
+
+                Label popupLabel = new Label("Do you want delete?");
+                Button buttonYes = new Button("YES");
+                Button buttonNo = new Button("NO");
+                HBox buttonsHBox = new HBox(10);
+                popupVBox.getChildren().add(popupLabel);
+                popupVBox.setAlignment(Pos.CENTER);
+                buttonsHBox.getChildren().addAll(buttonYes, buttonNo);
+                buttonsHBox.setAlignment(Pos.CENTER);
+
+                VBox popupPane = new VBox(10);
+                popupPane.getChildren().addAll(popupVBox, buttonsHBox);
+                popupPane.setAlignment(Pos.CENTER);
+
+                Scene popupScene = new Scene(popupPane, 300, 200);
+                popupWindow.setScene(popupScene);
+                popupWindow.show();
+
+                buttonNo.setOnMouseClicked(e ->{
+                    popupWindow.close();
+                });
+                workTimeID = workTime.getId();
+                buttonYes.setOnMouseClicked(ev ->{
+                    SaveWorkTimeData saveWorkTimeData = new SaveWorkTimeData();
+                    System.out.println("Delete record where id = " + workTimeID);
+                    saveWorkTimeData.removeDataFromDataBase(workTimeID);
+                    popupWindow.close();
+                });
 
             });
             workTimeDataPanel.getChildren().add(pane);

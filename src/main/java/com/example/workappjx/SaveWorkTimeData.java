@@ -52,19 +52,12 @@ public class SaveWorkTimeData {
 
         try {
             Connection connection = DriverManager.getConnection(url, username, password);
-//            LocalDate testLocalDate = workTime.getLocalDate();
-//            System.out.println("SaveTimeWorkData Data: " + testLocalDate);
-//            System.out.println("Start time: " + worktime.getStart_time());
+
             System.out.println("second id workTime: " + id);
             String sql = "DELETE FROM persons.workhours WHERE id = " + id;
 
             PreparedStatement statement = connection.prepareStatement(sql);
-//            statement.setString(1, workTime.getAddress());
-//            statement.setDate(2, Date.valueOf(workTime.getDate()));
-//            statement.setTime(3, Time.valueOf(workTime.getStart_time()));
-//            statement.setTime(4, Time.valueOf(workTime.getEnd_time()));
-//            statement.setString(5, workTime.getComment());
-//            statement.setInt(6, workTime.getUser_id());
+
 
             int rowsInserted = statement.executeUpdate();
             if (rowsInserted > 0) {
