@@ -1,6 +1,8 @@
 package com.example.workappjx;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
@@ -29,7 +31,7 @@ public class LoginPanelController {
     private Button logInButton;
 
     public static Person personData;
-    public int user_id;
+//    public int user_id;
 
     public static String getMd5( String source ) {
         try {
@@ -70,10 +72,14 @@ public class LoginPanelController {
                 personData = person;
 //                System.out.println("ID: " + personData.getId());
 
-                MainPanel createMainPanel = new MainPanel();
+//                MainPanel createMainPanel = new MainPanel();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("mainPanel.fxml"));
+                Parent root = loader.load();
+                MainPanel createMainPanel = loader.getController();
                 Stage stage = (Stage) logInButton.getScene().getWindow();
                 stage.close();
                 createMainPanel.mainPanel();
+
 
 
                 break;

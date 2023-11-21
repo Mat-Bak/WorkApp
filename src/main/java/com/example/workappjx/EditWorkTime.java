@@ -3,13 +3,16 @@ package com.example.workappjx;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextArea;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -37,19 +40,21 @@ public class EditWorkTime implements Initializable {
     public TextArea commentField;
 
 
-    @FXML
-    public Pane dataPane;
+//    @FXML
+//    public Pane dataPane;
 
-    @FXML public Button addDataButton;
+    @FXML public Button saveData;
+
+    @FXML public Button deleteData;
 
     @FXML
     public ComboBox addressComboBox;
 
     @FXML public Text date;
 
-    @FXML public DatePicker dateTime;
+//    @FXML public DatePicker dateTime;
 
-    public int testHour;
+//    public int testHour;
 
 
     @Override
@@ -90,23 +95,23 @@ public class EditWorkTime implements Initializable {
 //        this.testHour = testHour;
 //    }
 
-    public void initScene() throws IOException {
-
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("editWorkTime.fxml"));
-        Scene secondScene = new Scene(fxmlLoader.load(), 300, 460);
-        Stage Secondstage = new Stage();
-//        startHourBox.setValue(testHour);
-        Secondstage.setScene(secondScene);
-        Secondstage.show();
-//        date.setText(localDate.toString());
-//        startHourBox.setValue(startHour);
-//        startMinutsBox.setValue(startMin);
-//        endHourBox.setValue(endHour);
-//        endMinutsBox.setValue(endMin);
-        Secondstage.setTitle("Edit Work Time");
-
-    }
+//    public void initScene() throws IOException {
+//
+//        FXMLLoader fxmlLoader = new FXMLLoader();
+//        fxmlLoader.setLocation(getClass().getResource("editWorkTime.fxml"));
+//        Scene secondScene = new Scene(fxmlLoader.load(), 300, 460);
+//        Stage Secondstage = new Stage();
+////        startHourBox.setValue(testHour);
+//        Secondstage.setScene(secondScene);
+//        Secondstage.show();
+////        date.setText(localDate.toString());
+////        startHourBox.setValue(startHour);
+////        startMinutsBox.setValue(startMin);
+////        endHourBox.setValue(endHour);
+////        endMinutsBox.setValue(endMin);
+//        Secondstage.setTitle("Edit Work Time");
+//
+//    }
 
     public List<String> addressList(){
         DatabaseConnector databaseConnector = new DatabaseConnector();
@@ -140,33 +145,30 @@ public class EditWorkTime implements Initializable {
 
     }
 
-    public void editWorkTimeWindow() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("editWorkTime.fxml"));
-        Scene secondScene = new Scene(fxmlLoader.load(), 300, 460);
-        Stage Secondstage = new Stage();
-        Secondstage.setScene(secondScene);
-        Secondstage.show();
-//        date.setText(localDate.toString());
-//        startHourBox.setValue(startHour);
-//        startMinutsBox.setValue(startMin);
-//        endHourBox.setValue(endHour);
-//        endMinutsBox.setValue(endMin);
-        Secondstage.setTitle("Edit Work Time");
-    }
+//    public void editWorkTimeWindow() throws IOException {
+//        FXMLLoader fxmlLoader = new FXMLLoader();
+//        fxmlLoader.setLocation(getClass().getResource("editWorkTime.fxml"));
+//        Scene secondScene = new Scene(fxmlLoader.load(), 300, 460);
+//        Stage Secondstage = new Stage();
+//        Secondstage.setScene(secondScene);
+//        Secondstage.show();
+////        date.setText(localDate.toString());
+////        startHourBox.setValue(startHour);
+////        startMinutsBox.setValue(startMin);
+////        endHourBox.setValue(endHour);
+////        endMinutsBox.setValue(endMin);
+//        Secondstage.setTitle("Edit Work Time");
+//    }
 
-    public void setStartHourBox(int start){
-        this.startHourBox.setValue(start);
-    }
+//    public void setStartHourBox(int start){
+//        this.startHourBox.setValue(start);
+//    }
 
     public void addNewWorkTime(){
         int startH = (int) startHourBox.getValue();
         int startM = (int) startMinutsBox.getValue();
         int endH = (int) endHourBox.getValue();
         int endM = (int) endMinutsBox.getValue();
-
-
-
 
         //  temporarily set address
         String address = (String)addressComboBox.getValue();
@@ -193,10 +195,51 @@ public class EditWorkTime implements Initializable {
         saveTimeWorkData.connectWorkTimeDatabase(workTime);
 
         // close panel after add new data to database
-        Stage stage = (Stage) addDataButton.getScene().getWindow();
+        Stage stage = (Stage) deleteData.getScene().getWindow();
 
         stage.close();
     }
+
+//    public void deleteWorkTime(){
+//        Stage popupWindow = new Stage();
+//        popupWindow.initModality(Modality.APPLICATION_MODAL);
+//        popupWindow.setTitle("Delete");
+//
+//        StackPane popupRoot = new StackPane();
+//        VBox popupVBox = new VBox(10);
+//        popupVBox.setPadding(new Insets(10));
+//
+//        Label popupLabel = new Label("Do you want delete?");
+//        Button buttonYes = new Button("YES");
+//        Button buttonNo = new Button("NO");
+//        HBox buttonsHBox = new HBox(10);
+//        popupVBox.getChildren().add(popupLabel);
+//        popupVBox.setAlignment(Pos.CENTER);
+//        buttonsHBox.getChildren().addAll(buttonYes, buttonNo);
+//        buttonsHBox.setAlignment(Pos.CENTER);
+//
+//        VBox popupPane = new VBox(10);
+//        popupPane.getChildren().addAll(popupVBox, buttonsHBox);
+//        popupPane.setAlignment(Pos.CENTER);
+//
+//        Scene popupScene = new Scene(popupPane, 300, 200);
+//        popupWindow.setScene(popupScene);
+//        popupWindow.show();
+//
+//        buttonNo.setOnMouseClicked(e ->{
+//            popupWindow.close();
+//        });
+//
+//        buttonYes.setOnMouseClicked(ev ->{
+//            int workTimeID = MainPanel.workTimeID;
+//            SaveWorkTimeData saveWorkTimeData = new SaveWorkTimeData();
+//            System.out.println("Delete record where id = " + workTimeID);
+//            saveWorkTimeData.removeDataFromDataBase(workTimeID);
+//            popupWindow.close();
+//            Stage stage = (Stage) deleteData.getScene().getWindow();
+//            stage.close();
+//        });
+//    }
 
     public void testEditButton(){
         addNewWorkTime();
@@ -204,6 +247,9 @@ public class EditWorkTime implements Initializable {
         int id = MainPanel.workTimeID;
         System.out.println("get id worktime: " + id);
         saveWorkTimeData.removeDataFromDataBase(id);
+        Stage stage = (Stage) saveData.getScene().getWindow();
+        stage.close();
+
 //        System.out.println("Edit!");
     }
 

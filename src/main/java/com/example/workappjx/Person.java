@@ -17,9 +17,9 @@ public class Person {
     BigInteger pesel;
     int phoneNumber;
     int SalaryPerHour;
-    int tax;
+    boolean admin;
 
-    public Person(int id, String login, String password, String firstName, String lastName, BigInteger pesel, int phoneNumber, int SalaryPerHour, int tax) {
+    public Person(int id, String login, String password, String firstName, String lastName, BigInteger pesel, int phoneNumber, int SalaryPerHour, boolean admin) {
         this.id = id;
         this.login = login;
         this.password = password;
@@ -28,7 +28,7 @@ public class Person {
         this.pesel = pesel;
         this.phoneNumber = phoneNumber;
         this.SalaryPerHour = SalaryPerHour;
-        this.tax = tax;
+        this.admin = admin;
     }
 
     public Person() {
@@ -37,15 +37,15 @@ public class Person {
 
     public int getId(){return id;}
 
-    public void setId(){this.id = id;}
+//    public void setId(){this.id = id;}
 
     public String getLogin() {
         return login;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
+//    public void setLogin(String login) {
+//        this.login = login;
+//    }
 
     public String getPassword() {
         return password;
@@ -59,48 +59,50 @@ public class Person {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+//    public void setFirstName(String firstName) {
+//        this.firstName = firstName;
+//    }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+//    public void setLastName(String lastName) {
+//        this.lastName = lastName;
+//    }
 
     public BigInteger getPesel() {
         return pesel;
     }
 
-    public void setPesel(BigInteger pesel) {
-        this.pesel = pesel;
-    }
+//    public void setPesel(BigInteger pesel) {
+//        this.pesel = pesel;
+//    }
 
     public int getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
+//    public void setPhoneNumber(int phoneNumber) {
+//        this.phoneNumber = phoneNumber;
+//    }
 
     public int getSalaryPerHour() {
         return SalaryPerHour;
     }
 
-    public void setSalaryPerHour(int salaryPerHour) {
-        SalaryPerHour = salaryPerHour;
+//    public void setSalaryPerHour(int salaryPerHour) {
+//        SalaryPerHour = salaryPerHour;
+//    }
+
+    public boolean getAdmin() {
+        return admin;
     }
 
-    public int getTax() {
-        return tax;
-    }
+//    public void setAdmin(boolean admin) {
+//        this.admin = admin;
+//    }
 
-    public void setTax(int tax) {
-        this.tax = tax;
-    }
+
 }
 

@@ -56,41 +56,41 @@ public class WorkTime {
         return date;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
-    }
+//    public void setDate(LocalDate date) {
+//        this.date = date;
+//    }
 
     public LocalTime getStart_time() {
         return start_time;
     }
 
-    public void setStart_time(LocalTime start_time) {
-        this.start_time = start_time;
-    }
+//    public void setStart_time(LocalTime start_time) {
+//        this.start_time = start_time;
+//    }
 
     public LocalTime getEnd_time() {
         return end_time;
     }
 
-    public void setEnd_time(LocalTime end_time) {
-        this.end_time = end_time;
-    }
+//    public void setEnd_time(LocalTime end_time) {
+//        this.end_time = end_time;
+//    }
 
     public String getComment() {
         return comment;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
+//    public void setComment(String comment) {
+//        this.comment = comment;
+//    }
 
     public int getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
-    }
+//    public void setUser_id(int user_id) {
+//        this.user_id = user_id;
+//    }
 
     public LocalDate getLocalDate(){
 //        MainPanel mainPanel = new MainPanel();

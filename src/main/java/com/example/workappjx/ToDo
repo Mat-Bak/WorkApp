@@ -1,32 +1,33 @@
-Work Panels:
-    - Buttons allows to edit and delete work time
-    - Button to show more work time details
-    - In Add Work Time user should have options to write addres and search it from the list
-    - In the AddWorkTimePanel add choose box that user can chose time (PM or AM) or change time from 12 to 24
-
-Summary:
-    - Panel show summary in one month (Hours, money brutto and netto etc)
-    - fix back button
-
-New DataBase contains every address (every address should have boolean options that it's still active or not)
-
-Edit user database and add new variable "admin" which will be information if login user is have admin permissions or not
+Admin Account:
+    - Add/Delete new worker
+    - Add/Delete new address
+    - check address list
+    - check workers list
+    - Select month and address to check who and how many times someone worked
+    -
 
 Add to MainPanel new options that only Admin will have permissions.
-(New panels: add new address or change status, show every employees, add or remove employees)
+(New panels: add/delete new address, show every employees, add or remove employees)
 
-In options every user should have option to set tax and Admin should have options to set salary per hour.
+Add exit button
 
-In Time Hours panel remove default time (panel should be clear at start)
+Add information in every panel if user do something wrong (user should get info if he type wrong password)
+
+Add a minimum length password (maybe more requirements)
+
+End hour work in work time panel can not be less than start work time (if it is then user should get info about it)
+
+Address field can not be empty
+
+Show/Hide password on login panel and when user want to change password in main panel
+
+When Admin click on employer then should have option to change salary, edit personal data etc
 
 Justify everythink to center
 
 Set minimum window size
 
-If user add the same address in one day then sum time and add only one field in WorkApp callendar.
-
-
-
+clear or update worktime panel wher user delete, edit or add new work time
 
 Make this app more pretty
 

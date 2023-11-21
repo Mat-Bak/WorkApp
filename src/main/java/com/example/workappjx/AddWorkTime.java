@@ -51,8 +51,8 @@ public class AddWorkTime implements Initializable {
     public TextArea commentField;
 
 
-    @FXML
-    public Pane dataPane;
+//    @FXML
+//    public Pane dataPane;
 
     @FXML public Button addDataButton;
 
@@ -61,10 +61,10 @@ public class AddWorkTime implements Initializable {
 
     @FXML public Text date;
 
-    @FXML public DatePicker dateTime;
+//    @FXML public DatePicker dateTime;
 
 
-    private Text dupa = new Text("dupa");
+//    private Text dupa = new Text("dupa");
 
     SaveWorkTimeData saveTimeWorkData = new SaveWorkTimeData();
 
@@ -90,29 +90,29 @@ public class AddWorkTime implements Initializable {
 
     }
 
-    public void setStartHourBox(int hour) {
-        this.startHourBox.setValue(hour);
-    }
-
-    public void setStartMinutsBox(int Minuts){
-        this.startMinutsBox.setValue(Minuts);
-    }
-
-    public void setEndHourBox(int Hour){
-        this.endHourBox.setValue(Hour);
-    }
-
-    public void setEndMinutsBox(int Minuts){
-        this.endMinutsBox.setValue(Minuts);
-    }
-
-    public void setAddressComboBox(String address){
-        addressComboBox.setValue(address);
-    }
-
-    public void setCommentField(String comment){
-        this.commentField.setText(comment);
-    }
+//    public void setStartHourBox(int hour) {
+//        this.startHourBox.setValue(hour);
+//    }
+//
+//    public void setStartMinutsBox(int Minuts){
+//        this.startMinutsBox.setValue(Minuts);
+//    }
+//
+//    public void setEndHourBox(int Hour){
+//        this.endHourBox.setValue(Hour);
+//    }
+//
+//    public void setEndMinutsBox(int Minuts){
+//        this.endMinutsBox.setValue(Minuts);
+//    }
+//
+//    public void setAddressComboBox(String address){
+//        addressComboBox.setValue(address);
+//    }
+//
+//    public void setCommentField(String comment){
+//        this.commentField.setText(comment);
+//    }
 
 
     public List<String> addressList(){
@@ -146,76 +146,76 @@ public class AddWorkTime implements Initializable {
         return addressList;
 
     }
+    /*
+        public void addWorkTimeWindow(LocalDate localDate) throws IOException {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("addWorkTime.fxml"));
+            Scene secondScene = new Scene(fxmlLoader.load(), 300, 460);
+            Stage Secondstage = new Stage();
+            Secondstage.setTitle("Add Work Time");
+            Secondstage.setScene(secondScene);
+            Secondstage.show();
+        }
 
-    public void addWorkTimeWindow(LocalDate localDate) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("addWorkTime.fxml"));
-        Scene secondScene = new Scene(fxmlLoader.load(), 300, 460);
-        Stage Secondstage = new Stage();
-        Secondstage.setTitle("Add Work Time");
-        Secondstage.setScene(secondScene);
-        Secondstage.show();
-    }
+        public void setDateText(String text){
+            date.setText(text);
+        }
 
-    public void setDateText(String text){
-        date.setText(text);
-    }
-
-    public void getWorkTime(){
-        //MainPanel mainPanel = new MainPanel();
-        //get start and end time from panel
-        int startH = (int) startHourBox.getValue();
-        int startM = (int) startMinutsBox.getValue();
-        int endH = (int) endHourBox.getValue();
-        int endM = (int) endMinutsBox.getValue();
-
-
-
-
-        //  temporarily set address
-        String address = (String)addressComboBox.getValue();
-        // get comment from panel
-        String comment = commentField.getText();
-        // get selected date
-        LocalDate localDate = MainPanel.getLocalDate;
-
-        // get user id
-        Person person = LoginPanelController.getPersonData();
-        int user_id = person.getId();
-
-        // transform time from panel to LocalTime
-        LocalTime startWork = LocalTime.of(startH, startM);
-        LocalTime endWork = LocalTime.of(endH, endM);
-
-        // calculate work time duration
-        //Duration duration = Duration.between(startWork, endWork);
-
-        // create new WorkTime from data and save it to database
-        WorkTime workTime = new WorkTime(address,localDate,startWork, endWork,comment,user_id);
-        saveTimeWorkData.connectWorkTimeDatabase(workTime);
-
-        // close panel after add new data to database
-        Stage stage = (Stage) addDataButton.getScene().getWindow();
-        stage.close();
-
-        showWorkTimeData();
-        System.out.println("Work Time Saved!");
+        public void getWorkTime(){
+            //MainPanel mainPanel = new MainPanel();
+            //get start and end time from panel
+            int startH = (int) startHourBox.getValue();
+            int startM = (int) startMinutsBox.getValue();
+            int endH = (int) endHourBox.getValue();
+            int endM = (int) endMinutsBox.getValue();
 
 
 
-    }
 
-    public void showWorkTimeData(){
-        MainPanel mainPanel = new MainPanel();
-        WorkTime getLocalDataFromWorkTime = new WorkTime();
-        Person person = LoginPanelController.getPersonData();
-        LocalDate localDate = getLocalDataFromWorkTime.getLocalDate();
-        if(localDate == null) return;
-        LoadWorkTimeData loadWorkTimeData = new LoadWorkTimeData();
-        List<WorkTime> workTimeList = loadWorkTimeData.dbConnection(person.getId(), localDate);
-        mainPanel.showWorkTimeData();
-    }
+            //  temporarily set address
+            String address = (String)addressComboBox.getValue();
+            // get comment from panel
+            String comment = commentField.getText();
+            // get selected date
+            LocalDate localDate = MainPanel.getLocalDate;
 
+            // get user id
+            Person person = LoginPanelController.getPersonData();
+            int user_id = person.getId();
+
+            // transform time from panel to LocalTime
+            LocalTime startWork = LocalTime.of(startH, startM);
+            LocalTime endWork = LocalTime.of(endH, endM);
+
+            // calculate work time duration
+            //Duration duration = Duration.between(startWork, endWork);
+
+            // create new WorkTime from data and save it to database
+            WorkTime workTime = new WorkTime(address,localDate,startWork, endWork,comment,user_id);
+            saveTimeWorkData.connectWorkTimeDatabase(workTime);
+
+            // close panel after add new data to database
+            Stage stage = (Stage) addDataButton.getScene().getWindow();
+            stage.close();
+
+            showWorkTimeData();
+            System.out.println("Work Time Saved!");
+
+
+
+        }
+
+        public void showWorkTimeData(){
+            MainPanel mainPanel = new MainPanel();
+            WorkTime getLocalDataFromWorkTime = new WorkTime();
+            Person person = LoginPanelController.getPersonData();
+            LocalDate localDate = getLocalDataFromWorkTime.getLocalDate();
+            if(localDate == null) return;
+            LoadWorkTimeData loadWorkTimeData = new LoadWorkTimeData();
+            List<WorkTime> workTimeList = loadWorkTimeData.dbConnection(person.getId(), localDate);
+            mainPanel.showWorkTimeData();
+        }
+    */
     @FXML
     private void submitButton(ActionEvent event) throws IOException, InterruptedException {
 
@@ -263,6 +263,7 @@ public class AddWorkTime implements Initializable {
 
     }
 
+    /*
     public void testDataUpdate() throws IOException {
         System.out.println("Test czy działą button!");
         Person person = LoginPanelController.getPersonData();
@@ -325,4 +326,6 @@ public class AddWorkTime implements Initializable {
         System.out.println("Work Panel length: " + mainPanel.workTimeDataPanel.getChildren().size());
 
     }
+
+     */
 }

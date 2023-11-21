@@ -21,6 +21,7 @@ import javafx.stage.WindowEvent;
 import java.io.IOException;
 
 import java.net.URL;
+import java.sql.SQLException;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -55,6 +56,9 @@ public class MainPanel implements Initializable{
     public Pane personInfoPanel;
 
     @FXML
+    public Pane settingsPanel;
+
+    @FXML
     public Text firstNameLabel;
     @FXML
     public Text lastNameLabel;
@@ -83,17 +87,26 @@ public class MainPanel implements Initializable{
     public ComboBox monthList;
 
     @FXML
+    public Text testAdmin;
+
+    @FXML
     public Text SalaryHours;
     @FXML
     public Text SalaryBrutto;
-    @FXML
-    public Text SalaryNetto;
 
     @FXML
-    public ScrollPane scrollTest;
+    public Text salaryLabel;
 
     @FXML
-    public Button refreshData;
+    public PasswordField oldPass;
+    @FXML
+    public PasswordField newPass;
+
+//    @FXML
+//    public ScrollPane scrollTest;
+//
+//    @FXML
+//    public Button refreshData;
 
     private String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
@@ -108,27 +121,27 @@ public class MainPanel implements Initializable{
     public static int workTimeID;
 
 
-    public int startHourReturn(){
-        System.out.println("StartHour: " + startHour);
-        return startHour;
-    }
-    public int startMinutsReturn(){
-        System.out.println("StartMin: " + startMinuts);
-        return startMinuts;
-    }
-    public int endHourReturn(){
-        System.out.println("endHour: " + endHour);
-        return endHour;
-    }
-    public int endMinutsReturn(){
-        System.out.println("endMin: " + endHour);
-        return endMinuts;
-    }
+//    public int startHourReturn(){
+//        System.out.println("StartHour: " + startHour);
+//        return startHour;
+//    }
+//    public int startMinutsReturn(){
+//        System.out.println("StartMin: " + startMinuts);
+//        return startMinuts;
+//    }
+//    public int endHourReturn(){
+//        System.out.println("endHour: " + endHour);
+//        return endHour;
+//    }
+//    public int endMinutsReturn(){
+//        System.out.println("endMin: " + endHour);
+//        return endMinuts;
+//    }
 
 
-    public Person getPerson() {
-        return person;
-    }
+//    public Person getPerson() {
+//        return person;
+//    }
 
 
     public void mainPanel() throws IOException {
@@ -143,13 +156,21 @@ public class MainPanel implements Initializable{
         person = LoginPanelController.getPersonData();
     }
 
-    public int returnID(){
-        return id;
+//    public int returnID(){
+//        return id;
+//    }
+
+//    public void fireButton(WindowEvent event){
+//        refreshData.fire();
+//        System.out.println("BUTTON FIRED!");
+//    }
+
+    public void showAdminTest(){
+        testAdmin.setVisible(true);
     }
 
-    public void fireButton(WindowEvent event){
-        refreshData.fire();
-        System.out.println("BUTTON FIRED!");
+    public void hideAdminTest(){
+        testAdmin.setVisible(false);
     }
 
     // Show panel with person info
@@ -168,6 +189,8 @@ public class MainPanel implements Initializable{
 
     //show work panel
     public void showWorkPanel() throws IOException {
+        workTimeDataPanel.getChildren().clear();
+        dateTime.setValue(null);
         mainPanel.setVisible(false);
         workPanel.setVisible(true);
     }
@@ -179,8 +202,30 @@ public class MainPanel implements Initializable{
     }
     
     public void showSalaryPanel(){
+
+        monthList.setValue(null);
+        SalaryHours.setText("Hours: ");
+        SalaryBrutto.setText("Brutto: ");
+//        SalaryNetto.setText("Netto: ");
+//        taxText.setText("Tax: ");
         mainPanel.setVisible(false);
         salaryPanel.setVisible(true);
+    }
+
+    public void salaryPanelBack(){
+        mainPanel.setVisible(true);
+        salaryPanel.setVisible(false);
+    }
+
+    public void showSettingsPanel(){
+        oldPass.clear();
+        newPass.clear();
+        mainPanel.setVisible(false);
+        settingsPanel.setVisible(true);
+    }
+    public void settingPanelBack(){
+        mainPanel.setVisible(true);
+        settingsPanel.setVisible(false);
     }
 
     // set data in person info panel
@@ -191,18 +236,20 @@ public class MainPanel implements Initializable{
          lastNameLabel.setText("Last Name: " + person.getLastName());
          phoneNumberLabel.setText("Phone Number: " + person.getPhoneNumber());
          peselLabel.setText("Pesel: " + person.getPesel());
+        salaryLabel.setText("Salary per hour: " + person.getSalaryPerHour());
+
 
     }
 
-    public void testCloseRequest() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("addWorkTime.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 300, 460);
-        Stage stage = new Stage();
-        stage.setTitle("Add Work Time");
-        stage.setScene(scene);
-        stage.setOnCloseRequest(this::fireButton);
-    }
+//    public void testCloseRequest() throws IOException {
+//        FXMLLoader fxmlLoader = new FXMLLoader();
+//        fxmlLoader.setLocation(getClass().getResource("addWorkTime.fxml"));
+//        Scene scene = new Scene(fxmlLoader.load(), 300, 460);
+//        Stage stage = new Stage();
+//        stage.setTitle("Add Work Time");
+//        stage.setScene(scene);
+//        stage.setOnCloseRequest(this::fireButton);
+//    }
 
 
     public LocalDate getDataTime(){
@@ -213,27 +260,27 @@ public class MainPanel implements Initializable{
     }
 
 
-    public void setDataTime(LocalDate timeDate){
-        dateTime.setValue(timeDate);
-    }
+//    public void setDataTime(LocalDate timeDate){
+//        dateTime.setValue(timeDate);
+//    }
 
-    public HBox CreateHBox(String address, String time){
-        HBox hbox = new HBox();
-        Text workAddress = new Text(address);
-        Text workTime = new Text(time);
-        workAddress.setTextAlignment(TextAlignment.CENTER);
-        workTime.setTextAlignment(TextAlignment.RIGHT);
+//    public HBox CreateHBox(String address, String time){
+//        HBox hbox = new HBox();
+//        Text workAddress = new Text(address);
+//        Text workTime = new Text(time);
+//        workAddress.setTextAlignment(TextAlignment.CENTER);
+//        workTime.setTextAlignment(TextAlignment.RIGHT);
+////
+////        HBox.setHgrow(workAddress, Priority.ALWAYS);
+////        HBox.setHgrow(workTime, Priority.ALWAYS);
 //
-//        HBox.setHgrow(workAddress, Priority.ALWAYS);
-//        HBox.setHgrow(workTime, Priority.ALWAYS);
-
-        hbox.setMargin(workAddress, new Insets(20, 20, 20, 20));
-        hbox.setMargin(workTime, new Insets(20, 20, 20, 20));
-        hbox.getChildren().addAll(workAddress, workTime);
-
-        return hbox;
-
-    }
+//        hbox.setMargin(workAddress, new Insets(20, 20, 20, 20));
+//        hbox.setMargin(workTime, new Insets(20, 20, 20, 20));
+//        hbox.getChildren().addAll(workAddress, workTime);
+//
+//        return hbox;
+//
+//    }
 
     public void showWorkTimeData(){
         System.out.println("Test czy działą button!");
@@ -248,6 +295,7 @@ public class MainPanel implements Initializable{
 //        System.out.println("Dlugość tablicy workTime: " + workTimeList.size());
         workTimeDataPanel.getChildren().clear();
 
+
         for(WorkTime workTime : workTimeList){
             Text address = new Text(workTime.getAddress());
             Text time = new Text(workTime.timeToStrikg());
@@ -256,30 +304,30 @@ public class MainPanel implements Initializable{
 
             TextFlow dataPane = new TextFlow();
             TextFlow timePane = new TextFlow();
-            TextFlow buttonsEditPane = new TextFlow();
-            TextFlow buttonsDeletePane = new TextFlow();
+//            TextFlow buttonsEditPane = new TextFlow();
+//            TextFlow buttonsDeletePane = new TextFlow();
 
-            Button edit = new Button("E");
-            Button delete = new Button("D");
-            edit.setPrefSize(25,25);
-            delete.setPrefSize(25,25);
+//            Button edit = new Button("E");
+//            Button delete = new Button("D");
+//            edit.setPrefSize(25,25);
+//            delete.setPrefSize(25,25);
 
-            buttonsEditPane.setTextAlignment(TextAlignment.CENTER);
-            buttonsEditPane.setPrefSize(35, 39);
-            buttonsEditPane.getChildren().add(edit);
-            buttonsEditPane.setLayoutX(0);
-            buttonsDeletePane.setLayoutX(35);
-            buttonsEditPane.setPadding(new Insets(5,5,5,5));
-
-            buttonsDeletePane.setTextAlignment(TextAlignment.CENTER);
-            buttonsDeletePane.setPrefSize(35, 39);
-            buttonsDeletePane.getChildren().add(delete);
-            buttonsDeletePane.setPadding(new Insets(5,5,5,5));
+//            buttonsEditPane.setTextAlignment(TextAlignment.CENTER);
+//            buttonsEditPane.setPrefSize(35, 39);
+//            buttonsEditPane.getChildren().add(edit);
+//            buttonsEditPane.setLayoutX(0);
+//            buttonsDeletePane.setLayoutX(35);
+//            buttonsEditPane.setPadding(new Insets(5,5,5,5));
+//
+//            buttonsDeletePane.setTextAlignment(TextAlignment.CENTER);
+//            buttonsDeletePane.setPrefSize(35, 39);
+//            buttonsDeletePane.getChildren().add(delete);
+//            buttonsDeletePane.setPadding(new Insets(5,5,5,5));
 
             dataPane.setTextAlignment(TextAlignment.CENTER);
-            dataPane.setPrefSize(215, 39);
+            dataPane.setPrefSize(285, 39);
             dataPane.getChildren().add(address);
-            dataPane.setLayoutX(70);
+            dataPane.setLayoutX(0);
             dataPane.setPadding(new Insets(5,5,5,5));
 
             timePane.setTextAlignment(TextAlignment.CENTER);
@@ -291,7 +339,8 @@ public class MainPanel implements Initializable{
             Pane pane = new Pane();
             pane.setPrefWidth(380);
             pane.setPrefHeight(40);
-            pane.getChildren().addAll(buttonsEditPane, buttonsDeletePane,dataPane, timePane);
+            pane.getChildren().addAll(dataPane, timePane);
+//            pane.getChildren().addAll(buttonsEditPane, buttonsDeletePane,dataPane, timePane);
 
             pane.setStyle("-fx-border-color: grey;" +
                     "-fx-border-style: solid none solid none;" +
@@ -299,21 +348,21 @@ public class MainPanel implements Initializable{
                     "-fx-background-color: lightgrey;");
 
             dataPane.setStyle("-fx-border-color: grey;" +
-                    "-fx-border-style: hidden solid hidden solid;" +
+                    "-fx-border-style: hidden solid hidden hidden;" +
                     "-fx-border-width: 4;");
-            edit.setOnMouseEntered(event ->{
-                edit.setCursor(Cursor.HAND);
-            });
-            delete.setOnMouseEntered(event ->{
-                delete.setCursor(Cursor.HAND);
-            });
+//            edit.setOnMouseEntered(event ->{
+//                edit.setCursor(Cursor.HAND);
+//            });
+//            delete.setOnMouseEntered(event ->{
+//                delete.setCursor(Cursor.HAND);
+//            });
 
             pane.setOnMouseEntered(event ->{
                 pane.setStyle("-fx-border-color: lightgrey;" +
                         "-fx-border-style: solid none solid none;" +
                         "-fx-border-width: 2;" +
                         "-fx-background-color: grey;");
-//                pane.setCursor(Cursor.HAND);
+                pane.setCursor(Cursor.HAND);
             });
 
             pane.setOnMouseExited(event ->{
@@ -324,7 +373,7 @@ public class MainPanel implements Initializable{
                 pane.setCursor(Cursor.DEFAULT);
             });
 
-            edit.setOnMouseClicked(event -> {
+            pane.setOnMouseClicked(event -> {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("editWorkTime.fxml"));
                 Scene secondScene = null;
@@ -351,133 +400,165 @@ public class MainPanel implements Initializable{
 
 
             });
-            delete.setOnMouseClicked(event -> {
-                Stage popupWindow = new Stage();
-                popupWindow.initModality(Modality.APPLICATION_MODAL);
-                popupWindow.setTitle("Delete");
 
-                StackPane popupRoot = new StackPane();
-                VBox popupVBox = new VBox(10);
-                popupVBox.setPadding(new Insets(10));
-
-                Label popupLabel = new Label("Do you want delete?");
-                Button buttonYes = new Button("YES");
-                Button buttonNo = new Button("NO");
-                HBox buttonsHBox = new HBox(10);
-                popupVBox.getChildren().add(popupLabel);
-                popupVBox.setAlignment(Pos.CENTER);
-                buttonsHBox.getChildren().addAll(buttonYes, buttonNo);
-                buttonsHBox.setAlignment(Pos.CENTER);
-
-                VBox popupPane = new VBox(10);
-                popupPane.getChildren().addAll(popupVBox, buttonsHBox);
-                popupPane.setAlignment(Pos.CENTER);
-
-                Scene popupScene = new Scene(popupPane, 300, 200);
-                popupWindow.setScene(popupScene);
-                popupWindow.show();
-
-                buttonNo.setOnMouseClicked(e ->{
-                    popupWindow.close();
-                });
-                workTimeID = workTime.getId();
-                buttonYes.setOnMouseClicked(ev ->{
-                    SaveWorkTimeData saveWorkTimeData = new SaveWorkTimeData();
-                    System.out.println("Delete record where id = " + workTimeID);
-                    saveWorkTimeData.removeDataFromDataBase(workTimeID);
-                    popupWindow.close();
-                });
-
-            });
+//            edit.setOnMouseClicked(event -> {
+//                FXMLLoader fxmlLoader = new FXMLLoader();
+//                fxmlLoader.setLocation(getClass().getResource("editWorkTime.fxml"));
+//                Scene secondScene = null;
+//                try {
+//                    secondScene = new Scene(fxmlLoader.load(), 300, 460);
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//                Stage Secondstage = new Stage();
+//                Secondstage.setScene(secondScene);
+//                Secondstage.show();
+//
+//
+//                startHour = workTime.getStart_time().getHour();
+//                startMinuts = workTime.getStart_time().getMinute();
+//                endHour = workTime.getEnd_time().getHour();
+//                endMinuts = workTime.getEnd_time().getMinute();
+//                id = workTime.getUser_id();
+//
+//                EditWorkTime editWorkTime = fxmlLoader.getController();
+//                editWorkTime.setData(startHour, startMinuts, endHour, endMinuts, workTime.getAddress(), workTime.getComment());
+////                System.out.println("ID worktime: " + workTime.getId());
+//                workTimeID = workTime.getId();
+//
+//
+//            });
+//            delete.setOnMouseClicked(event -> {
+//                Stage popupWindow = new Stage();
+//                popupWindow.initModality(Modality.APPLICATION_MODAL);
+//                popupWindow.setTitle("Delete");
+//
+//                StackPane popupRoot = new StackPane();
+//                VBox popupVBox = new VBox(10);
+//                popupVBox.setPadding(new Insets(10));
+//
+//                Label popupLabel = new Label("Do you want delete?");
+//                Button buttonYes = new Button("YES");
+//                Button buttonNo = new Button("NO");
+//                HBox buttonsHBox = new HBox(10);
+//                popupVBox.getChildren().add(popupLabel);
+//                popupVBox.setAlignment(Pos.CENTER);
+//                buttonsHBox.getChildren().addAll(buttonYes, buttonNo);
+//                buttonsHBox.setAlignment(Pos.CENTER);
+//
+//                VBox popupPane = new VBox(10);
+//                popupPane.getChildren().addAll(popupVBox, buttonsHBox);
+//                popupPane.setAlignment(Pos.CENTER);
+//
+//                Scene popupScene = new Scene(popupPane, 300, 200);
+//                popupWindow.setScene(popupScene);
+//                popupWindow.show();
+//
+//                buttonNo.setOnMouseClicked(e ->{
+//                    popupWindow.close();
+//                });
+//                workTimeID = workTime.getId();
+//                buttonYes.setOnMouseClicked(ev ->{
+//                    SaveWorkTimeData saveWorkTimeData = new SaveWorkTimeData();
+//                    System.out.println("Delete record where id = " + workTimeID);
+//                    saveWorkTimeData.removeDataFromDataBase(workTimeID);
+//                    popupWindow.close();
+//                });
+//
+//            });
             workTimeDataPanel.getChildren().add(pane);
 
         }
     }
 
-    public void addNewPanel(WorkTime workTime){
-        Text address = new Text(workTime.getAddress());
-        Text time = new Text(workTime.timeToStrikg());
-        address.setTextAlignment(TextAlignment.CENTER);
-        time.setTextAlignment(TextAlignment.CENTER);
+//    public int returnWorkTitemID(){
+//        return workTimeID;
+//    }
 
-        TextFlow dataPane = new TextFlow();
-        TextFlow timePane = new TextFlow();
-        TextFlow buttonsEditPane = new TextFlow();
-        TextFlow buttonsDeletePane = new TextFlow();
+//    public void addNewPanel(WorkTime workTime){
+//        Text address = new Text(workTime.getAddress());
+//        Text time = new Text(workTime.timeToStrikg());
+//        address.setTextAlignment(TextAlignment.CENTER);
+//        time.setTextAlignment(TextAlignment.CENTER);
+//
+//        TextFlow dataPane = new TextFlow();
+//        TextFlow timePane = new TextFlow();
+//        TextFlow buttonsEditPane = new TextFlow();
+//        TextFlow buttonsDeletePane = new TextFlow();
+//
+//        Button edit = new Button("E");
+//        Button delete = new Button("D");
+//        edit.setPrefSize(25,25);
+//        delete.setPrefSize(25,25);
+//
+//        buttonsEditPane.setTextAlignment(TextAlignment.CENTER);
+//        buttonsEditPane.setPrefSize(35, 39);
+//        buttonsEditPane.getChildren().add(edit);
+//        buttonsEditPane.setLayoutX(0);
+//        buttonsDeletePane.setLayoutX(35);
+//        buttonsEditPane.setPadding(new Insets(5,5,5,5));
+//
+//        buttonsDeletePane.setTextAlignment(TextAlignment.CENTER);
+//        buttonsDeletePane.setPrefSize(35, 39);
+//        buttonsDeletePane.getChildren().add(delete);
+//        buttonsDeletePane.setPadding(new Insets(5,5,5,5));
+//
+//        dataPane.setTextAlignment(TextAlignment.CENTER);
+//        dataPane.setPrefSize(215, 39);
+//        dataPane.getChildren().add(address);
+//        dataPane.setLayoutX(70);
+//        dataPane.setPadding(new Insets(5,5,5,5));
+//
+//        timePane.setTextAlignment(TextAlignment.CENTER);
+//        timePane.setPrefSize(94, 39);
+//        timePane.getChildren().add(time);
+//        timePane.setLayoutX(285);
+//        timePane.setPadding(new Insets(5,5,5,5));
+//
+//        Pane pane = new Pane();
+//        pane.setPrefWidth(380);
+//        pane.setPrefHeight(40);
+//        pane.getChildren().addAll(buttonsEditPane, buttonsDeletePane,dataPane, timePane);
+//
+//        pane.setStyle("-fx-border-color: grey;" +
+//                "-fx-border-style: solid none solid none;" +
+//                "-fx-border-width: 2;" +
+//                "-fx-background-color: lightgrey;");
+//
+//        dataPane.setStyle("-fx-border-color: grey;" +
+//                "-fx-border-style: hidden solid hidden solid;" +
+//                "-fx-border-width: 4;");
+//        edit.setOnMouseEntered(event ->{
+//            edit.setCursor(Cursor.HAND);
+//        });
+//        delete.setOnMouseEntered(event ->{
+//            delete.setCursor(Cursor.HAND);
+//        });
+//
+//        pane.setOnMouseEntered(event ->{
+//            pane.setStyle("-fx-border-color: lightgrey;" +
+//                    "-fx-border-style: solid none solid none;" +
+//                    "-fx-border-width: 2;" +
+//                    "-fx-background-color: grey;");
+////                pane.setCursor(Cursor.HAND);
+//        });
+//
+//        pane.setOnMouseExited(event ->{
+//            pane.setStyle("-fx-border-color: grey;" +
+//                    "-fx-border-style: solid none solid none;" +
+//                    "-fx-border-width: 2;" +
+//                    "-fx-background-color: lightgrey;");
+//            pane.setCursor(Cursor.DEFAULT);
+//        });
+//        workTimeDataPanel.getChildren().add(pane);
+//    }
+//    public void getDataOnClick(ActionEvent event){
+//
+//    }
 
-        Button edit = new Button("E");
-        Button delete = new Button("D");
-        edit.setPrefSize(25,25);
-        delete.setPrefSize(25,25);
-
-        buttonsEditPane.setTextAlignment(TextAlignment.CENTER);
-        buttonsEditPane.setPrefSize(35, 39);
-        buttonsEditPane.getChildren().add(edit);
-        buttonsEditPane.setLayoutX(0);
-        buttonsDeletePane.setLayoutX(35);
-        buttonsEditPane.setPadding(new Insets(5,5,5,5));
-
-        buttonsDeletePane.setTextAlignment(TextAlignment.CENTER);
-        buttonsDeletePane.setPrefSize(35, 39);
-        buttonsDeletePane.getChildren().add(delete);
-        buttonsDeletePane.setPadding(new Insets(5,5,5,5));
-
-        dataPane.setTextAlignment(TextAlignment.CENTER);
-        dataPane.setPrefSize(215, 39);
-        dataPane.getChildren().add(address);
-        dataPane.setLayoutX(70);
-        dataPane.setPadding(new Insets(5,5,5,5));
-
-        timePane.setTextAlignment(TextAlignment.CENTER);
-        timePane.setPrefSize(94, 39);
-        timePane.getChildren().add(time);
-        timePane.setLayoutX(285);
-        timePane.setPadding(new Insets(5,5,5,5));
-
-        Pane pane = new Pane();
-        pane.setPrefWidth(380);
-        pane.setPrefHeight(40);
-        pane.getChildren().addAll(buttonsEditPane, buttonsDeletePane,dataPane, timePane);
-
-        pane.setStyle("-fx-border-color: grey;" +
-                "-fx-border-style: solid none solid none;" +
-                "-fx-border-width: 2;" +
-                "-fx-background-color: lightgrey;");
-
-        dataPane.setStyle("-fx-border-color: grey;" +
-                "-fx-border-style: hidden solid hidden solid;" +
-                "-fx-border-width: 4;");
-        edit.setOnMouseEntered(event ->{
-            edit.setCursor(Cursor.HAND);
-        });
-        delete.setOnMouseEntered(event ->{
-            delete.setCursor(Cursor.HAND);
-        });
-
-        pane.setOnMouseEntered(event ->{
-            pane.setStyle("-fx-border-color: lightgrey;" +
-                    "-fx-border-style: solid none solid none;" +
-                    "-fx-border-width: 2;" +
-                    "-fx-background-color: grey;");
-//                pane.setCursor(Cursor.HAND);
-        });
-
-        pane.setOnMouseExited(event ->{
-            pane.setStyle("-fx-border-color: grey;" +
-                    "-fx-border-style: solid none solid none;" +
-                    "-fx-border-width: 2;" +
-                    "-fx-background-color: lightgrey;");
-            pane.setCursor(Cursor.DEFAULT);
-        });
-        workTimeDataPanel.getChildren().add(pane);
-    }
-    public void getDataOnClick(ActionEvent event){
-
-    }
-
-    public Button returnButtonFire(){
-        return refreshData;
-    }
+//    public Button returnButtonFire(){
+//        return refreshData;
+//    }
 
 //    public void testButtonFire(){
 //        LocalDate date = getDataTime();
@@ -549,6 +630,15 @@ public class MainPanel implements Initializable{
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
+        Person person = LoginPanelController.getPersonData();
+        System.out.println("getAdmin: " + person.getAdmin());
+        if(person.getAdmin() == true){
+            showAdminTest();
+            System.out.println("Admin Test Visible!");
+        }else{
+            hideAdminTest();
+            System.out.println("Admin Test Hidden!");
+        }
 
         for(int i = 0; i < months.length; ++i){
             monthList.getItems().add(months[i]);
@@ -586,23 +676,42 @@ public class MainPanel implements Initializable{
         SalaryHours.setText("");
         SalaryHours.setText("Hours: " + SumOfHours/60 + "h " + SumOfHours%60 + "min");
         SalaryBrutto.setText("");
-        SalaryBrutto.setText("Brutto: " + (SumOfHours/60)*person.getSalaryPerHour());
-        SalaryNetto.setText("");
-        float tax = 1 - (float)person.getTax()/100;
-//        System.out.println("PersonTax: " + person.getTax() + "\n tax: " + tax);
-        SalaryNetto.setText("Netto: " +  (SumOfHours/60)*person.getSalaryPerHour()*tax);
+        SalaryBrutto.setText("Brutto: " + (int)((SumOfHours/60)*person.getSalaryPerHour()));
+//        SalaryNetto.setText("");
+//        float tax = 1 - (float)person.getTax()/100;
+////        System.out.println("PersonTax: " + person.getTax() + "\n tax: " + tax);
+//        SalaryNetto.setText("Netto: " +  (int)((SumOfHours/60)*person.getSalaryPerHour()*tax));
+//        taxText.setText("");
+//        taxText.setText("Tax: " + person.getTax()+"%");
+
 //        System.out.println("WorkTime data getMonthValue: " + workTimeList.get(0).getDate().getMonthValue());
 //        System.out.println("WorkTime work hours: " + hours + "h " + min + "min");
 //        System.out.println("WorkTime start time: " + workTimeList.get(0).getStart_time() + " | end time: "+ workTimeList.get(0).getEnd_time());
     }
 
-    public void addNewPane(Pane pane){
-        workTimeDataPanel.getChildren().add(pane);
+//    public void addNewPane(Pane pane){
+//        workTimeDataPanel.getChildren().add(pane);
+//    }
+
+
+    public void changePass() throws SQLException {
+        LoginPanelController loginPanelController = new LoginPanelController();
+        String oldPassword = loginPanelController.getMd5(oldPass.getText());
+        String newPassword = loginPanelController.getMd5(newPass.getText());
+        Person person = LoginPanelController.getPersonData();
+        LoadPersonData loadPersonData = new LoadPersonData();
+        if(person.getPassword().equals(oldPassword) && !oldPass.getText().equals(newPass.getText())){
+            loadPersonData.changePassword(newPassword, person.getId());
+            System.out.println("Password changed!");
+        }else{
+            System.out.println("Wrong old password!");
+        }
+
     }
 
-    public void clearPane(){
-        workTimeDataPanel.getChildren().clear();
-    }
+//    public void clearPane(){
+//        workTimeDataPanel.getChildren().clear();
+//    }
 
 
 //    public void clearDataPicker(){

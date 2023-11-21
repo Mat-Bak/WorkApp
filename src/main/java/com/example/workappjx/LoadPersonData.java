@@ -1,8 +1,7 @@
 package com.example.workappjx;
 
 import java.math.BigInteger;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,7 +28,7 @@ public class LoadPersonData {
         BigInteger pesel;
         int phoneNumber;
         int SalaryPerHour;
-        int tax;
+        boolean admin;
 
         List<Person> personList = new ArrayList<>();
 
@@ -49,9 +48,9 @@ public class LoadPersonData {
                 phoneNumber = resultSet.getInt("phoneNumber");
                 pesel = BigInteger.valueOf(resultSet.getLong("pesel"));
                 SalaryPerHour = resultSet.getInt("SalaryPerHour");
-                tax = resultSet.getInt("tax");
+                admin = resultSet.getBoolean("admin");
 
-                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber, SalaryPerHour, tax);
+                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber, SalaryPerHour, admin);
 //                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber);
                 personList.add(person);
             }
@@ -68,4 +67,22 @@ public class LoadPersonData {
         }
         return personList;
     }
+
+    public void changePassword(String pass, int id) throws SQLException {
+        String url = "jdbc:mysql://localhost/persons";
+        String username = "root";
+        String password = "1234qwer";
+        Connection connection = DriverManager.getConnection(url, username, password);
+//        DatabaseConnector connector = new DatabaseConnector();
+        String query = "UPDATE Persons.workers SET password = '" + pass + "' WHERE id = " + id + ";";
+        PreparedStatement statement = connection.prepareStatement(query);
+        int rowsInserted = statement.executeUpdate();
+        if (rowsInserted > 0) {
+//                System.out.println("Dane zostały dodane do bazy.");
+        }
+        statement.close();
+        connection.close();
+    }
+
+
 }
