@@ -1,8 +1,6 @@
 Admin Account:
-    - Add/Delete new worker
     - Add/Delete new address
     - check address list
-    - check workers list
     - Select month and address to check who and how many times someone worked
     -
 

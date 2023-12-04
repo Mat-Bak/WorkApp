@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.security.MessageDigest;
+import java.sql.SQLException;
 import java.util.List;
 
 /*
@@ -60,33 +61,45 @@ public class LoginPanelController {
         return personData;
     }
 
-    public void logIn() throws IOException {
+    public void logIn() throws IOException, SQLException {
         LoadPersonData getPersonData = new LoadPersonData();
-        List<Person> personList = getPersonData.dbConnection();
+        String login = loginField.getText();
+        String pass = getMd5(passwordField.getText());
+        Person person = getPersonData.logInToApp(login, pass);
+        if(person != null){
+            System.out.println("Login succesful!");
+            personData = person;
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("mainPanel.fxml"));
+            Parent root = loader.load();
+            MainPanel createMainPanel = loader.getController();
+            Stage stage = (Stage) logInButton.getScene().getWindow();
+            stage.close();
+            createMainPanel.mainPanel();
+        }else{
+            System.out.println("LogIn failed!");
+        }
+//        List<Person> personList = getPersonData.dbConnection();
 
 //        System.out.println("Login: " + loginField.getText() + "\n Password: " + getMd5(passwordField.getText()));
-        for (Person person : personList) {
-//            System.out.println("Person Login: " + person.getLogin() + "| Person Password: " + getMd5(person.getPassword()));
-            if (person.getLogin().equals(loginField.getText()) && person.getPassword().equals(getMd5(passwordField.getText()))){
-                System.out.println("Login succesful!");
-                personData = person;
-//                System.out.println("ID: " + personData.getId());
-
-//                MainPanel createMainPanel = new MainPanel();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("mainPanel.fxml"));
-                Parent root = loader.load();
-                MainPanel createMainPanel = loader.getController();
-                Stage stage = (Stage) logInButton.getScene().getWindow();
-                stage.close();
-                createMainPanel.mainPanel();
-
-
-
-                break;
-            }else{
-                System.out.println("Login Failed!");
-            }
-        }
+//        for (Person person : personList) {
+////            System.out.println("Person Login: " + person.getLogin() + "| Person Password: " + getMd5(person.getPassword()));
+//            if (person.getLogin().equals(loginField.getText()) && person.getPassword().equals(getMd5(passwordField.getText()))){
+//                System.out.println("Login succesful!");
+//                personData = person;
+////                System.out.println("ID: " + personData.getId());
+//
+////                MainPanel createMainPanel = new MainPanel();
+//                FXMLLoader loader = new FXMLLoader(getClass().getResource("mainPanel.fxml"));
+//                Parent root = loader.load();
+//                MainPanel createMainPanel = loader.getController();
+//                Stage stage = (Stage) logInButton.getScene().getWindow();
+//                stage.close();
+//                createMainPanel.mainPanel();
+//                break;
+//            }else{
+//                System.out.println("Login Failed!");
+//            }
+//        }
 
 
     }

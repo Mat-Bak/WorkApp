@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="400.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workappjx.MainPanel">
+<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workappjx.MainPanel">
    <children>
       <Pane fx:id="mainPanel" prefHeight="421.0" prefWidth="460.0">
          <children>
@@ -50,6 +50,15 @@
                   <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@images/coins.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button fx:id="workersPanelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="175.0" layoutY="177.0" mnemonicParsing="false" onAction="#showWorkersPanel" prefHeight="100.0" prefWidth="100.0" textAlignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@images/workers.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -141,6 +150,17 @@
             </Text>
             <PasswordField fx:id="newPass" layoutX="69.0" layoutY="183.0" prefHeight="48.0" prefWidth="318.0" />
             <Button fx:id="savePass" layoutX="69.0" layoutY="335.0" mnemonicParsing="false" onAction="#changePass" prefHeight="40.0" prefWidth="139.0" text="Save" />
+         </children>
+      </Pane>
+      <Pane fx:id="workersPane" prefHeight="421.0" prefWidth="460.0" visible="false">
+         <children>
+            <ScrollPane layoutX="14.0" layoutY="54.0" prefHeight="271.0" prefWidth="431.0">
+               <content>
+                  <VBox fx:id="workersVBox" prefHeight="265.0" prefWidth="427.0" />
+               </content>
+            </ScrollPane>
+            <Button fx:id="addNewWorker" layoutX="338.0" layoutY="14.0" mnemonicParsing="false" onAction="#showAddNewWorkerPanel" prefHeight="27.0" prefWidth="94.0" text="New +" />
+            <Button fx:id="SalaryPanelBack2" layoutX="159.0" layoutY="335.0" mnemonicParsing="false" onAction="#workersPanelBack" prefHeight="40.0" prefWidth="139.0" text="Back" />
          </children>
       </Pane>
    </children>

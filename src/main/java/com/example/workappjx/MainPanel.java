@@ -1,5 +1,6 @@
 package com.example.workappjx;
 
+import javafx.concurrent.Worker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,11 +21,13 @@ import javafx.stage.WindowEvent;
 
 import java.io.IOException;
 
+import java.math.BigInteger;
 import java.net.URL;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -59,6 +62,9 @@ public class MainPanel implements Initializable{
     public Pane settingsPanel;
 
     @FXML
+    public Pane workersPane;
+
+    @FXML
     public Text firstNameLabel;
     @FXML
     public Text lastNameLabel;
@@ -84,6 +90,9 @@ public class MainPanel implements Initializable{
     public VBox workTimeDataPanel;
 
     @FXML
+    public VBox workersVBox;
+
+    @FXML
     public ComboBox monthList;
 
     @FXML
@@ -102,6 +111,8 @@ public class MainPanel implements Initializable{
     @FXML
     public PasswordField newPass;
 
+    @FXML
+    public AnchorPane anchorPane;
 //    @FXML
 //    public ScrollPane scrollTest;
 //
@@ -117,6 +128,8 @@ public class MainPanel implements Initializable{
     public int endMinuts;
 
     public int id;
+
+    public int personID;
 
     public static int workTimeID;
 
@@ -193,6 +206,18 @@ public class MainPanel implements Initializable{
         dateTime.setValue(null);
         mainPanel.setVisible(false);
         workPanel.setVisible(true);
+    }
+
+    public void showWorkersPanel() throws SQLException {
+        mainPanel.setVisible(false);
+        workersPane.setVisible(true);
+        workersVBox.getChildren().clear();
+        showWorkersList();
+    }
+
+    public void workersPanelBack(){
+        mainPanel.setVisible(true);
+        workersPane.setVisible(false);
     }
 
     // back to main panel from work panel
@@ -304,25 +329,6 @@ public class MainPanel implements Initializable{
 
             TextFlow dataPane = new TextFlow();
             TextFlow timePane = new TextFlow();
-//            TextFlow buttonsEditPane = new TextFlow();
-//            TextFlow buttonsDeletePane = new TextFlow();
-
-//            Button edit = new Button("E");
-//            Button delete = new Button("D");
-//            edit.setPrefSize(25,25);
-//            delete.setPrefSize(25,25);
-
-//            buttonsEditPane.setTextAlignment(TextAlignment.CENTER);
-//            buttonsEditPane.setPrefSize(35, 39);
-//            buttonsEditPane.getChildren().add(edit);
-//            buttonsEditPane.setLayoutX(0);
-//            buttonsDeletePane.setLayoutX(35);
-//            buttonsEditPane.setPadding(new Insets(5,5,5,5));
-//
-//            buttonsDeletePane.setTextAlignment(TextAlignment.CENTER);
-//            buttonsDeletePane.setPrefSize(35, 39);
-//            buttonsDeletePane.getChildren().add(delete);
-//            buttonsDeletePane.setPadding(new Insets(5,5,5,5));
 
             dataPane.setTextAlignment(TextAlignment.CENTER);
             dataPane.setPrefSize(285, 39);
@@ -708,6 +714,236 @@ public class MainPanel implements Initializable{
         }
 
     }
+
+    public void showWorkersList(){
+        System.out.println("TEST CZY TO GÓWNO DZIAŁA!");
+        DatabaseConnector connector = new DatabaseConnector();
+
+        int id;
+        String login;
+        String password = null;
+        String firstName = null;
+        String lastName = null;
+        BigInteger pesel = null;
+        int phoneNumber = 0;
+        int SalaryPerHour = 0;
+        boolean admin = false;
+//        Person user = null;
+
+        List<Person> personList = new ArrayList<>();
+
+        // SQL query
+//        String query = "SELECT * FROM workers";
+        String query = "SELECT * FROM Persons.workers;";
+
+
+        // Execute query and get result
+        ResultSet resultSet = null;
+        try {
+            resultSet = connector.executeQuery(query);
+            while (resultSet.next()) {
+                id = resultSet.getInt("id");
+                login = resultSet.getString("login");
+                password = resultSet.getString("password");
+                firstName = resultSet.getString("firstName");
+                lastName = resultSet.getString("lastName");
+                phoneNumber = resultSet.getInt("phoneNumber");
+                pesel = BigInteger.valueOf(resultSet.getLong("pesel"));
+                SalaryPerHour = resultSet.getInt("SalaryPerHour");
+                admin = resultSet.getBoolean("admin");
+
+                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber, SalaryPerHour, admin);
+//                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber);
+                personList.add(person);
+            }
+            resultSet.close();
+            connector.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+        for(Person person : personList){
+            personID = person.getId();
+            Text name = new Text(person.getFirstName() + " " + person.getLastName());
+//            Text time = new Text(workTime.timeToStrikg());
+            name.setTextAlignment(TextAlignment.CENTER);
+//            time.setTextAlignment(TextAlignment.CENTER);
+
+            TextFlow namePane = new TextFlow();
+            TextFlow buttonPane = new TextFlow();
+//            TextFlow timePane = new TextFlow();
+//
+            Button deleteWorker = new Button("D");
+            deleteWorker.setPrefSize(10,10);
+            buttonPane.getChildren().add(deleteWorker);
+            buttonPane.setTextAlignment(TextAlignment.CENTER);
+            buttonPane.setPadding(new Insets(5,5,5,5));
+            namePane.setPrefSize(25,39);
+            namePane.setTextAlignment(TextAlignment.CENTER);
+            namePane.setPrefSize(400, 39);
+//            namePane.setLayoutX(25);
+            namePane.getChildren().add(name);
+            namePane.setLayoutX(0);
+            namePane.setPadding(new Insets(5,5,5,5));
+
+
+
+//
+//            timePane.setTextAlignment(TextAlignment.CENTER);
+//            timePane.setPrefSize(94, 39);
+////            timePane.getChildren().add(time);
+//            timePane.setLayoutX(285);
+//            timePane.setPadding(new Insets(5,5,5,5));
+
+            Pane pane = new Pane();
+            pane.setPrefWidth(426);
+            pane.setPrefHeight(40);
+            pane.getChildren().addAll(namePane, buttonPane);
+
+            pane.setStyle("-fx-border-color: grey;" +
+                    "-fx-border-style: solid none solid none;" +
+                    "-fx-border-width: 2;" +
+                    "-fx-background-color: lightgrey;");
+
+//            dataPane.setStyle("-fx-border-color: grey;" +
+//                    "-fx-border-style: hidden solid hidden hidden;" +
+//                    "-fx-border-width: 4;");
+//            edit.setOnMouseEntered(event ->{
+//                edit.setCursor(Cursor.HAND);
+//            });
+//            delete.setOnMouseEntered(event ->{
+//                delete.setCursor(Cursor.HAND);
+//            });
+
+            pane.setOnMouseEntered(event ->{
+                pane.setStyle("-fx-border-color: lightgrey;" +
+                        "-fx-border-style: solid none solid none;" +
+                        "-fx-border-width: 2;" +
+                        "-fx-background-color: grey;");
+                pane.setCursor(Cursor.HAND);
+            });
+
+            pane.setOnMouseExited(event ->{
+                pane.setStyle("-fx-border-color: grey;" +
+                        "-fx-border-style: solid none solid none;" +
+                        "-fx-border-width: 2;" +
+                        "-fx-background-color: lightgrey;");
+                pane.setCursor(Cursor.DEFAULT);
+            });
+
+            String finalFirstName = firstName;
+            namePane.setOnMouseClicked(event -> {
+
+//                String userName;
+//                String userSurname;
+//                int userPhone;
+//                BigInteger userPesel;
+//                int userSalary;
+//                boolean userAdmin;
+//                DatabaseConnector databaseConnector = new DatabaseConnector();
+//
+//                String getUser = "SELECT * FROM Persons.address WHERE id = '" + person.getId() + "';";
+//                ResultSet res = null;
+//
+//                try {
+//                    res = databaseConnector.executeQuery(getUser);
+//                    userName = res.getString("firstName");
+//                    userSurname = res.getString("lastName");
+//                    userPhone = res.getInt("phoneNumber");
+//                    userPesel = new BigInteger(String.valueOf(res.getInt("pesel")));
+//                    userSalary = res.getInt("SalaryPerHour");
+//                    userAdmin = res.getBoolean("admin");
+//                } catch (SQLException e) {
+//                    throw new RuntimeException(e);
+//                }
+
+
+
+
+
+                FXMLLoader fxmlLoader = new FXMLLoader();
+                fxmlLoader.setLocation(getClass().getResource("workerPanel.fxml"));
+                Scene secondScene = null;
+                try {
+                    secondScene = new Scene(fxmlLoader.load(), 326, 425);
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                Stage Secondstage = new Stage();
+                Secondstage.setScene(secondScene);
+                Secondstage.show();
+                WorkerPanel workerPanel = fxmlLoader.getController();
+                workerPanel.setPersonID(person.getId());
+                workerPanel.setDataInPanel(person.getFirstName(), person.getLastName(), person.getPesel(), person.getPhoneNumber(), person.getSalaryPerHour(), person.getAdmin());
+//                workersVBox.getChildren().clear();
+//                anchorPane.setVisible(false);
+                workersPanelBack();
+            });
+
+            deleteWorker.setOnMouseClicked(event -> {
+
+                String url = "jdbc:mysql://localhost/persons";
+                String username = "root";
+                String passwordDb = "1234qwer";
+
+                try {
+                    Connection connection = DriverManager.getConnection(url, username, passwordDb);
+
+                    System.out.println("second id workTime: " + person.getId());
+                    String sql = "DELETE FROM persons.workers WHERE id = '" + person.getId() + "';";
+
+                    PreparedStatement statement = connection.prepareStatement(sql);
+
+
+                    int rowsInserted = statement.executeUpdate();
+                    if (rowsInserted > 0) {
+//                System.out.println("Dane zostały dodane do bazy.");
+                    }
+
+                    statement.close();
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                workersVBox.getChildren().clear();
+                showWorkersList();
+
+            });
+
+
+            workersVBox.getChildren().add(pane);
+
+        }
+
+
+
+
+    }
+
+    public void clearWorkersPanel(){
+        workersVBox.getChildren().clear();
+    }
+
+    public void showAddNewWorkerPanel() throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("newWorkerPanel.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 462, 521);
+        Stage stage = new Stage();
+        //E:/Nauka/Java/workApp/workAppJX/src/main/resources/
+        stage.setTitle("Add New Worker");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+//    public void setUserData(String name, String surname, int phone, BigInteger pesel, int salary, boolean admin){
+//        this.person.setFirstName(name);
+//        this.person.setLastName(surname);
+//        this.person.setPhoneNumber(phone);
+//        this.person.setPesel(pesel);
+//        this.person.setSalaryPerHour(salary);
+//        this.person.setAdmin(admin);
+//    }
 
 //    public void clearPane(){
 //        workTimeDataPanel.getChildren().clear();
