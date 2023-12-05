@@ -200,46 +200,46 @@ public class EditWorkTime implements Initializable {
         stage.close();
     }
 
-//    public void deleteWorkTime(){
-//        Stage popupWindow = new Stage();
-//        popupWindow.initModality(Modality.APPLICATION_MODAL);
-//        popupWindow.setTitle("Delete");
-//
-//        StackPane popupRoot = new StackPane();
-//        VBox popupVBox = new VBox(10);
-//        popupVBox.setPadding(new Insets(10));
-//
-//        Label popupLabel = new Label("Do you want delete?");
-//        Button buttonYes = new Button("YES");
-//        Button buttonNo = new Button("NO");
-//        HBox buttonsHBox = new HBox(10);
-//        popupVBox.getChildren().add(popupLabel);
-//        popupVBox.setAlignment(Pos.CENTER);
-//        buttonsHBox.getChildren().addAll(buttonYes, buttonNo);
-//        buttonsHBox.setAlignment(Pos.CENTER);
-//
-//        VBox popupPane = new VBox(10);
-//        popupPane.getChildren().addAll(popupVBox, buttonsHBox);
-//        popupPane.setAlignment(Pos.CENTER);
-//
-//        Scene popupScene = new Scene(popupPane, 300, 200);
-//        popupWindow.setScene(popupScene);
-//        popupWindow.show();
-//
-//        buttonNo.setOnMouseClicked(e ->{
-//            popupWindow.close();
-//        });
-//
-//        buttonYes.setOnMouseClicked(ev ->{
-//            int workTimeID = MainPanel.workTimeID;
-//            SaveWorkTimeData saveWorkTimeData = new SaveWorkTimeData();
-//            System.out.println("Delete record where id = " + workTimeID);
-//            saveWorkTimeData.removeDataFromDataBase(workTimeID);
-//            popupWindow.close();
-//            Stage stage = (Stage) deleteData.getScene().getWindow();
-//            stage.close();
-//        });
-//    }
+    public void deleteWorkTime(){
+        Stage popupWindow = new Stage();
+        popupWindow.initModality(Modality.APPLICATION_MODAL);
+        popupWindow.setTitle("Delete");
+
+        StackPane popupRoot = new StackPane();
+        VBox popupVBox = new VBox(10);
+        popupVBox.setPadding(new Insets(10));
+
+        Label popupLabel = new Label("Do you want delete?");
+        Button buttonYes = new Button("YES");
+        Button buttonNo = new Button("NO");
+        HBox buttonsHBox = new HBox(10);
+        popupVBox.getChildren().add(popupLabel);
+        popupVBox.setAlignment(Pos.CENTER);
+        buttonsHBox.getChildren().addAll(buttonYes, buttonNo);
+        buttonsHBox.setAlignment(Pos.CENTER);
+
+        VBox popupPane = new VBox(10);
+        popupPane.getChildren().addAll(popupVBox, buttonsHBox);
+        popupPane.setAlignment(Pos.CENTER);
+
+        Scene popupScene = new Scene(popupPane, 300, 200);
+        popupWindow.setScene(popupScene);
+        popupWindow.show();
+
+        buttonNo.setOnMouseClicked(e ->{
+            popupWindow.close();
+        });
+
+        buttonYes.setOnMouseClicked(ev ->{
+            int workTimeID = MainPanel.workTimeID;
+            SaveWorkTimeData saveWorkTimeData = new SaveWorkTimeData();
+            System.out.println("Delete record where id = " + workTimeID);
+            saveWorkTimeData.removeDataFromDataBase(workTimeID);
+            popupWindow.close();
+            Stage stage = (Stage) deleteData.getScene().getWindow();
+            stage.close();
+        });
+    }
 
     public void testEditButton(){
         addNewWorkTime();

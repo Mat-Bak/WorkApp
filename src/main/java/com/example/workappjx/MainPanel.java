@@ -1,26 +1,23 @@
 package com.example.workappjx;
 
-import javafx.concurrent.Worker;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
-
+import javafx.geometry.Orientation;
 import java.io.IOException;
 
 import java.math.BigInteger;
@@ -67,6 +64,9 @@ public class MainPanel implements Initializable{
     public Pane workersPane;
 
     @FXML
+    public Pane addressPane;
+
+    @FXML
     public Text firstNameLabel;
     @FXML
     public Text lastNameLabel;
@@ -93,6 +93,9 @@ public class MainPanel implements Initializable{
 
     @FXML
     public VBox workersVBox;
+
+    @FXML
+    public VBox addressVBox;
 
     @FXML
     public ComboBox monthList;
@@ -136,7 +139,7 @@ public class MainPanel implements Initializable{
     public static int workTimeID;
 
 //    public Image binImage = new Image("E:\\Nauka\\Reposytory\\WorkApp\\src\\main\\resources\\com\\example\\workappjx\\images\\bin.png");
-    public Image binImage = new Image("src\\main\\resources\\com\\example\\workappjx\\images\\bin.png");
+    public Image deleteImage = new Image("file:src/main/resources/com/example/workappjx/images/delete.png");
 
 
 //    public int startHourReturn(){
@@ -256,6 +259,17 @@ public class MainPanel implements Initializable{
     public void settingPanelBack(){
         mainPanel.setVisible(true);
         settingsPanel.setVisible(false);
+    }
+
+    public void showAddressPanel(){
+        mainPanel.setVisible(false);
+        addressPane.setVisible(true);
+        showAddressList();
+    }
+
+    public void addressPanelBack(){
+        mainPanel.setVisible(true);
+        addressPane.setVisible(false);
     }
 
     // set data in person info panel
@@ -779,23 +793,25 @@ public class MainPanel implements Initializable{
             TextFlow buttonPane = new TextFlow();
 //            TextFlow timePane = new TextFlow();
 //
-            ImageView view = new ImageView(binImage);
-            view.setFitHeight(15);
+            ImageView view = new ImageView(deleteImage);
+            view.setFitHeight(10);
             view.setPreserveRatio(true);
+
+            Separator separator = new Separator(Orientation.HORIZONTAL);
 
             Button deleteWorker = new Button();
             deleteWorker.setGraphic(view);
             deleteWorker.setPrefSize(10,10);
             buttonPane.getChildren().add(deleteWorker);
             buttonPane.setTextAlignment(TextAlignment.CENTER);
-            buttonPane.setPadding(new Insets(5,5,5,5));
+            buttonPane.setPadding(new Insets(8));
             namePane.setPrefSize(25,39);
             namePane.setTextAlignment(TextAlignment.CENTER);
             namePane.setPrefSize(400, 39);
 //            namePane.setLayoutX(25);
             namePane.getChildren().add(name);
             namePane.setLayoutX(0);
-            namePane.setPadding(new Insets(5,5,5,5));
+            namePane.setPadding(new Insets(12));
 
 
 
@@ -809,6 +825,9 @@ public class MainPanel implements Initializable{
             Pane pane = new Pane();
             pane.setPrefWidth(426);
             pane.setPrefHeight(40);
+            pane.setLayoutY(pane.getLayoutY() + 3);
+//            HBox.setMargin(HBox.setPrefSize(100, 200),new Insets(0, 0, 0, 50));
+
             pane.getChildren().addAll(namePane, buttonPane);
 
             pane.setStyle("-fx-border-color: grey;" +
@@ -900,7 +919,7 @@ public class MainPanel implements Initializable{
                     Connection connection = DriverManager.getConnection(url, username, passwordDb);
 
                     System.out.println("second id workTime: " + person.getId());
-                    String sql = "DELETE FROM persons.workers WHERE id = '" + person.getId() + "';";
+                    String sql = "DELETE FROM workers WHERE id = '" + person.getId() + "';";
 
                     PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -921,7 +940,7 @@ public class MainPanel implements Initializable{
             });
 
 
-            workersVBox.getChildren().add(pane);
+            workersVBox.getChildren().addAll(separator,pane);
 
         }
 
@@ -935,6 +954,7 @@ public class MainPanel implements Initializable{
     }
 
     public void showAddNewWorkerPanel() throws IOException {
+
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("newWorkerPanel.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 462, 521);
@@ -943,6 +963,230 @@ public class MainPanel implements Initializable{
         stage.setTitle("Add New Worker");
         stage.setScene(scene);
         stage.show();
+    }
+
+    public void showAddressList(){
+        addressVBox.getChildren().clear();
+        DatabaseConnector connector = new DatabaseConnector();
+        System.out.println("Działą!");
+        String address;
+        int id;
+
+        List<AddNewAddress> addressList = new ArrayList<>();
+
+        // SQL query
+//        String query = "SELECT * FROM workers";
+        String query = "SELECT * FROM Persons.address;";
+
+
+        // Execute query and get result
+        ResultSet resultSet = null;
+        try {
+            System.out.println("1!");
+            resultSet = connector.executeQuery(query);
+            while (resultSet.next()) {
+                id = resultSet.getInt("id");
+                address = resultSet.getString("address");
+
+                AddNewAddress newAddress = new AddNewAddress(id, address);
+                addressList.add(newAddress);
+//                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber, SalaryPerHour, admin);
+//                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber);
+//                personList.add(person);
+            }
+            resultSet.close();
+            connector.close();
+            System.out.println("2!");
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        System.out.println("3!");
+        for(AddNewAddress addAddress : addressList) {
+
+            int addressID = addAddress.getID();
+            System.out.println("address ID: " + addressID);
+            Text addressName = new Text(addAddress.getAddress());
+//            Text time = new Text(workTime.timeToStrikg());
+            addressName.setTextAlignment(TextAlignment.CENTER);
+//            time.setTextAlignment(TextAlignment.CENTER);
+
+            TextFlow addressPane = new TextFlow();
+            TextFlow buttonPane = new TextFlow();
+//            TextFlow timePane = new TextFlow();
+//
+            Separator separator = new Separator(Orientation.HORIZONTAL);
+
+            ImageView view = new ImageView(deleteImage);
+            view.setFitHeight(10);
+            view.setPreserveRatio(true);
+
+            Button deleteAddress = new Button();
+            deleteAddress.setGraphic(view);
+            deleteAddress.setPrefSize(10, 10);
+            buttonPane.getChildren().add(deleteAddress);
+            buttonPane.setTextAlignment(TextAlignment.CENTER);
+            buttonPane.setPadding(new Insets(8));
+            addressPane.setPrefSize(25, 39);
+            addressPane.setTextAlignment(TextAlignment.CENTER);
+            addressPane.setPrefSize(400, 39);
+//            namePane.setLayoutX(25);
+            addressPane.getChildren().add(addressName);
+            addressPane.setLayoutX(0);
+            addressPane.setPadding(new Insets(12));
+
+
+//
+//            timePane.setTextAlignment(TextAlignment.CENTER);
+//            timePane.setPrefSize(94, 39);
+////            timePane.getChildren().add(time);
+//            timePane.setLayoutX(285);
+//            timePane.setPadding(new Insets(5,5,5,5));
+
+            Pane pane = new Pane();
+            pane.setPrefWidth(426);
+            pane.setPrefHeight(40);
+            pane.getChildren().addAll(addressPane, buttonPane);
+
+            pane.setStyle("-fx-border-color: grey;" +
+                    "-fx-border-style: solid none solid none;" +
+                    "-fx-border-width: 2;" +
+                    "-fx-background-color: lightgrey;");
+
+//            dataPane.setStyle("-fx-border-color: grey;" +
+//                    "-fx-border-style: hidden solid hidden hidden;" +
+//                    "-fx-border-width: 4;");
+//            edit.setOnMouseEntered(event ->{
+//                edit.setCursor(Cursor.HAND);
+//            });
+//            delete.setOnMouseEntered(event ->{
+//                delete.setCursor(Cursor.HAND);
+//            });
+
+            pane.setOnMouseEntered(event -> {
+                pane.setStyle("-fx-border-color: lightgrey;" +
+                        "-fx-border-style: solid none solid none;" +
+                        "-fx-border-width: 2;" +
+                        "-fx-background-color: grey;");
+                pane.setCursor(Cursor.HAND);
+            });
+
+            pane.setOnMouseExited(event -> {
+                pane.setStyle("-fx-border-color: grey;" +
+                        "-fx-border-style: solid none solid none;" +
+                        "-fx-border-width: 2;" +
+                        "-fx-background-color: lightgrey;");
+                pane.setCursor(Cursor.DEFAULT);
+            });
+
+            deleteAddress.setOnMouseClicked(event -> {
+                String url = "jdbc:mysql://localhost/persons";
+                String username = "root";
+                String passwordDb = "1234qwer";
+                System.out.println("CLICKED!");
+                try {
+                    Connection connection = DriverManager.getConnection(url, username, passwordDb);
+
+                    System.out.println("delete id address: " + addAddress.getID());
+                    String sql = "DELETE FROM address WHERE id = '" + addAddress.getID() + "';";
+
+                    PreparedStatement statement = connection.prepareStatement(sql);
+
+
+                    int rowsInserted = statement.executeUpdate();
+                    if (rowsInserted > 0) {
+//                System.out.println("Dane zostały dodane do bazy.");
+                    }
+
+                    statement.close();
+                    connection.close();
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+                addressVBox.getChildren().clear();
+                showAddressList();
+
+            });
+
+
+
+
+
+            addressVBox.getChildren().addAll(separator,pane);
+
+
+
+
+        }
+        System.out.println("5!");
+
+
+    }
+
+    public void addNewAddress(){
+        Stage popupWindow = new Stage();
+        popupWindow.initModality(Modality.APPLICATION_MODAL);
+        popupWindow.setTitle("Add New Address");
+
+        StackPane popupRoot = new StackPane();
+        VBox popupVBox = new VBox(10);
+        popupVBox.setPadding(new Insets(10));
+
+        TextField addresField = new TextField();
+        addresField.setPrefSize(350, 30);
+
+        Text addressText = new Text("Address:");
+
+//        Label popupLabel = new Label("Do you want delete?");
+        Button buttonSave = new Button("SAVE");
+        buttonSave.setPrefSize(70,40);
+        popupVBox.getChildren().addAll(addressText, addresField, buttonSave);
+        popupVBox.setAlignment(Pos.CENTER);
+
+
+        VBox popupPane = new VBox(10);
+        popupPane.getChildren().add(popupVBox);
+        popupPane.setAlignment(Pos.CENTER);
+
+        Scene popupScene = new Scene(popupPane, 400, 150);
+        popupWindow.setScene(popupScene);
+        popupWindow.show();
+
+        buttonSave.setOnMouseClicked(ev ->{
+            String url = "jdbc:mysql://localhost/persons";
+            String username = "root";
+            String dbPassword = "1234qwer";
+
+            try {
+                Connection connection = DriverManager.getConnection(url, username, dbPassword);
+//            LocalDate testLocalDate = worktime.getLocalDate();
+//            System.out.println("SaveTimeWorkData Data: " + testLocalDate);
+//            System.out.println("Start time: " + worktime.getStart_time());
+                String sql = "INSERT INTO address (address) VALUES (?)";
+
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setString(1, addresField.getText());
+
+
+                int rowsInserted = statement.executeUpdate();
+//            if (rowsInserted > 0) {
+////                System.out.println("Dane zostały dodane do bazy.");
+//            }
+//            MainPanel mainPanel = new MainPanel();
+
+                statement.close();
+                connection.close();
+                popupWindow.close();
+//                Stage stage = (Stage) confirmButton.getScene().getWindow();
+
+//                stage.close();
+                System.out.println("Worker created!");
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Address saved!: " + addresField.getText());
+            showAddressList();
+        });
     }
 
 //    public void setUserData(String name, String surname, int phone, BigInteger pesel, int salary, boolean admin){

@@ -20,7 +20,7 @@
          <children>
             <Button fx:id="personPanelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="50.0" mnemonicParsing="false" onAction="#showPersonInfo" prefHeight="100.0" prefWidth="100.0" textAlignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" translateY="-10.0">
                      <image>
                         <Image url="@images/profil.png" />
                      </image>
@@ -29,7 +29,7 @@
             </Button>
             <Button layoutX="175.0" layoutY="50.0" mnemonicParsing="false" onAction="#showWorkPanel" prefHeight="100.0" prefWidth="100.0">
                <graphic>
-                  <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" translateY="-10.0">
                      <image>
                         <Image url="@images/clock.png" />
                      </image>
@@ -38,7 +38,7 @@
             </Button>
             <Button layoutX="325.0" layoutY="50.0" mnemonicParsing="false" onAction="#showSettingsPanel" prefHeight="100.0" prefWidth="100.0">
                <graphic>
-                  <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" translateY="-10.0">
                      <image>
                         <Image url="@images/settings.png" />
                      </image>
@@ -47,7 +47,7 @@
             </Button>
             <Button fx:id="salaryPanelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="177.0" mnemonicParsing="false" onAction="#showSalaryPanel" prefHeight="100.0" prefWidth="100.0" textAlignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" translateY="-10.0">
                      <image>
                         <Image url="@images/coins.png" />
                      </image>
@@ -56,16 +56,55 @@
             </Button>
             <Button fx:id="workersPanelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="175.0" layoutY="177.0" mnemonicParsing="false" onAction="#showWorkersPanel" prefHeight="100.0" prefWidth="100.0" textAlignment="CENTER">
                <graphic>
-                  <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" translateY="-10.0">
                      <image>
                         <Image url="@images/workers.png" />
                      </image>
                   </ImageView>
                </graphic>
             </Button>
-            <Text fx:id="testAdmin" layoutX="200.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADMIN" visible="false">
+            <Text fx:id="testAdmin" layoutX="150.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADMIN" visible="false">
                <font>
                   <Font size="46.0" />
+               </font>
+            </Text>
+            <Button fx:id="addressPanelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="325.0" layoutY="177.0" mnemonicParsing="false" onAction="#showAddressPanel" prefHeight="100.0" prefWidth="100.0" textAlignment="CENTER">
+               <graphic>
+                  <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" translateY="-10.0">
+                     <image>
+                        <Image url="@images/address.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Text layoutX="48.0" layoutY="142.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PROFILE">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="185.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WORK TIME">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="342.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SETTINGS">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="49.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SALARY">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="191.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WORKERS">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Text>
+            <Text layoutX="344.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADDRESS">
+               <font>
+                  <Font name="System Bold" size="14.0" />
                </font>
             </Text>
          </children>
@@ -161,6 +200,17 @@
             </ScrollPane>
             <Button fx:id="addNewWorker" layoutX="338.0" layoutY="14.0" mnemonicParsing="false" onAction="#showAddNewWorkerPanel" prefHeight="27.0" prefWidth="94.0" text="New +" />
             <Button fx:id="SalaryPanelBack2" layoutX="159.0" layoutY="335.0" mnemonicParsing="false" onAction="#workersPanelBack" prefHeight="40.0" prefWidth="139.0" text="Back" />
+         </children>
+      </Pane>
+      <Pane fx:id="addressPane" prefHeight="431.0" prefWidth="470.0" visible="false">
+         <children>
+            <ScrollPane layoutX="20.0" layoutY="56.0" prefHeight="271.0" prefWidth="431.0">
+               <content>
+                  <VBox fx:id="addressVBox" prefHeight="265.0" prefWidth="427.0" />
+               </content>
+            </ScrollPane>
+            <Button fx:id="addNewAddress" layoutX="338.0" layoutY="14.0" mnemonicParsing="false" onAction="#addNewAddress" prefHeight="27.0" prefWidth="94.0" text="New +" />
+            <Button fx:id="addressPanelBack" layoutX="159.0" layoutY="335.0" mnemonicParsing="false" onAction="#addressPanelBack" prefHeight="40.0" prefWidth="139.0" text="Back" />
          </children>
       </Pane>
    </children>

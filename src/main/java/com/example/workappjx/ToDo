@@ -1,13 +1,9 @@
 Admin Account:
-    - Add/Delete new address
-    - check address list
     - Select month and address to check who and how many times someone worked
-    -
-
-Add to MainPanel new options that only Admin will have permissions.
-(New panels: add/delete new address, show every employees, add or remove employees)
-
-Add exit button
+    - In workers panel add button "raport" to get worker raport from selected month
+    - In wokers panel add button "General Raport" where admin can get info about every worker and sumary of workerd hours in selected month
+    - In worker edit panel add button "raport" to get raport from selected month with accurate information about work time
+    - In address panel add button to get raport from selected address and selected month (report should contains who work on this address and work hours [and summary od hour])
 
 Add information in every panel if user do something wrong (user should get info if he type wrong password)
 
@@ -19,13 +15,11 @@ Address field can not be empty
 
 Show/Hide password on login panel and when user want to change password in main panel
 
-When Admin click on employer then should have option to change salary, edit personal data etc
-
 Justify everythink to center
 
 Set minimum window size
 
-clear or update worktime panel wher user delete, edit or add new work time
+clear or update worktime panel where user delete, edit or add new work time
 
 Make this app more pretty
 
