@@ -11,6 +11,8 @@ import javafx.scene.Cursor;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -132,6 +134,9 @@ public class MainPanel implements Initializable{
     public int personID;
 
     public static int workTimeID;
+
+//    public Image binImage = new Image("E:\\Nauka\\Reposytory\\WorkApp\\src\\main\\resources\\com\\example\\workappjx\\images\\bin.png");
+    public Image binImage = new Image("src\\main\\resources\\com\\example\\workappjx\\images\\bin.png");
 
 
 //    public int startHourReturn(){
@@ -774,7 +779,12 @@ public class MainPanel implements Initializable{
             TextFlow buttonPane = new TextFlow();
 //            TextFlow timePane = new TextFlow();
 //
-            Button deleteWorker = new Button("D");
+            ImageView view = new ImageView(binImage);
+            view.setFitHeight(15);
+            view.setPreserveRatio(true);
+
+            Button deleteWorker = new Button();
+            deleteWorker.setGraphic(view);
             deleteWorker.setPrefSize(10,10);
             buttonPane.getChildren().add(deleteWorker);
             buttonPane.setTextAlignment(TextAlignment.CENTER);
@@ -882,7 +892,6 @@ public class MainPanel implements Initializable{
             });
 
             deleteWorker.setOnMouseClicked(event -> {
-
                 String url = "jdbc:mysql://localhost/persons";
                 String username = "root";
                 String passwordDb = "1234qwer";
