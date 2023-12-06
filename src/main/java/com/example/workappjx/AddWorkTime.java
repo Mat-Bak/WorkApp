@@ -122,7 +122,7 @@ public class AddWorkTime implements Initializable {
 
         List<String> addressList = new ArrayList<>();
 
-        String query = "SELECT * FROM Persons.address;";
+        String query = "SELECT * FROM Persons.address WHERE active = 1";
 
         try {
             // Execute query and get result

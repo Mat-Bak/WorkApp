@@ -11,6 +11,7 @@ import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -140,6 +141,7 @@ public class MainPanel implements Initializable{
 
 //    public Image binImage = new Image("E:\\Nauka\\Reposytory\\WorkApp\\src\\main\\resources\\com\\example\\workappjx\\images\\bin.png");
     public Image deleteImage = new Image("file:src/main/resources/com/example/workappjx/images/delete.png");
+    public Image optionsImage = new Image("file:src/main/resources/com/example/workappjx/images/raport.png");
 
 
 //    public int startHourReturn(){
@@ -971,6 +973,7 @@ public class MainPanel implements Initializable{
         System.out.println("Działą!");
         String address;
         int id;
+        boolean active;
 
         List<AddNewAddress> addressList = new ArrayList<>();
 
@@ -987,8 +990,10 @@ public class MainPanel implements Initializable{
             while (resultSet.next()) {
                 id = resultSet.getInt("id");
                 address = resultSet.getString("address");
+                active = resultSet.getBoolean("active");
 
-                AddNewAddress newAddress = new AddNewAddress(id, address);
+
+                AddNewAddress newAddress = new AddNewAddress(id, address, active);
                 addressList.add(newAddress);
 //                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber, SalaryPerHour, admin);
 //                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber);
@@ -1012,26 +1017,51 @@ public class MainPanel implements Initializable{
 //            time.setTextAlignment(TextAlignment.CENTER);
 
             TextFlow addressPane = new TextFlow();
-            TextFlow buttonPane = new TextFlow();
+            TextFlow deletePane = new TextFlow();
+            TextFlow optionsPane = new TextFlow();
+            TextFlow checkBoxPane = new TextFlow();
 //            TextFlow timePane = new TextFlow();
 //
             Separator separator = new Separator(Orientation.HORIZONTAL);
 
-            ImageView view = new ImageView(deleteImage);
-            view.setFitHeight(10);
-            view.setPreserveRatio(true);
+            ImageView deleteView = new ImageView(deleteImage);
+            deleteView.setFitHeight(10);
+            deleteView.setPreserveRatio(true);
+
+            ImageView optionsView = new ImageView(optionsImage);
+            optionsView.setFitHeight(12);
+            optionsView.setPreserveRatio(true);
 
             Button deleteAddress = new Button();
-            deleteAddress.setGraphic(view);
+            deleteAddress.setGraphic(deleteView);
             deleteAddress.setPrefSize(10, 10);
-            buttonPane.getChildren().add(deleteAddress);
-            buttonPane.setTextAlignment(TextAlignment.CENTER);
-            buttonPane.setPadding(new Insets(8));
-            addressPane.setPrefSize(25, 39);
+
+            Button moreOptions = new Button();
+            moreOptions.setGraphic(optionsView);
+            moreOptions.setPrefSize(10, 10);
+
+            CheckBox activeAddress = new CheckBox("Active");
+
+            deletePane.getChildren().add(deleteAddress);
+//            buttonPane.setTextAlignment(TextAlignment.CENTER);
+            deletePane.setPadding(new Insets(8));
+
+            optionsPane.getChildren().add(moreOptions);
+            optionsPane.setLayoutX(30);
+//            buttonPane.setTextAlignment(TextAlignment.CENTER);
+            optionsPane.setPadding(new Insets(8));
+
+            checkBoxPane.getChildren().add(activeAddress);
+            checkBoxPane.setLayoutX(330);
+//            buttonPane.setTextAlignment(TextAlignment.CENTER);
+            checkBoxPane.setPadding(new Insets(8));
+
+//            addressPane.setPrefSize(25, 39);
             addressPane.setTextAlignment(TextAlignment.CENTER);
-            addressPane.setPrefSize(400, 39);
+            addressPane.setPrefSize(300, 39);
 //            namePane.setLayoutX(25);
             addressPane.getChildren().add(addressName);
+//            addressPane.setTextAlignment(TextAlignment.JUSTIFY);
             addressPane.setLayoutX(0);
             addressPane.setPadding(new Insets(12));
 
@@ -1046,12 +1076,51 @@ public class MainPanel implements Initializable{
             Pane pane = new Pane();
             pane.setPrefWidth(426);
             pane.setPrefHeight(40);
-            pane.getChildren().addAll(addressPane, buttonPane);
+            pane.getChildren().addAll(addressPane, deletePane, optionsPane, checkBoxPane);
+            if(addAddress.getActive()==false){
 
-            pane.setStyle("-fx-border-color: grey;" +
-                    "-fx-border-style: solid none solid none;" +
-                    "-fx-border-width: 2;" +
-                    "-fx-background-color: lightgrey;");
+                addressPane.setDisable(true);
+                activeAddress.setSelected(false);
+                pane.setStyle("-fx-border-color: lightgrey;" +
+                        "-fx-border-style: solid none solid none;" +
+                        "-fx-border-width: 2;" +
+                        "-fx-background-color: gainsboro;");
+                addressName.setFill(Color.GREY);
+                deleteAddress.setOnMouseEntered(event -> {
+                    deleteAddress.setCursor(Cursor.HAND);
+                });
+
+                deleteAddress.setOnMouseExited(event -> {
+                    deleteAddress.setCursor(Cursor.DEFAULT);
+                });
+
+            }else{
+                addressPane.setDisable(false);
+                activeAddress.setSelected(true);
+                System.out.println("TRUE: " + addressName.getText());
+                pane.setStyle("-fx-border-color: grey;" +
+                        "-fx-border-style: solid none solid none;" +
+                        "-fx-border-width: 2;" +
+                        "-fx-background-color: lightgrey;"+
+                        "-fx-text-fill: black");
+                addressName.setFill(Color.BLACK);
+                pane.setOnMouseEntered(event -> {
+                    pane.setStyle("-fx-border-color: lightgrey;" +
+                            "-fx-border-style: solid none solid none;" +
+                            "-fx-border-width: 2;" +
+                            "-fx-background-color: grey;");
+                    pane.setCursor(Cursor.HAND);
+                });
+
+                pane.setOnMouseExited(event -> {
+                    pane.setStyle("-fx-border-color: grey;" +
+                            "-fx-border-style: solid none solid none;" +
+                            "-fx-border-width: 2;" +
+                            "-fx-background-color: lightgrey;");
+                    pane.setCursor(Cursor.DEFAULT);
+                });
+            }
+
 
 //            dataPane.setStyle("-fx-border-color: grey;" +
 //                    "-fx-border-style: hidden solid hidden hidden;" +
@@ -1063,21 +1132,7 @@ public class MainPanel implements Initializable{
 //                delete.setCursor(Cursor.HAND);
 //            });
 
-            pane.setOnMouseEntered(event -> {
-                pane.setStyle("-fx-border-color: lightgrey;" +
-                        "-fx-border-style: solid none solid none;" +
-                        "-fx-border-width: 2;" +
-                        "-fx-background-color: grey;");
-                pane.setCursor(Cursor.HAND);
-            });
 
-            pane.setOnMouseExited(event -> {
-                pane.setStyle("-fx-border-color: grey;" +
-                        "-fx-border-style: solid none solid none;" +
-                        "-fx-border-width: 2;" +
-                        "-fx-background-color: lightgrey;");
-                pane.setCursor(Cursor.DEFAULT);
-            });
 
             deleteAddress.setOnMouseClicked(event -> {
                 String url = "jdbc:mysql://localhost/persons";
@@ -1134,13 +1189,14 @@ public class MainPanel implements Initializable{
 
         TextField addresField = new TextField();
         addresField.setPrefSize(350, 30);
+        CheckBox addressActive = new CheckBox("Active");
 
         Text addressText = new Text("Address:");
 
 //        Label popupLabel = new Label("Do you want delete?");
         Button buttonSave = new Button("SAVE");
         buttonSave.setPrefSize(70,40);
-        popupVBox.getChildren().addAll(addressText, addresField, buttonSave);
+        popupVBox.getChildren().addAll(addressText, addresField,addressActive ,buttonSave);
         popupVBox.setAlignment(Pos.CENTER);
 
 
@@ -1162,10 +1218,11 @@ public class MainPanel implements Initializable{
 //            LocalDate testLocalDate = worktime.getLocalDate();
 //            System.out.println("SaveTimeWorkData Data: " + testLocalDate);
 //            System.out.println("Start time: " + worktime.getStart_time());
-                String sql = "INSERT INTO address (address) VALUES (?)";
+                String sql = "INSERT INTO address (address, active) VALUES (?, ?)";
 
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setString(1, addresField.getText());
+                statement.setBoolean(2, addressActive.isSelected());
 
 
                 int rowsInserted = statement.executeUpdate();
