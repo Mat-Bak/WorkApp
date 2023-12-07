@@ -3,7 +3,6 @@ Admin Account:
     - In workers panel add button "raport" to get worker raport from selected month
     - In wokers panel add button "General Raport" where admin can get info about every worker and sumary of workerd hours in selected month
     - In worker edit panel add button "raport" to get raport from selected month with accurate information about work time
-    - In address panel add button to get raport from selected address and selected month (report should contains who work on this address and work hours [and summary od hour])
 
 Add information in every panel if user do something wrong (user should get info if he type wrong password)
 

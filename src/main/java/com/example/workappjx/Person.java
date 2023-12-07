@@ -1,6 +1,10 @@
 package com.example.workappjx;
 
 import java.math.BigInteger;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
 
@@ -101,6 +105,55 @@ public class Person {
 
     public void setAdmin(boolean admin) {
         this.admin = admin;
+    }
+
+    public List<Person> getPersonList(){
+        DatabaseConnector connector = new DatabaseConnector();
+
+        int id;
+        String login;
+        String password = null;
+        String firstName = null;
+        String lastName = null;
+        BigInteger pesel = null;
+        int phoneNumber = 0;
+        int SalaryPerHour = 0;
+        boolean admin = false;
+//        Person user = null;
+
+        List<Person> personList = new ArrayList<>();
+
+        // SQL query
+//        String query = "SELECT * FROM workers";
+        String query = "SELECT * FROM Persons.workers;";
+
+
+        // Execute query and get result
+        ResultSet resultSet = null;
+        try {
+            resultSet = connector.executeQuery(query);
+            while (resultSet.next()) {
+                id = resultSet.getInt("id");
+                login = resultSet.getString("login");
+                password = resultSet.getString("password");
+                firstName = resultSet.getString("firstName");
+                lastName = resultSet.getString("lastName");
+                phoneNumber = resultSet.getInt("phoneNumber");
+                pesel = BigInteger.valueOf(resultSet.getLong("pesel"));
+                SalaryPerHour = resultSet.getInt("SalaryPerHour");
+                admin = resultSet.getBoolean("admin");
+
+                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber, SalaryPerHour, admin);
+//                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber);
+                personList.add(person);
+            }
+            resultSet.close();
+            connector.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return personList;
+
     }
 
 

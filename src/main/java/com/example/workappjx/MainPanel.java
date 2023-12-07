@@ -1,5 +1,6 @@
 package com.example.workappjx;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -19,14 +20,18 @@ import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.geometry.Orientation;
+
+import java.io.FileWriter;
 import java.io.IOException;
 
+import java.io.PrintWriter;
 import java.math.BigInteger;
 import java.net.URL;
 import java.sql.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -329,7 +334,7 @@ public class MainPanel implements Initializable{
 //    }
 
     public void showWorkTimeData(){
-        System.out.println("Test czy działą button!");
+//        System.out.println("Test czy działą button!");
         Person person = LoginPanelController.getPersonData();
         LocalDate localDate = getDataTime();
 //        localDate = dateTime.getValue();
@@ -658,13 +663,13 @@ public class MainPanel implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         Person person = LoginPanelController.getPersonData();
-        System.out.println("getAdmin: " + person.getAdmin());
+//        System.out.println("getAdmin: " + person.getAdmin());
         if(person.getAdmin() == true){
             showAdminTest();
-            System.out.println("Admin Test Visible!");
+//            System.out.println("Admin Test Visible!");
         }else{
             hideAdminTest();
-            System.out.println("Admin Test Hidden!");
+//            System.out.println("Admin Test Hidden!");
         }
 
         for(int i = 0; i < months.length; ++i){
@@ -729,60 +734,61 @@ public class MainPanel implements Initializable{
         LoadPersonData loadPersonData = new LoadPersonData();
         if(person.getPassword().equals(oldPassword) && !oldPass.getText().equals(newPass.getText())){
             loadPersonData.changePassword(newPassword, person.getId());
-            System.out.println("Password changed!");
+//            System.out.println("Password changed!");
         }else{
-            System.out.println("Wrong old password!");
+//            System.out.println("Wrong old password!");
         }
 
     }
 
     public void showWorkersList(){
-        System.out.println("TEST CZY TO GÓWNO DZIAŁA!");
-        DatabaseConnector connector = new DatabaseConnector();
-
-        int id;
-        String login;
-        String password = null;
-        String firstName = null;
-        String lastName = null;
-        BigInteger pesel = null;
-        int phoneNumber = 0;
-        int SalaryPerHour = 0;
-        boolean admin = false;
-//        Person user = null;
-
-        List<Person> personList = new ArrayList<>();
-
-        // SQL query
-//        String query = "SELECT * FROM workers";
-        String query = "SELECT * FROM Persons.workers;";
-
-
-        // Execute query and get result
-        ResultSet resultSet = null;
-        try {
-            resultSet = connector.executeQuery(query);
-            while (resultSet.next()) {
-                id = resultSet.getInt("id");
-                login = resultSet.getString("login");
-                password = resultSet.getString("password");
-                firstName = resultSet.getString("firstName");
-                lastName = resultSet.getString("lastName");
-                phoneNumber = resultSet.getInt("phoneNumber");
-                pesel = BigInteger.valueOf(resultSet.getLong("pesel"));
-                SalaryPerHour = resultSet.getInt("SalaryPerHour");
-                admin = resultSet.getBoolean("admin");
-
-                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber, SalaryPerHour, admin);
-//                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber);
-                personList.add(person);
-            }
-            resultSet.close();
-            connector.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-
+//        System.out.println("TEST CZY TO GÓWNO DZIAŁA!");
+//        DatabaseConnector connector = new DatabaseConnector();
+//
+//        int id;
+//        String login;
+//        String password = null;
+//        String firstName = null;
+//        String lastName = null;
+//        BigInteger pesel = null;
+//        int phoneNumber = 0;
+//        int SalaryPerHour = 0;
+//        boolean admin = false;
+////        Person user = null;
+//
+//        List<Person> personList = new ArrayList<>();
+//
+//        // SQL query
+////        String query = "SELECT * FROM workers";
+//        String query = "SELECT * FROM Persons.workers;";
+//
+//
+//        // Execute query and get result
+//        ResultSet resultSet = null;
+//        try {
+//            resultSet = connector.executeQuery(query);
+//            while (resultSet.next()) {
+//                id = resultSet.getInt("id");
+//                login = resultSet.getString("login");
+//                password = resultSet.getString("password");
+//                firstName = resultSet.getString("firstName");
+//                lastName = resultSet.getString("lastName");
+//                phoneNumber = resultSet.getInt("phoneNumber");
+//                pesel = BigInteger.valueOf(resultSet.getLong("pesel"));
+//                SalaryPerHour = resultSet.getInt("SalaryPerHour");
+//                admin = resultSet.getBoolean("admin");
+//
+//                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber, SalaryPerHour, admin);
+////                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber);
+//                personList.add(person);
+//            }
+//            resultSet.close();
+//            connector.close();
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+        Person listOfPerson = new Person();
+        List<Person> personList = listOfPerson.getPersonList();
 
         for(Person person : personList){
             personID = person.getId();
@@ -863,7 +869,7 @@ public class MainPanel implements Initializable{
                 pane.setCursor(Cursor.DEFAULT);
             });
 
-            String finalFirstName = firstName;
+//            String finalFirstName = firstName;
             namePane.setOnMouseClicked(event -> {
 
 //                String userName;
@@ -920,7 +926,7 @@ public class MainPanel implements Initializable{
                 try {
                     Connection connection = DriverManager.getConnection(url, username, passwordDb);
 
-                    System.out.println("second id workTime: " + person.getId());
+//                    System.out.println("second id workTime: " + person.getId());
                     String sql = "DELETE FROM workers WHERE id = '" + person.getId() + "';";
 
                     PreparedStatement statement = connection.prepareStatement(sql);
@@ -970,7 +976,7 @@ public class MainPanel implements Initializable{
     public void showAddressList(){
         addressVBox.getChildren().clear();
         DatabaseConnector connector = new DatabaseConnector();
-        System.out.println("Działą!");
+//        System.out.println("Działą!");
         String address;
         int id;
         boolean active;
@@ -985,7 +991,7 @@ public class MainPanel implements Initializable{
         // Execute query and get result
         ResultSet resultSet = null;
         try {
-            System.out.println("1!");
+//            System.out.println("1!");
             resultSet = connector.executeQuery(query);
             while (resultSet.next()) {
                 id = resultSet.getInt("id");
@@ -1001,16 +1007,16 @@ public class MainPanel implements Initializable{
             }
             resultSet.close();
             connector.close();
-            System.out.println("2!");
+//            System.out.println("2!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-        System.out.println("3!");
+//        System.out.println("3!");
         for(AddNewAddress addAddress : addressList) {
 
             int addressID = addAddress.getID();
-            System.out.println("address ID: " + addressID);
+//            System.out.println("address ID: " + addressID);
             Text addressName = new Text(addAddress.getAddress());
 //            Text time = new Text(workTime.timeToStrikg());
             addressName.setTextAlignment(TextAlignment.CENTER);
@@ -1097,7 +1103,7 @@ public class MainPanel implements Initializable{
             }else{
                 addressPane.setDisable(false);
                 activeAddress.setSelected(true);
-                System.out.println("TRUE: " + addressName.getText());
+//                System.out.println("TRUE: " + addressName.getText());
                 pane.setStyle("-fx-border-color: grey;" +
                         "-fx-border-style: solid none solid none;" +
                         "-fx-border-width: 2;" +
@@ -1138,11 +1144,11 @@ public class MainPanel implements Initializable{
                 String url = "jdbc:mysql://localhost/persons";
                 String username = "root";
                 String passwordDb = "1234qwer";
-                System.out.println("CLICKED!");
+//                System.out.println("CLICKED!");
                 try {
                     Connection connection = DriverManager.getConnection(url, username, passwordDb);
 
-                    System.out.println("delete id address: " + addAddress.getID());
+//                    System.out.println("delete id address: " + addAddress.getID());
                     String sql = "DELETE FROM address WHERE id = '" + addAddress.getID() + "';";
 
                     PreparedStatement statement = connection.prepareStatement(sql);
@@ -1163,6 +1169,95 @@ public class MainPanel implements Initializable{
 
             });
 
+            moreOptions.setOnMouseClicked(event -> {
+                String selectedAddress = addressName.getText();
+
+                Stage popupWindow = new Stage();
+                popupWindow.initModality(Modality.APPLICATION_MODAL);
+                popupWindow.setTitle("Address Raport");
+
+
+
+                StackPane popupRoot = new StackPane();
+                VBox popupVBox = new VBox(10);
+                popupVBox.setPadding(new Insets(10));
+
+                ComboBox monthsList = new ComboBox(FXCollections.observableArrayList(months));
+                monthsList.setPrefWidth(200);
+
+                Button buttonSave = new Button("GET RAPORT");
+                buttonSave.setPrefSize(100,40);
+                popupVBox.getChildren().addAll(monthsList, buttonSave);
+                popupVBox.setAlignment(Pos.CENTER);
+
+                VBox popupPane = new VBox(10);
+                popupPane.getChildren().add(popupVBox);
+                popupPane.setAlignment(Pos.CENTER);
+
+                Scene popupScene = new Scene(popupPane, 400, 150);
+                popupWindow.setScene(popupScene);
+                popupWindow.show();
+
+                buttonSave.setOnMouseClicked(e ->{
+                    int selectedMonth = monthsList.getSelectionModel().getSelectedIndex()+1;
+                    String sql = null;
+                    DatabaseConnector connect = new DatabaseConnector();
+                    if(selectedMonth < 10){
+                        sql = "SELECT * FROM persons.workhours  WHERE (data >= '2023-0" + selectedMonth + "-01' AND data <= '2023-0" + selectedMonth + "-31') AND address = '" + selectedAddress +"';";
+                    }else{
+                        sql = "SELECT * FROM persons.workhours  WHERE (data >= '2023-" + selectedMonth + "-01' AND data <= '2023-" + selectedMonth + "-31') AND address = '" + selectedAddress +"';";
+                    }
+                    ResultSet result = null;
+                    try {
+                        result = result = connect.executeQuery(sql);
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    ;
+                    Person listOfPerson = new Person();
+                    List<Person> personList = listOfPerson.getPersonList();
+                    int idList = 1;
+                    try (FileWriter fileWriter = new FileWriter("Raport.txt");
+                         PrintWriter printWriter = new PrintWriter(fileWriter)) {
+                        printWriter.println(selectedAddress + " | " + monthsList.getValue());
+//                        System.out.println("!!!!!Month: " + monthsList.getValue());
+                        printWriter.println("ID | DATE | WORKER| WORK HOURS");
+//                        System.out.println("1!");
+                        while (result.next()) {
+//                            int id = result.getInt("id");
+                            String workDate = result.getString("data");
+                            int userID = result.getInt("user_id");
+//                            System.out.println("User_ID: " + userID);
+                            LocalTime startTime = result.getTime("start_time").toLocalTime();
+                            LocalTime endTime = result.getTime("end_time").toLocalTime();
+                            Duration workTime = Duration.between(startTime,  endTime);
+                            long hours = workTime.toHours();
+                            long minuts = workTime.toMinutesPart()%60;
+//                            System.out.println("WorkTime: " + hours + "h " + minuts+"Min");
+                            Person worker = null;
+                            for (Person person : personList){
+                                if(person.getId() == userID){
+                                    worker = person;
+                                    break;
+                                }
+                            }
+//                            Person worker = personList.get(userID-1);
+                            printWriter.println(idList + " | " + workDate + " | " + worker.getFirstName() + " " + worker.getLastName() + " | " + hours + "h " + minuts+"Min");
+                            idList++;
+                        }
+                        result.close();
+                        connect.close();
+//                        System.out.println("2!");
+                    } catch (IOException | SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+//                    System.out.println("Month: " + selectedMonth);
+                });
+
+            });
+
+
 
 
 
@@ -1173,7 +1268,7 @@ public class MainPanel implements Initializable{
 
 
         }
-        System.out.println("5!");
+//        System.out.println("5!");
 
 
     }
@@ -1237,11 +1332,11 @@ public class MainPanel implements Initializable{
 //                Stage stage = (Stage) confirmButton.getScene().getWindow();
 
 //                stage.close();
-                System.out.println("Worker created!");
+//                System.out.println("Worker created!");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
-            System.out.println("Address saved!: " + addresField.getText());
+//            System.out.println("Address saved!: " + addresField.getText());
             showAddressList();
         });
     }
