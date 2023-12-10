@@ -33,6 +33,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -799,21 +800,37 @@ public class MainPanel implements Initializable{
 
             TextFlow namePane = new TextFlow();
             TextFlow buttonPane = new TextFlow();
+            TextFlow optionsPane = new TextFlow();
 //            TextFlow timePane = new TextFlow();
 //
             ImageView view = new ImageView(deleteImage);
             view.setFitHeight(10);
             view.setPreserveRatio(true);
 
+            ImageView optionsView = new ImageView(optionsImage);
+            optionsView.setFitHeight(12);
+            optionsView.setPreserveRatio(true);
+
             Separator separator = new Separator(Orientation.HORIZONTAL);
 
             Button deleteWorker = new Button();
             deleteWorker.setGraphic(view);
             deleteWorker.setPrefSize(10,10);
+
+            Button moreOptions = new Button();
+            moreOptions.setGraphic(optionsView);
+            moreOptions.setPrefSize(10, 10);
+
+            optionsPane.getChildren().add(moreOptions);
+            optionsPane.setLayoutX(30);
+//            buttonPane.setTextAlignment(TextAlignment.CENTER);
+            optionsPane.setPadding(new Insets(8));
+
             buttonPane.getChildren().add(deleteWorker);
-            buttonPane.setTextAlignment(TextAlignment.CENTER);
+//            buttonPane.setTextAlignment(TextAlignment.CENTER);
             buttonPane.setPadding(new Insets(8));
-            namePane.setPrefSize(25,39);
+
+//            namePane.setPrefSize(25,39);
             namePane.setTextAlignment(TextAlignment.CENTER);
             namePane.setPrefSize(400, 39);
 //            namePane.setLayoutX(25);
@@ -836,7 +853,7 @@ public class MainPanel implements Initializable{
             pane.setLayoutY(pane.getLayoutY() + 3);
 //            HBox.setMargin(HBox.setPrefSize(100, 200),new Insets(0, 0, 0, 50));
 
-            pane.getChildren().addAll(namePane, buttonPane);
+            pane.getChildren().addAll(namePane, buttonPane, optionsPane);
 
             pane.setStyle("-fx-border-color: grey;" +
                     "-fx-border-style: solid none solid none;" +
@@ -948,6 +965,134 @@ public class MainPanel implements Initializable{
             });
 
 
+            moreOptions.setOnMouseClicked(event -> {
+//                String selectedAddress = addressName.getText();
+
+                Stage popupWindow = new Stage();
+                popupWindow.initModality(Modality.APPLICATION_MODAL);
+                popupWindow.setTitle("Worker Raport");
+
+
+
+                StackPane popupRoot = new StackPane();
+                VBox popupVBox = new VBox(10);
+                popupVBox.setPadding(new Insets(10));
+
+                ComboBox monthsList = new ComboBox(FXCollections.observableArrayList(months));
+                monthsList.setPrefWidth(200);
+
+                Button buttonSave = new Button("GET RAPORT");
+                buttonSave.setPrefSize(100,40);
+                popupVBox.getChildren().addAll(monthsList, buttonSave);
+                popupVBox.setAlignment(Pos.CENTER);
+
+                VBox popupPane = new VBox(10);
+                popupPane.getChildren().add(popupVBox);
+                popupPane.setAlignment(Pos.CENTER);
+
+                Scene popupScene = new Scene(popupPane, 400, 150);
+                popupWindow.setScene(popupScene);
+                popupWindow.show();
+
+                buttonSave.setOnMouseClicked(e ->{
+                    int selectedMonth = monthsList.getSelectionModel().getSelectedIndex()+1;
+                    String sql = null;
+                    DatabaseConnector connect = new DatabaseConnector();
+                    System.out.println("SelectedMonth: " + selectedMonth);
+                    if(selectedMonth == 4 || selectedMonth == 6 || selectedMonth == 9){
+                        sql = "SELECT * FROM persons.workhours  WHERE (data >= '2023-0" + selectedMonth + "-01' AND data <= '2023-0" + selectedMonth + "-30') AND user_id = '" + person.getId() +"';";
+                    }else if(selectedMonth == 1 || selectedMonth == 3 || selectedMonth == 5 || selectedMonth == 7 || selectedMonth == 8){
+                        sql = "SELECT * FROM persons.workhours  WHERE (data >= '2023-0" + selectedMonth + "-01' AND data <= '2023-0" + selectedMonth + "-31') AND user_id = '" + person.getId() +"';";
+                    }else if(selectedMonth == 10 || selectedMonth == 12){
+                        sql = "SELECT * FROM persons.workhours  WHERE (data >= '2023-" + selectedMonth + "-01' AND data <= '2023-" + selectedMonth + "-31') AND user_id = '" + person.getId() +"';";
+                    }else if(selectedMonth == 11){
+                        sql = "SELECT * FROM persons.workhours  WHERE (data >= '2023-" + selectedMonth + "-01' AND data <= '2023-" + selectedMonth + "-30') AND user_id = '" + person.getId() +"';";
+                    }else if(selectedMonth == 2){
+                        sql = "SELECT * FROM persons.workhours  WHERE (data >= '2023-" + selectedMonth + "-01' AND data <= '2023-" + selectedMonth + "-28') AND user_id = '" + person.getId() +"';";
+                    }else{
+                        System.out.println("DATE ERROR!");
+                    }
+
+                    ResultSet result = null;
+                    try {
+                        result = result = connect.executeQuery(sql);
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    ;
+//                    Person listOfWorkers = new Person();
+//                    List<Person> personList = listOfPerson.getPersonList();
+                    int idList = 1;
+                    AddWorkTime addWorkTime = new AddWorkTime();
+                    ArrayList<String> getAddressList = addWorkTime.addressList();
+                    ArrayList<Integer> getWorkHour = new ArrayList<>(Collections.nCopies(getAddressList.size(), 0));
+//                    ArrayList<ArrayList<String>> sumWorkerHour = new ArrayList<>(getAddressList.size());
+//                    sumWorkerHour.add(getAddressList);
+//                    List<Duration> getWorkHour = new ArrayList<>();
+                    try (FileWriter fileWriter = new FileWriter("WorkerRaport.txt");
+                         PrintWriter printWriter = new PrintWriter(fileWriter)) {
+                        printWriter.println(person.getFirstName() + " " + person.getLastName() + " | " + monthsList.getValue());
+//                        System.out.println("!!!!!Month: " + monthsList.getValue());
+                        printWriter.println("ID | DATE | Address | Worker | WORK HOURS | Comment");
+//                        System.out.println("1!");
+                        while (result.next()) {
+//                            int id = result.getInt("id");
+                            String workDate = result.getString("data");
+//                            int userID = result.getInt("user_id");
+//                            System.out.println("User_ID: " + userID);
+                            LocalTime startTime = result.getTime("start_time").toLocalTime();
+                            LocalTime endTime = result.getTime("end_time").toLocalTime();
+                            Duration workTime = Duration.between(startTime,  endTime);
+                            int workTimeToInt = workTime.toMinutesPart();
+                            System.out.println("WorkTimeToInt: " + workTimeToInt);
+                            String address = result.getString("address");
+                            long hours = workTime.toHours();
+                            long minuts = workTime.toMinutesPart()%60;
+                            String comment = result.getString("comment");
+//                            System.out.println("WorkTime: " + hours + "h " + minuts+"Min");
+//                            Person worker = null;
+//                            for (Person user : personList){
+//                                if(user.getId() == userID){
+//                                    worker = user;
+//                                    break;
+//                                }
+//                            }
+//                            Person worker = personList.get(userID-1);
+                            printWriter.println(idList + " | " + workDate + " | " + address + " | "+ person.getFirstName() + " " + person.getLastName() + " | " + hours + "h " + minuts+"Min" +" | "+ comment);
+                            idList++;
+                            for(int i = 0; i < getAddressList.size(); ++i){
+                                if(getAddressList.get(i).equals(address)){
+                                    getWorkHour.set(i, getWorkHour.get(i) + workTimeToInt);
+                                }
+                            }
+
+                        }
+
+                        printWriter.println("-------------------------------------------- \n Work Hours Address Summary \n --------------------------------------------");
+                        int idWorkHour = 1;
+                        for(int j = 0; j < getAddressList.size(); ++j){
+                            if(getWorkHour.get(j) == 0){
+                                continue;
+                            }
+                            printWriter.println(idWorkHour + " | " + getAddressList.get(j) + " | " + getWorkHour.get(j));
+                            idWorkHour++;
+                        }
+
+                        result.close();
+                        connect.close();
+//                        System.out.println("2!");
+                    } catch (IOException | SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+
+
+
+//                    System.out.println("Month: " + selectedMonth);
+                });
+
+            });
+
+
             workersVBox.getChildren().addAll(separator,pane);
 
         }
@@ -955,6 +1100,33 @@ public class MainPanel implements Initializable{
 
 
 
+    }
+
+    public void sumOfWorkHour(List<String> address, List<Duration> workHours){
+        List<String> addressList = removeDuplicates(address);
+
+
+    }
+
+    public List<String> removeDuplicates(List<String> list)
+    {
+
+        // Create a new ArrayList
+        List<String> newList = new ArrayList<>();
+
+        // Traverse through the first list
+        for (String element : list) {
+
+            // If this element is not present in newList
+            // then add it
+            if (!newList.contains(element)) {
+
+                newList.add(element);
+            }
+        }
+
+        // return the new list
+        return newList;
     }
 
     public void clearWorkersPanel(){
@@ -1082,9 +1254,9 @@ public class MainPanel implements Initializable{
             Pane pane = new Pane();
             pane.setPrefWidth(426);
             pane.setPrefHeight(40);
+            pane.setLayoutY(pane.getLayoutY() + 3);
             pane.getChildren().addAll(addressPane, deletePane, optionsPane, checkBoxPane);
             if(addAddress.getActive()==false){
-
                 addressPane.setDisable(true);
                 activeAddress.setSelected(false);
                 pane.setStyle("-fx-border-color: lightgrey;" +
@@ -1127,7 +1299,53 @@ public class MainPanel implements Initializable{
                 });
             }
 
+            activeAddress.setOnMouseClicked(e -> {
 
+                String url = "jdbc:mysql://localhost/persons";
+                String username = "root";
+                String passwordDb = "1234qwer";
+//                System.out.println("CLICKED!");
+                System.out.println("Active: " + activeAddress.isSelected());
+                int isActive = 0;
+                if(activeAddress.isSelected()){
+                    isActive = 1;
+                }else{
+                    isActive = 0;
+                }
+                try {
+                    Connection connection = DriverManager.getConnection(url, username, passwordDb);
+
+//                    System.out.println("delete id address: " + addAddress.getID());
+                    String sql = "UPDATE Persons.address SET active = '" + isActive + "' WHERE id = " + addAddress.getID() + ";";
+
+                    PreparedStatement statement = connection.prepareStatement(sql);
+
+
+                    int rowsInserted = statement.executeUpdate();
+                    if (rowsInserted > 0) {
+//                System.out.println("Dane zostały dodane do bazy.");
+                    }
+
+                    statement.close();
+                    connection.close();
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
+
+                showAddressPanel();
+
+                System.out.println("Active clicked! " + addressPane.isDisable());
+                addressPane.setDisable(!addressPane.isDisabled());
+                System.out.println("Active clicked 2! " + addressPane.isDisable());
+                if(addressPane.isDisable()){
+                    addressPane.setDisable(true);
+                    addAddress.setActive(false);
+                }else{
+                    addressPane.setDisable(false);
+                    addAddress.setActive(true);
+                }
+
+            });
 //            dataPane.setStyle("-fx-border-color: grey;" +
 //                    "-fx-border-style: hidden solid hidden hidden;" +
 //                    "-fx-border-width: 4;");
@@ -1217,7 +1435,7 @@ public class MainPanel implements Initializable{
                     Person listOfPerson = new Person();
                     List<Person> personList = listOfPerson.getPersonList();
                     int idList = 1;
-                    try (FileWriter fileWriter = new FileWriter("Raport.txt");
+                    try (FileWriter fileWriter = new FileWriter("AddressRaport.txt");
                          PrintWriter printWriter = new PrintWriter(fileWriter)) {
                         printWriter.println(selectedAddress + " | " + monthsList.getValue());
 //                        System.out.println("!!!!!Month: " + monthsList.getValue());
@@ -1244,6 +1462,8 @@ public class MainPanel implements Initializable{
 //                            Person worker = personList.get(userID-1);
                             printWriter.println(idList + " | " + workDate + " | " + worker.getFirstName() + " " + worker.getLastName() + " | " + hours + "h " + minuts+"Min");
                             idList++;
+
+
                         }
                         result.close();
                         connect.close();

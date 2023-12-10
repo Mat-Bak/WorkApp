@@ -1,5 +1,7 @@
 package com.example.workappjx;
 
+import java.util.ArrayList;
+
 public class AddNewAddress {
     int id;
     String address;
@@ -22,4 +24,8 @@ public class AddNewAddress {
     public boolean getActive(){
         return active;
     }
+    public void setActive(boolean act){
+        active  = act;
+    }
+
 }

@@ -2,18 +2,11 @@ package com.example.workappjx;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
-import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -81,7 +74,7 @@ public class AddWorkTime implements Initializable {
             startMinutsBox.getItems().add(j);
             endMinutsBox.getItems().add(j);
         }
-        List<String> ListOfAddress = addressList();
+        List<String> ListOfAddress = ActiveAddressList();
         date.setText(MainPanel.getLocalDate.toString());
 //date.setText("Dupa2");
         for(int k = 0; k<ListOfAddress.size(); ++k ){
@@ -115,7 +108,7 @@ public class AddWorkTime implements Initializable {
 //    }
 
 
-    public List<String> addressList(){
+    public List<String> ActiveAddressList(){
         DatabaseConnector databaseConnector = new DatabaseConnector();
         String address;
         int id;
@@ -123,6 +116,38 @@ public class AddWorkTime implements Initializable {
         List<String> addressList = new ArrayList<>();
 
         String query = "SELECT * FROM Persons.address WHERE active = 1";
+
+        try {
+            // Execute query and get result
+            ResultSet resultSet = databaseConnector.executeQuery(query);
+            while (resultSet.next()) {
+                id = resultSet.getInt("id");
+                address = resultSet.getString("address");
+                addressList.add(address);
+            }
+            resultSet.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // Close database connection
+        try {
+            databaseConnector.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return addressList;
+
+    }
+
+    public ArrayList<String> addressList(){
+        DatabaseConnector databaseConnector = new DatabaseConnector();
+        String address;
+        int id;
+
+        ArrayList<String> addressList = new ArrayList<>();
+
+        String query = "SELECT * FROM Persons.address";
 
         try {
             // Execute query and get result
