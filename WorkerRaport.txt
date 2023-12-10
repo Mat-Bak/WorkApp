@@ -1,0 +1,34 @@
+Admin Root | September
+ID | DATE | Address | Worker | WORK HOURS | Comment
+1 | 2023-09-17 | testowy adres | Admin Root | 5h 7Min | tgdfgsdgsd
+2 | 2023-09-16 | Kolejny adres | Admin Root | 8h 12Min | bxbxcbcx
+3 | 2023-09-16 | test | Admin Root | 1h 51Min | jhjklk
+4 | 2023-09-16 | testowy adres | Admin Root | 11h 23Min | gjhkgjhkgjhkkjl
+5 | 2023-09-16 | test | Admin Root | 0h 52Min | hgkllkkl
+6 | 2023-09-16 | test | Admin Root | 10h 14Min | gjhglkk
+7 | 2023-09-22 | Kolejny adres | Admin Root | 2h 9Min | jngfhjncjfdg
+8 | 2023-09-23 | Kolejny adres | Admin Root | 9h 54Min | nfdgncvb
+9 | 2023-09-23 | testowy adres | Admin Root | 7h 59Min | cgbnxcvnxvnx
+10 | 2023-09-23 | test | Admin Root | 8h 0Min | 
+11 | 2023-09-23 | Kolejny adres | Admin Root | 1h 0Min | rgsdfgsdfgsd
+12 | 2023-09-07 | testowy adres | Admin Root | 6h 10Min | asfgasdfa
+13 | 2023-09-12 | testowy adres | Admin Root | 0h 22Min | test
+14 | 2023-09-13 | testowy adres | Admin Root | 10h 5Min | fasdfas
+15 | 2023-09-11 | test | Admin Root | 8h 56Min | fasdfas
+16 | 2023-09-18 | testowy adres | Admin Root | 9h 5Min | asdfasdfa
+17 | 2023-09-17 | testowy adres | Admin Root | 3h 6Min | asfasdfa
+18 | 2023-09-29 | testowy adres | Admin Root | 0h 1Min | 
+19 | 2023-09-29 | Kolejny adres | Admin Root | 5h 57Min | asdfa
+20 | 2023-09-12 | Kolejny adres | Admin Root | 1h 3Min | asdas
+21 | 2023-09-07 | test | Admin Root | 7h 55Min |  n cvbnmvf
+22 | 2023-09-29 | test | Admin Root | 6h 51Min | fdgh
+23 | 2023-09-29 | Kolejny adres | Admin Root | 5h 59Min | cxbvx
+24 | 2023-09-30 | test | Admin Root | 8h 6Min | Próba zmiany danych
+25 | 2023-09-30 | Kolejny adres | Admin Root | 11h 7Min | asda
+26 | 2023-09-30 | testowy adres | Admin Root | 7h 0Min | asdas
+27 | 2023-09-30 | test | Admin Root | 7h 58Min | test Button 
+-------------------------------------------- 
+ Work Hours Address Summary 
+ --------------------------------------------
+1 | Kolejny adres | 201
+2 | test | 343
