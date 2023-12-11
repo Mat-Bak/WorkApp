@@ -1420,11 +1420,21 @@ public class MainPanel implements Initializable{
                     int selectedMonth = monthsList.getSelectionModel().getSelectedIndex()+1;
                     String sql = null;
                     DatabaseConnector connect = new DatabaseConnector();
-                    if(selectedMonth < 10){
+
+                    if(selectedMonth == 4 || selectedMonth == 6 || selectedMonth == 9){
+                        sql = "SELECT * FROM persons.workhours  WHERE (data >= '2023-0" + selectedMonth + "-01' AND data <= '2023-0" + selectedMonth + "-30') AND address = '" + selectedAddress +"';";
+                    }else if(selectedMonth == 1 || selectedMonth == 3 || selectedMonth == 5 || selectedMonth == 7 || selectedMonth == 8){
                         sql = "SELECT * FROM persons.workhours  WHERE (data >= '2023-0" + selectedMonth + "-01' AND data <= '2023-0" + selectedMonth + "-31') AND address = '" + selectedAddress +"';";
-                    }else{
+                    }else if(selectedMonth == 10 || selectedMonth == 12){
                         sql = "SELECT * FROM persons.workhours  WHERE (data >= '2023-" + selectedMonth + "-01' AND data <= '2023-" + selectedMonth + "-31') AND address = '" + selectedAddress +"';";
+                    }else if(selectedMonth == 11){
+                        sql = "SELECT * FROM persons.workhours  WHERE (data >= '2023-" + selectedMonth + "-01' AND data <= '2023-" + selectedMonth + "-30') AND address = '" + selectedAddress +"';";
+                    }else if(selectedMonth == 2){
+                        sql = "SELECT * FROM persons.workhours  WHERE (data >= '2023-" + selectedMonth + "-01' AND data <= '2023-" + selectedMonth + "-28') AND address = '" + selectedAddress +"';";
+                    }else{
+                        System.out.println("DATE ERROR!");
                     }
+
                     ResultSet result = null;
                     try {
                         result = result = connect.executeQuery(sql);
@@ -1441,6 +1451,7 @@ public class MainPanel implements Initializable{
 //                        System.out.println("!!!!!Month: " + monthsList.getValue());
                         printWriter.println("ID | DATE | WORKER| WORK HOURS");
 //                        System.out.println("1!");
+                        int sumOfHours = 0;
                         while (result.next()) {
 //                            int id = result.getInt("id");
                             String workDate = result.getString("data");
@@ -1449,6 +1460,7 @@ public class MainPanel implements Initializable{
                             LocalTime startTime = result.getTime("start_time").toLocalTime();
                             LocalTime endTime = result.getTime("end_time").toLocalTime();
                             Duration workTime = Duration.between(startTime,  endTime);
+                            sumOfHours += workTime.toMinutes();
                             long hours = workTime.toHours();
                             long minuts = workTime.toMinutesPart()%60;
 //                            System.out.println("WorkTime: " + hours + "h " + minuts+"Min");
@@ -1465,6 +1477,8 @@ public class MainPanel implements Initializable{
 
 
                         }
+                        printWriter.println("---------------------------------- WORK HOURS SUM ----------------------------------");
+                        printWriter.println(selectedAddress + ": " + sumOfHours/60 + "h " + sumOfHours%60 + "min");
                         result.close();
                         connect.close();
 //                        System.out.println("2!");
