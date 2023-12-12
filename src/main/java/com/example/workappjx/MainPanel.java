@@ -124,7 +124,16 @@ public class MainPanel implements Initializable{
     public PasswordField newPass;
 
     @FXML
+    public PasswordField reNewPass;
+
+    @FXML
     public AnchorPane anchorPane;
+
+    @FXML
+    public Text callendarError;
+
+    @FXML
+    public Text passwordError;
 //    @FXML
 //    public ScrollPane scrollTest;
 //
@@ -261,6 +270,8 @@ public class MainPanel implements Initializable{
     public void showSettingsPanel(){
         oldPass.clear();
         newPass.clear();
+        reNewPass.clear();
+        passwordError.setText("");
         mainPanel.setVisible(false);
         settingsPanel.setVisible(true);
     }
@@ -644,13 +655,19 @@ public class MainPanel implements Initializable{
 
 
     public void createWorkPanel() throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("addWorkTime.fxml"));
-        Scene secondScene = new Scene(fxmlLoader.load(), 300, 460);
-        Stage Secondstage = new Stage();
-        Secondstage.setTitle("Add Work Time");
-        Secondstage.setScene(secondScene);
-        Secondstage.show();
+        try {
+            callendarError.setText("");
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("addWorkTime.fxml"));
+            Scene secondScene = new Scene(fxmlLoader.load(), 300, 460);
+            Stage Secondstage = new Stage();
+            Secondstage.setTitle("Add Work Time");
+            Secondstage.setScene(secondScene);
+            Secondstage.show();
+        }catch (IOException e){
+            callendarError.setText("Select date");
+            callendarError.setFill(Color.RED);
+        }
 
 //        AddWorkTime workTimePanel = new AddWorkTime();
 //        getLocalDate = dateTime.getValue();
@@ -709,7 +726,7 @@ public class MainPanel implements Initializable{
         SalaryHours.setText("");
         SalaryHours.setText("Hours: " + SumOfHours/60 + "h " + SumOfHours%60 + "min");
         SalaryBrutto.setText("");
-        SalaryBrutto.setText("Brutto: " + (int)((SumOfHours/60)*person.getSalaryPerHour()));
+        SalaryBrutto.setText("Brutto: " + (int)((SumOfHours/60)*person.getSalaryPerHour()) + " kr");
 //        SalaryNetto.setText("");
 //        float tax = 1 - (float)person.getTax()/100;
 ////        System.out.println("PersonTax: " + person.getTax() + "\n tax: " + tax);
@@ -733,10 +750,27 @@ public class MainPanel implements Initializable{
         String newPassword = loginPanelController.getMd5(newPass.getText());
         Person person = LoginPanelController.getPersonData();
         LoadPersonData loadPersonData = new LoadPersonData();
+        boolean passwordCorrect = true;
         if(person.getPassword().equals(oldPassword) && !oldPass.getText().equals(newPass.getText())){
-            loadPersonData.changePassword(newPassword, person.getId());
+            if(!newPass.getText().equals(reNewPass.getText())){
+                passwordCorrect = false;
+                passwordError.setText("New Password and Repeat Password must be the same!");
+                passwordError.setFill(Color.RED);
+            }
+            if(newPass.getText().length() < 8){
+                passwordCorrect = false;
+                passwordError.setText("The new password must be longer than 8 characters!");
+                passwordError.setFill(Color.RED);
+            }
+            if (passwordCorrect){
+                loadPersonData.changePassword(newPassword, person.getId());
+                passwordError.setText("Password changed!");
+                passwordError.setFill(Color.GREEN);
+            }
 //            System.out.println("Password changed!");
         }else{
+            passwordError.setText("The password cannot be the same as the old password!");
+            passwordError.setFill(Color.RED);
 //            System.out.println("Wrong old password!");
         }
 
@@ -1541,6 +1575,12 @@ public class MainPanel implements Initializable{
             String url = "jdbc:mysql://localhost/persons";
             String username = "root";
             String dbPassword = "1234qwer";
+            if(addresField.getText().isEmpty()){
+                addresField.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
+                return;
+            }else{
+                addresField.setStyle("-fx-border-color: none ;");
+            }
 
             try {
                 Connection connection = DriverManager.getConnection(url, username, dbPassword);

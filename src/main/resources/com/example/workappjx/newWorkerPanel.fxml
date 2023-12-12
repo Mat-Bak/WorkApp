@@ -61,7 +61,7 @@
       <TextField fx:id="phoneField" layoutX="37.0" layoutY="276.0" prefHeight="25.0" prefWidth="180.0" />
       <TextField fx:id="peselField" layoutX="239.0" layoutY="276.0" prefHeight="25.0" prefWidth="180.0" />
       <TextField fx:id="salaryField" layoutX="36.0" layoutY="350.0" prefHeight="25.0" prefWidth="180.0" />
-      <Button fx:id="confirmButton" layoutX="183.0" layoutY="447.0" mnemonicParsing="false" onAction="#createNewWorker" prefHeight="35.0" prefWidth="97.0" text="Confimr">
+      <Button fx:id="confirmButton" layoutX="183.0" layoutY="463.0" mnemonicParsing="false" onAction="#createNewWorker" prefHeight="35.0" prefWidth="97.0" text="Confimr">
          <font>
             <Font size="16.0" />
          </font>
@@ -73,5 +73,6 @@
       </Text>
       <PasswordField fx:id="passwordField" layoutX="239.0" layoutY="70.0" prefHeight="25.0" prefWidth="180.0" />
       <PasswordField fx:id="rePasswordField" layoutX="239.0" layoutY="131.0" prefHeight="25.0" prefWidth="180.0" />
+      <Text fx:id="newWorkerError" layoutX="7.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="450.13671875" />
    </children>
 </AnchorPane>

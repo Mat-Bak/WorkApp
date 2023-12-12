@@ -14,9 +14,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="anchorPane" prefHeight="400.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workappjx.MainPanel">
+<AnchorPane fx:id="anchorPane" prefHeight="382.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workappjx.MainPanel">
    <children>
-      <Pane fx:id="mainPanel" prefHeight="421.0" prefWidth="460.0">
+      <Pane fx:id="mainPanel" prefHeight="421.0" prefWidth="460.0" visible="false">
          <children>
             <Button fx:id="personPanelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="50.0" mnemonicParsing="false" onAction="#showPersonInfo" prefHeight="100.0" prefWidth="100.0" textAlignment="CENTER">
                <graphic>
@@ -143,13 +143,14 @@
          <children>
             <DatePicker fx:id="dateTime" layoutX="36.0" layoutY="23.0" onAction="#showWorkTimeData" onMouseClicked="#getDataTime" prefHeight="35.0" prefWidth="247.0" />
             <Line endX="203.0" layoutX="230.0" layoutY="79.0" startX="-212.0" />
-            <Button fx:id="backButton" layoutX="167.0" layoutY="365.0" mnemonicParsing="false" onAction="#workPanelBack" prefHeight="35.0" prefWidth="116.0" text="Back" />
+            <Button fx:id="backButton" layoutX="166.0" layoutY="352.0" mnemonicParsing="false" onAction="#workPanelBack" prefHeight="35.0" prefWidth="116.0" text="Back" />
             <Button fx:id="addWorkTimeButton" layoutX="303.0" layoutY="23.0" mnemonicParsing="false" onAction="#createWorkPanel" prefHeight="35.0" prefWidth="116.0" text="Add +" />
             <ScrollPane layoutX="26.0" layoutY="89.0" prefHeight="253.0" prefWidth="395.0">
                <content>
                   <VBox fx:id="workTimeDataPanel" maxHeight="250.0" maxWidth="394.0" prefHeight="250.0" prefWidth="393.0" />
                </content>
             </ScrollPane>
+            <Text fx:id="callendarError" layoutX="137.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" />
          </children>
       </Pane>
       <Pane fx:id="salaryPanel" layoutX="-6.0" layoutY="-2.0" prefHeight="413.0" prefWidth="456.0" visible="false">
@@ -173,22 +174,29 @@
             <Button fx:id="SalaryPanelBack" layoutX="159.0" layoutY="335.0" mnemonicParsing="false" onAction="#salaryPanelBack" prefHeight="40.0" prefWidth="139.0" text="Back" />
          </children>
       </Pane>
-      <Pane fx:id="settingsPanel" layoutX="4.0" layoutY="8.0" prefHeight="413.0" prefWidth="456.0" visible="false">
+      <Pane fx:id="settingsPanel" layoutX="4.0" layoutY="8.0" prefHeight="413.0" prefWidth="456.0">
          <children>
             <Button fx:id="SalaryPanelBack1" layoutX="249.0" layoutY="335.0" mnemonicParsing="false" onAction="#settingPanelBack" prefHeight="40.0" prefWidth="139.0" text="Back" />
-            <Text layoutX="138.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Old Password">
+            <Text layoutX="138.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Old Password">
                <font>
                   <Font size="30.0" />
                </font>
             </Text>
-            <PasswordField fx:id="oldPass" layoutX="69.0" layoutY="67.0" prefHeight="48.0" prefWidth="318.0" />
-            <Text layoutX="138.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Password">
+            <PasswordField fx:id="oldPass" layoutX="69.0" layoutY="55.0" prefHeight="48.0" prefWidth="318.0" />
+            <Text layoutX="138.0" layoutY="149.0" strokeType="OUTSIDE" strokeWidth="0.0" text="New Password">
                <font>
                   <Font size="30.0" />
                </font>
             </Text>
-            <PasswordField fx:id="newPass" layoutX="69.0" layoutY="183.0" prefHeight="48.0" prefWidth="318.0" />
+            <PasswordField fx:id="newPass" layoutX="69.0" layoutY="157.0" prefHeight="48.0" prefWidth="318.0" />
             <Button fx:id="savePass" layoutX="69.0" layoutY="335.0" mnemonicParsing="false" onAction="#changePass" prefHeight="40.0" prefWidth="139.0" text="Save" />
+            <Text layoutX="121.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Repeat Password">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Text>
+            <Text fx:id="passwordError" layoutX="215.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="fadsf" />
+            <PasswordField fx:id="reNewPass" layoutX="69.0" layoutY="250.0" prefHeight="48.0" prefWidth="318.0" />
          </children>
       </Pane>
       <Pane fx:id="workersPane" prefHeight="421.0" prefWidth="460.0" visible="false">

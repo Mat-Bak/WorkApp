@@ -1,5 +1,7 @@
 package com.example.workappjx;
 
+import javafx.scene.text.Text;
+
 import java.math.BigInteger;
 import java.sql.*;
 import java.util.ArrayList;
@@ -68,7 +70,7 @@ public class LoadPersonData {
         return personList;
     }
 
-    public Person logInToApp(String userLogin, String userPassword) throws SQLException {
+    public Person logInToApp(String userLogin, String userPassword, Text textError) throws SQLException {
         DatabaseConnector connector = new DatabaseConnector();
 
         int id;

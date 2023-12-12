@@ -6,6 +6,7 @@
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 <VBox alignment="CENTER" prefHeight="250.0" prefWidth="300.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workappjx.LoginPanelController">
     <padding>
@@ -15,6 +16,7 @@
    <TextField fx:id="loginField" text="admin" />
    <Label text="PASSWORD" />
    <PasswordField fx:id="passwordField" text="admin" />
+   <Text fx:id="errorText" strokeType="OUTSIDE" strokeWidth="0.0" />
     <Button fx:id="logInButton" onAction="#logIn" text="Hello!" />
 
     <Label fx:id="welcomeText" prefHeight="17.0" prefWidth="159.0" />

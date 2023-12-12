@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -30,6 +32,11 @@ public class LoginPanelController {
     private PasswordField passwordField;
     @FXML
     private Button logInButton;
+
+    @FXML
+    private Text errorText;
+
+
 
     public static Person personData;
 //    public int user_id;
@@ -65,7 +72,7 @@ public class LoginPanelController {
         LoadPersonData getPersonData = new LoadPersonData();
         String login = loginField.getText();
         String pass = getMd5(passwordField.getText());
-        Person person = getPersonData.logInToApp(login, pass);
+        Person person = getPersonData.logInToApp(login, pass, errorText);
         if(person != null){
             System.out.println("Login succesful!");
             personData = person;
@@ -76,6 +83,9 @@ public class LoginPanelController {
             stage.close();
             createMainPanel.mainPanel();
         }else{
+
+            errorText.setText("Invalid login or password!");
+            errorText.setFill(Color.RED);
             System.out.println("LogIn failed!");
         }
 //        List<Person> personList = getPersonData.dbConnection();
