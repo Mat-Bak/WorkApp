@@ -41,6 +41,6 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="workTimeError" layoutX="6.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="304.0" />
+      <Text fx:id="workTimeError" layoutX="6.0" layoutY="421.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="304.0" />
    </children>
 </AnchorPane>

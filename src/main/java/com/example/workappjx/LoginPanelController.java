@@ -3,6 +3,7 @@ package com.example.workappjx;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -11,7 +12,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.security.MessageDigest;
 import java.sql.SQLException;
-import java.util.List;
 
 /*
 
@@ -76,12 +76,31 @@ public class LoginPanelController {
         if(person != null){
             System.out.println("Login succesful!");
             personData = person;
+
+//            FXMLLoader fxmlLoader = new FXMLLoader();
+//            fxmlLoader.setLocation(getClass().getResource("mainPanel.fxml"));
+//            Scene secondScene;
+//            secondScene = new Scene(fxmlLoader.load(), 450, 400);
+//            Stage Secondstage = new Stage();
+//            Secondstage.setTitle("WorkApp");
+//            Secondstage.setScene(secondScene);
+//            Secondstage.show();
+//
+//            MainPanel mainPanel = fxmlLoader.getController();
+
             FXMLLoader loader = new FXMLLoader(getClass().getResource("mainPanel.fxml"));
             Parent root = loader.load();
             MainPanel createMainPanel = loader.getController();
+//            Scene mainScene = new Scene(loader.load(), 450, 400);
+//            Stage mainStage = new Stage();
+            //E:/Nauka/Java/workApp/workAppJX/src/main/resources/
+//            mainStage.setTitle("WorkApp");
+//            mainStage.setScene(mainScene);
+//            mainStage.show();
             Stage stage = (Stage) logInButton.getScene().getWindow();
             stage.close();
-            createMainPanel.mainPanel();
+//            mainStage.close();
+            createMainPanel.createMainPanel();
         }else{
 
             errorText.setText("Invalid login or password!");

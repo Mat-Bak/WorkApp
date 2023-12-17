@@ -5,6 +5,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -46,10 +47,11 @@ public class AddNewWorker {
     @FXML
     public Text newWorkerError;
 
-    public void createNewWorker(){
+    public void createNewWorker() throws SQLException {
         String login = loginField.getText();
         String password = passwordField.getText().toString();
         String rePassword = rePasswordField.getText().toString();
+        boolean errors = false;
         if(!password.equals(rePassword)){
             newWorkerError.setText("password and repassword must be the same!");
             System.out.println("password != repassword \n Password: " + password + "\n rePassword: " + rePassword);
@@ -73,35 +75,42 @@ public class AddNewWorker {
         String url = "jdbc:mysql://localhost/persons";
         String username = "root";
         String dbPassword = "1234qwer";
-
+        Connection connection = DriverManager.getConnection(url, username, dbPassword);
         try{
-            Connection connection = DriverManager.getConnection(url, username, dbPassword);
             String sql = "SELECT * FROM workers WHERE login = " + login + ";";
             PreparedStatement statement = connection.prepareStatement(sql);
             int rowsInserted = statement.executeUpdate();
             statement.close();
             connection.close();
-        } catch (SQLException e) {
             loginField.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
             newWorkerError.setText("Login already exist!");
-            throw new RuntimeException(e);
+            newWorkerError.setFill(Color.RED);
+            errors = true;
+        } catch (SQLException e) {
+            System.out.println("Login don't exist!");
+//            throw new RuntimeException(e);
         }
 
         try{
-            Connection connection = DriverManager.getConnection(url, username, dbPassword);
+//            connection = DriverManager.getConnection(url, username, dbPassword);
             String sql = "SELECT * FROM workers WHERE pesel = " + pesel + ";";
             PreparedStatement statement = connection.prepareStatement(sql);
             int rowsInserted = statement.executeUpdate();
             statement.close();
             connection.close();
-        } catch (SQLException e) {
             peselField.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
             newWorkerError.setText("Pesel already exist!");
-            throw new RuntimeException(e);
+            errors = true;
+        } catch (SQLException e) {
+            System.out.println("Pesel don't exist!");
+//            throw new RuntimeException(e);
+        }
+        if (errors){
+            return;
         }
 
         try {
-            Connection connection = DriverManager.getConnection(url, username, dbPassword);
+//            Connection connection = DriverManager.getConnection(url, username, dbPassword);
 //            LocalDate testLocalDate = worktime.getLocalDate();
 //            System.out.println("SaveTimeWorkData Data: " + testLocalDate);
 //            System.out.println("Start time: " + worktime.getStart_time());

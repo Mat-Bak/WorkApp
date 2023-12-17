@@ -1,5 +1,6 @@
 package com.example.workappjx;
 
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 
@@ -36,7 +37,6 @@ public class SaveWorkTimeData {
             if (rowsInserted > 0) {
 //                System.out.println("Dane zostały dodane do bazy.");
             }
-            MainPanel mainPanel = new MainPanel();
 
             statement.close();
             connection.close();
