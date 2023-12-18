@@ -1,21 +1,18 @@
 package com.example.workappjx;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -51,6 +48,8 @@ public class EditWorkTime implements Initializable {
     public ComboBox addressComboBox;
 
     @FXML public Text date;
+
+    public MainPanel mainPanel;
 
 //    @FXML public DatePicker dateTime;
 
@@ -241,10 +240,15 @@ public class EditWorkTime implements Initializable {
         });
     }
 
-    public void testEditButton(){
+    public void setMainPanel(MainPanel mainPanel){
+        this.mainPanel = mainPanel;
+    }
+
+    public void editWorkTimeData(){
         addNewWorkTime();
         SaveWorkTimeData saveWorkTimeData = new SaveWorkTimeData();
         int id = MainPanel.workTimeID;
+        mainPanel.showWorkTimeData();
         System.out.println("get id worktime: " + id);
         saveWorkTimeData.removeDataFromDataBase(id);
         Stage stage = (Stage) saveData.getScene().getWindow();

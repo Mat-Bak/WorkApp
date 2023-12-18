@@ -470,6 +470,7 @@ public class MainPanel implements Initializable{
 
                 EditWorkTime editWorkTime = fxmlLoader.getController();
                 editWorkTime.setData(startHour, startMinuts, endHour, endMinuts, workTime.getAddress(), workTime.getComment());
+                editWorkTime.setMainPanel(this);
 //                System.out.println("ID worktime: " + workTime.getId());
                 workTimeID = workTime.getId();
 

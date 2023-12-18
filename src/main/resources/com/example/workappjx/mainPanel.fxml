@@ -16,7 +16,7 @@
 
 <AnchorPane fx:id="anchorPane" prefHeight="382.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workappjx.MainPanel">
    <children>
-      <Pane fx:id="mainPanel" prefHeight="421.0" prefWidth="460.0" visible="false">
+      <Pane fx:id="mainPanel" prefHeight="421.0" prefWidth="460.0">
          <children>
             <Button fx:id="personPanelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="25.0" layoutY="50.0" mnemonicParsing="false" onAction="#showPersonInfo" prefHeight="100.0" prefWidth="100.0" textAlignment="CENTER">
                <graphic>
@@ -139,7 +139,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane fx:id="workPanel" layoutY="-1.0" prefHeight="414.0" prefWidth="450.0">
+      <Pane fx:id="workPanel" layoutY="-1.0" prefHeight="414.0" prefWidth="450.0" visible="false">
          <children>
             <DatePicker fx:id="dateTime" layoutX="55.0" layoutY="23.0" onAction="#showWorkTimeData" onMouseClicked="#getDataTime" prefHeight="35.0" prefWidth="247.0" />
             <Line endX="203.0" layoutX="230.0" layoutY="79.0" startX="-212.0" />
