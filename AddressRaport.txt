@@ -1,0 +1,12 @@
+Kolejny adres | September
+ID | DATE | WORKER| WORK HOURS
+1 | 2023-09-16 | Admin Root | 8h 12Min
+2 | 2023-09-22 | Admin Root | 2h 9Min
+3 | 2023-09-23 | Admin Root | 9h 54Min
+4 | 2023-09-23 | Admin Root | 1h 0Min
+5 | 2023-09-29 | Admin Root | 5h 57Min
+6 | 2023-09-12 | Admin Root | 1h 3Min
+7 | 2023-09-29 | Admin Root | 5h 59Min
+8 | 2023-09-30 | Admin Root | 11h 7Min
+---------------------------------- WORK HOURS SUM ----------------------------------
+Kolejny adres: 45h 21min
