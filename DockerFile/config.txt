@@ -1,0 +1,12 @@
+to start app you have to create database using dump.sql file.
+
+You need install mysql on your device
+
+Next you have to create database using command:
+"mysql -u 'user_name' -p -e "CREATE DATABASE persons;"
+// name 'persons' is database name that was set in the program code
+
+next you have to add data to exist database. To do this use command:
+"mysql -u 'user_name' -p persons < dump.sql"
+
+now database exist and you can use it to start app
