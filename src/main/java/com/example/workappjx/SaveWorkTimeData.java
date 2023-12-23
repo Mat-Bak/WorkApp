@@ -1,13 +1,12 @@
 package com.example.workappjx;
 
-import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 
 /*
 
 Methods:
-    * void connectWorkTimeDatabase(WorkTime worktime) - the method is to connect with work time database. The method get one WorkTime argument which are used to get data from this class.
+    * void connectWorkTimeDatabase(WorkTime) - the method is to connect with work time database. The method get one WorkTime argument which are used to get data from this class.
 
  */
 
@@ -20,9 +19,6 @@ public class SaveWorkTimeData {
 
         try {
             Connection connection = DriverManager.getConnection(url, username, password);
-            LocalDate testLocalDate = worktime.getLocalDate();
-//            System.out.println("SaveTimeWorkData Data: " + testLocalDate);
-//            System.out.println("Start time: " + worktime.getStart_time());
             String sql = "INSERT INTO workhours (address, data, start_time, end_time, comment, user_id) VALUES (?, ?, ?, ?, ?, ?)";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -33,10 +29,6 @@ public class SaveWorkTimeData {
             statement.setString(5, worktime.getComment());
             statement.setInt(6, worktime.getUser_id());
 
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-//                System.out.println("Dane zostały dodane do bazy.");
-            }
 
             statement.close();
             connection.close();
@@ -53,16 +45,11 @@ public class SaveWorkTimeData {
         try {
             Connection connection = DriverManager.getConnection(url, username, password);
 
-            System.out.println("second id workTime: " + id);
             String sql = "DELETE FROM persons.workhours WHERE id = " + id;
 
             PreparedStatement statement = connection.prepareStatement(sql);
 
 
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-//                System.out.println("Dane zostały dodane do bazy.");
-            }
 
             statement.close();
             connection.close();

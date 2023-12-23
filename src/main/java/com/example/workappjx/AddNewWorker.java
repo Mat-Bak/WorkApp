@@ -10,8 +10,6 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.sql.*;
-import java.time.LocalDate;
-
 public class AddNewWorker {
 
     @FXML
@@ -49,18 +47,15 @@ public class AddNewWorker {
 
     public void createNewWorker() throws SQLException {
         String login = loginField.getText();
-        String password = passwordField.getText().toString();
-        String rePassword = rePasswordField.getText().toString();
+        String password = passwordField.getText();
+        String rePassword = rePasswordField.getText();
         boolean errors = false;
         if(!password.equals(rePassword)){
             newWorkerError.setText("password and repassword must be the same!");
-            System.out.println("password != repassword \n Password: " + password + "\n rePassword: " + rePassword);
             return;
         }
-        System.out.println("Password: " + password);
         LoginPanelController loginPanelController = new LoginPanelController();
         password = loginPanelController.getMd5(password);
-        System.out.println("Password after MD5: " + password);
         String name = nameField.getText();
         String lastName = surnameField.getText();
         String phoneNumber = phoneField.getText();
@@ -86,13 +81,10 @@ public class AddNewWorker {
             newWorkerError.setText("Login already exist!");
             newWorkerError.setFill(Color.RED);
             errors = true;
-        } catch (SQLException e) {
-            System.out.println("Login don't exist!");
-//            throw new RuntimeException(e);
+        } catch (SQLException ignored) {
         }
 
         try{
-//            connection = DriverManager.getConnection(url, username, dbPassword);
             String sql = "SELECT * FROM workers WHERE pesel = " + pesel + ";";
             PreparedStatement statement = connection.prepareStatement(sql);
             int rowsInserted = statement.executeUpdate();
@@ -101,19 +93,13 @@ public class AddNewWorker {
             peselField.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
             newWorkerError.setText("Pesel already exist!");
             errors = true;
-        } catch (SQLException e) {
-            System.out.println("Pesel don't exist!");
-//            throw new RuntimeException(e);
+        } catch (SQLException ignored) {
         }
         if (errors){
             return;
         }
 
         try {
-//            Connection connection = DriverManager.getConnection(url, username, dbPassword);
-//            LocalDate testLocalDate = worktime.getLocalDate();
-//            System.out.println("SaveTimeWorkData Data: " + testLocalDate);
-//            System.out.println("Start time: " + worktime.getStart_time());
             String sql = "INSERT INTO workers (login, password, firstName, lastName, phoneNumber, pesel, SalaryPerHour, admin) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -128,17 +114,12 @@ public class AddNewWorker {
 
 
             int rowsInserted = statement.executeUpdate();
-//            if (rowsInserted > 0) {
-////                System.out.println("Dane zostały dodane do bazy.");
-//            }
-//            MainPanel mainPanel = new MainPanel();
 
             statement.close();
             connection.close();
             Stage stage = (Stage) confirmButton.getScene().getWindow();
 
             stage.close();
-            System.out.println("Worker created!");
         } catch (SQLException e) {
             e.printStackTrace();
         }

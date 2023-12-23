@@ -36,10 +36,6 @@ public class EditWorkTime implements Initializable {
     @FXML
     public TextArea commentField;
 
-
-//    @FXML
-//    public Pane dataPane;
-
     @FXML public Button saveData;
 
     @FXML public Button deleteData;
@@ -50,11 +46,6 @@ public class EditWorkTime implements Initializable {
     @FXML public Text date;
 
     public MainPanel mainPanel;
-
-//    @FXML public DatePicker dateTime;
-
-//    public int testHour;
-
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
@@ -68,10 +59,8 @@ public class EditWorkTime implements Initializable {
         }
         List<String> ListOfAddress = addressList();
         date.setText("EDIT\n" + MainPanel.getLocalDate.toString());
-//        date.setText("DDUPA");
-//        startHourBox.setValue(1);
-        for(int k = 0; k<ListOfAddress.size(); ++k ){
-            addressComboBox.getItems().add(ListOfAddress.get(k));
+        for (String listOfAddress : ListOfAddress) {
+            addressComboBox.getItems().add(listOfAddress);
         }
     }
 
@@ -85,37 +74,9 @@ public class EditWorkTime implements Initializable {
 
     }
 
-//    public void setEndHour(int hour){
-//        endHourBox.setValue(hour);
-//    }
-
-
-//    public EditWorkTime(int testHour){
-//        this.testHour = testHour;
-//    }
-
-//    public void initScene() throws IOException {
-//
-//        FXMLLoader fxmlLoader = new FXMLLoader();
-//        fxmlLoader.setLocation(getClass().getResource("editWorkTime.fxml"));
-//        Scene secondScene = new Scene(fxmlLoader.load(), 300, 460);
-//        Stage Secondstage = new Stage();
-////        startHourBox.setValue(testHour);
-//        Secondstage.setScene(secondScene);
-//        Secondstage.show();
-////        date.setText(localDate.toString());
-////        startHourBox.setValue(startHour);
-////        startMinutsBox.setValue(startMin);
-////        endHourBox.setValue(endHour);
-////        endMinutsBox.setValue(endMin);
-//        Secondstage.setTitle("Edit Work Time");
-//
-//    }
-
     public List<String> addressList(){
         DatabaseConnector databaseConnector = new DatabaseConnector();
         String address;
-        int id;
 
         List<String> addressList = new ArrayList<>();
 
@@ -125,7 +86,6 @@ public class EditWorkTime implements Initializable {
             // Execute query and get result
             ResultSet resultSet = databaseConnector.executeQuery(query);
             while (resultSet.next()) {
-                id = resultSet.getInt("id");
                 address = resultSet.getString("address");
                 addressList.add(address);
             }
@@ -144,25 +104,6 @@ public class EditWorkTime implements Initializable {
 
     }
 
-//    public void editWorkTimeWindow() throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader();
-//        fxmlLoader.setLocation(getClass().getResource("editWorkTime.fxml"));
-//        Scene secondScene = new Scene(fxmlLoader.load(), 300, 460);
-//        Stage Secondstage = new Stage();
-//        Secondstage.setScene(secondScene);
-//        Secondstage.show();
-////        date.setText(localDate.toString());
-////        startHourBox.setValue(startHour);
-////        startMinutsBox.setValue(startMin);
-////        endHourBox.setValue(endHour);
-////        endMinutsBox.setValue(endMin);
-//        Secondstage.setTitle("Edit Work Time");
-//    }
-
-//    public void setStartHourBox(int start){
-//        this.startHourBox.setValue(start);
-//    }
-
     public void addNewWorkTime(){
         int startH = (int) startHourBox.getValue();
         int startM = (int) startMinutsBox.getValue();
@@ -171,7 +112,6 @@ public class EditWorkTime implements Initializable {
 
         //  temporarily set address
         String address = (String)addressComboBox.getValue();
-        //        LocalDate localDate = dateTime.getValue();
         // get comment from panel
         String comment = commentField.getText();
         // get selected date
@@ -184,9 +124,6 @@ public class EditWorkTime implements Initializable {
         // transform time from panel to LocalTime
         LocalTime startWork = LocalTime.of(startH, startM);
         LocalTime endWork = LocalTime.of(endH, endM);
-
-        // calculate work time duration
-        //Duration duration = Duration.between(startWork, endWork);
 
         // create new WorkTime from data and save it to database
         WorkTime workTime = new WorkTime(address,localDate,startWork, endWork,comment,user_id);
@@ -201,6 +138,7 @@ public class EditWorkTime implements Initializable {
 
     public void deleteWorkTime(){
         Stage popupWindow = new Stage();
+        popupWindow.setResizable(false);
         popupWindow.initModality(Modality.APPLICATION_MODAL);
         popupWindow.setTitle("Delete");
 
@@ -225,14 +163,11 @@ public class EditWorkTime implements Initializable {
         popupWindow.setScene(popupScene);
         popupWindow.show();
 
-        buttonNo.setOnMouseClicked(e ->{
-            popupWindow.close();
-        });
+        buttonNo.setOnMouseClicked(e -> popupWindow.close());
 
         buttonYes.setOnMouseClicked(ev ->{
             int workTimeID = MainPanel.workTimeID;
             SaveWorkTimeData saveWorkTimeData = new SaveWorkTimeData();
-            System.out.println("Delete record where id = " + workTimeID);
             saveWorkTimeData.removeDataFromDataBase(workTimeID);
             popupWindow.close();
             Stage stage = (Stage) deleteData.getScene().getWindow();
@@ -249,16 +184,8 @@ public class EditWorkTime implements Initializable {
         SaveWorkTimeData saveWorkTimeData = new SaveWorkTimeData();
         int id = MainPanel.workTimeID;
         mainPanel.showWorkTimeData();
-        System.out.println("get id worktime: " + id);
         saveWorkTimeData.removeDataFromDataBase(id);
         Stage stage = (Stage) saveData.getScene().getWindow();
         stage.close();
-
-//        System.out.println("Edit!");
     }
-
-
 }
-
-
-

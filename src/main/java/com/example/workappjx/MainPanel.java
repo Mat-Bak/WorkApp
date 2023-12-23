@@ -12,10 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
@@ -90,8 +87,6 @@ public class MainPanel implements Initializable{
     public DatePicker dateTime;
     public Person person;
 
-//    public LocalDate localDate;
-
     public static LocalDate getLocalDate;
 
     @FXML
@@ -134,9 +129,6 @@ public class MainPanel implements Initializable{
     @FXML
     public Text passwordError;
 
-    @FXML
-    public Button refreshData;
-
     private final String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
 
@@ -157,36 +149,8 @@ public class MainPanel implements Initializable{
 
     public static VBox mainPanelVBox;
 
-//    public Stage primaryStage;
-
-//    public Image binImage = new Image("E:\\Nauka\\Reposytory\\WorkApp\\src\\main\\resources\\com\\example\\workappjx\\images\\bin.png");
     public Image deleteImage = new Image("file:src/main/resources/com/example/workappjx/images/delete.png");
     public Image optionsImage = new Image("file:src/main/resources/com/example/workappjx/images/raport.png");
-
-
-//    public int startHourReturn(){
-//        System.out.println("StartHour: " + startHour);
-//        return startHour;
-//    }
-//    public int startMinutsReturn(){
-//        System.out.println("StartMin: " + startMinuts);
-//        return startMinuts;
-//    }
-//    public int endHourReturn(){
-//        System.out.println("endHour: " + endHour);
-//        return endHour;
-//    }
-//    public int endMinutsReturn(){
-//        System.out.println("endMin: " + endHour);
-//        return endMinuts;
-//    }
-
-
-//    public Person getPerson() {
-//        return person;
-//    }
-
-
 
 
     public MainPanel(){
@@ -199,9 +163,9 @@ public class MainPanel implements Initializable{
         fxmlLoader.setLocation(getClass().getResource("mainPanel.fxml"));
         scene = new Scene(fxmlLoader.load(), 450, 400);
         stage = new Stage();
-        //E:/Nauka/Java/workApp/workAppJX/src/main/resources/
         stage.setTitle("WorkApp");
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
         person = LoginPanelController.getPersonData();
     }
@@ -210,20 +174,6 @@ public class MainPanel implements Initializable{
         return this.scene;
     }
 
-
-
-    public static Stage getStage(){
-        return stage;
-    }
-
-//    public int returnID(){
-//        return id;
-//    }
-
-//    public void fireButton(WindowEvent event){
-//        refreshData.fire();
-//        System.out.println("BUTTON FIRED!");
-//    }
 
     public void showAdminTest(){
         testAdmin.setVisible(true);
@@ -278,8 +228,6 @@ public class MainPanel implements Initializable{
         monthList.setValue(null);
         SalaryHours.setText("Hours: ");
         SalaryBrutto.setText("Brutto: ");
-//        SalaryNetto.setText("Netto: ");
-//        taxText.setText("Tax: ");
         mainPanel.setVisible(false);
         salaryPanel.setVisible(true);
     }
@@ -316,7 +264,6 @@ public class MainPanel implements Initializable{
     // set data in person info panel
     public void setPersonData() {
         Person person = LoginPanelController.getPersonData();
-
          firstNameLabel.setText("First Name: " + person.getFirstName());
          lastNameLabel.setText("Last Name: " + person.getLastName());
          phoneNumberLabel.setText("Phone Number: " + person.getPhoneNumber());
@@ -326,71 +273,21 @@ public class MainPanel implements Initializable{
 
     }
 
-//    public void testCloseRequest() throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader();
-//        fxmlLoader.setLocation(getClass().getResource("addWorkTime.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load(), 300, 460);
-//        Stage stage = new Stage();
-//        stage.setTitle("Add Work Time");
-//        stage.setScene(scene);
-//        stage.setOnCloseRequest(this::fireButton);
-//    }
-
-
     public LocalDate getDataTime(){
         getLocalDate = dateTime.getValue();
         return getLocalDate;
-//        System.out.println("MainPanel Data: " + getLocalDate);
-    }
-
-
-//    public void setDataTime(LocalDate timeDate){
-//        dateTime.setValue(timeDate);
-//    }
-
-//    public HBox CreateHBox(String address, String time){
-//        HBox hbox = new HBox();
-//        Text workAddress = new Text(address);
-//        Text workTime = new Text(time);
-//        workAddress.setTextAlignment(TextAlignment.CENTER);
-//        workTime.setTextAlignment(TextAlignment.RIGHT);
-////
-////        HBox.setHgrow(workAddress, Priority.ALWAYS);
-////        HBox.setHgrow(workTime, Priority.ALWAYS);
-//
-//        hbox.setMargin(workAddress, new Insets(20, 20, 20, 20));
-//        hbox.setMargin(workTime, new Insets(20, 20, 20, 20));
-//        hbox.getChildren().addAll(workAddress, workTime);
-//
-//        return hbox;
-//
-//    }
-
-    public void changeColorVBox(){
-        workTimeDataPanel.setStyle("-fx-border-color: red;" +
-                "-fx-border-style: solid;" +
-                "-fx-border-width: 2;");
     }
 
     public void showWorkTimeData(){
-        System.out.println("Test czy działą button!");
         Person person = LoginPanelController.getPersonData();
         LocalDate localDate = getDataTime();
-//        localDate = dateTime.getValue();
-//        System.out.println("LocalDate: " + localDate);
-        System.out.println("A : LocalDate: " + localDate);
         if(localDate == null) return;
-        System.out.println("B : LocalDate: " + localDate);
-//        System.out.println("Person ID: " + person.getId());
         LoadWorkTimeData loadWorkTimeData = new LoadWorkTimeData();
         List<WorkTime> workTimeList = loadWorkTimeData.dbConnection(person.getId(), localDate);
-//        System.out.println("Dlugość tablicy workTime: " + workTimeList.size());
         workTimeDataPanel.getChildren().clear();
 
 
-        System.out.println("C");
         for(WorkTime workTime : workTimeList){
-            System.out.println("D");
             Text address = new Text(workTime.getAddress());
             Text time = new Text(workTime.timeToStrikg());
             address.setTextAlignment(TextAlignment.CENTER);
@@ -415,7 +312,6 @@ public class MainPanel implements Initializable{
             pane.setPrefWidth(380);
             pane.setPrefHeight(40);
             pane.getChildren().addAll(dataPane, timePane);
-//            pane.getChildren().addAll(buttonsEditPane, buttonsDeletePane,dataPane, timePane);
 
             pane.setStyle("-fx-border-color: grey;" +
                     "-fx-border-style: solid none solid none;" +
@@ -425,12 +321,6 @@ public class MainPanel implements Initializable{
             dataPane.setStyle("-fx-border-color: grey;" +
                     "-fx-border-style: hidden solid hidden hidden;" +
                     "-fx-border-width: 4;");
-//            edit.setOnMouseEntered(event ->{
-//                edit.setCursor(Cursor.HAND);
-//            });
-//            delete.setOnMouseEntered(event ->{
-//                delete.setCursor(Cursor.HAND);
-//            });
 
             pane.setOnMouseEntered(event ->{
                 pane.setStyle("-fx-border-color: lightgrey;" +
@@ -458,6 +348,7 @@ public class MainPanel implements Initializable{
                     throw new RuntimeException(e);
                 }
                 Stage Secondstage = new Stage();
+                Secondstage.setResizable(false);
                 Secondstage.setScene(secondScene);
                 Secondstage.show();
 
@@ -471,270 +362,14 @@ public class MainPanel implements Initializable{
                 EditWorkTime editWorkTime = fxmlLoader.getController();
                 editWorkTime.setData(startHour, startMinuts, endHour, endMinuts, workTime.getAddress(), workTime.getComment());
                 editWorkTime.setMainPanel(this);
-//                System.out.println("ID worktime: " + workTime.getId());
                 workTimeID = workTime.getId();
 
 
             });
 
-//            edit.setOnMouseClicked(event -> {
-//                FXMLLoader fxmlLoader = new FXMLLoader();
-//                fxmlLoader.setLocation(getClass().getResource("editWorkTime.fxml"));
-//                Scene secondScene = null;
-//                try {
-//                    secondScene = new Scene(fxmlLoader.load(), 300, 460);
-//                } catch (IOException e) {
-//                    throw new RuntimeException(e);
-//                }
-//                Stage Secondstage = new Stage();
-//                Secondstage.setScene(secondScene);
-//                Secondstage.show();
-//
-//
-//                startHour = workTime.getStart_time().getHour();
-//                startMinuts = workTime.getStart_time().getMinute();
-//                endHour = workTime.getEnd_time().getHour();
-//                endMinuts = workTime.getEnd_time().getMinute();
-//                id = workTime.getUser_id();
-//
-//                EditWorkTime editWorkTime = fxmlLoader.getController();
-//                editWorkTime.setData(startHour, startMinuts, endHour, endMinuts, workTime.getAddress(), workTime.getComment());
-////                System.out.println("ID worktime: " + workTime.getId());
-//                workTimeID = workTime.getId();
-//
-//
-//            });
-//            delete.setOnMouseClicked(event -> {
-//                Stage popupWindow = new Stage();
-//                popupWindow.initModality(Modality.APPLICATION_MODAL);
-//                popupWindow.setTitle("Delete");
-//
-//                StackPane popupRoot = new StackPane();
-//                VBox popupVBox = new VBox(10);
-//                popupVBox.setPadding(new Insets(10));
-//
-//                Label popupLabel = new Label("Do you want delete?");
-//                Button buttonYes = new Button("YES");
-//                Button buttonNo = new Button("NO");
-//                HBox buttonsHBox = new HBox(10);
-//                popupVBox.getChildren().add(popupLabel);
-//                popupVBox.setAlignment(Pos.CENTER);
-//                buttonsHBox.getChildren().addAll(buttonYes, buttonNo);
-//                buttonsHBox.setAlignment(Pos.CENTER);
-//
-//                VBox popupPane = new VBox(10);
-//                popupPane.getChildren().addAll(popupVBox, buttonsHBox);
-//                popupPane.setAlignment(Pos.CENTER);
-//
-//                Scene popupScene = new Scene(popupPane, 300, 200);
-//                popupWindow.setScene(popupScene);
-//                popupWindow.show();
-//
-//                buttonNo.setOnMouseClicked(e ->{
-//                    popupWindow.close();
-//                });
-//                workTimeID = workTime.getId();
-//                buttonYes.setOnMouseClicked(ev ->{
-//                    SaveWorkTimeData saveWorkTimeData = new SaveWorkTimeData();
-//                    System.out.println("Delete record where id = " + workTimeID);
-//                    saveWorkTimeData.removeDataFromDataBase(workTimeID);
-//                    popupWindow.close();
-//                });
-//
-//            });
             workTimeDataPanel.getChildren().add(pane);
 
         }
-        System.out.println("E");
-        System.out.println("------------------------------");
-    }
-
-
-
-
-//    public int returnWorkTitemID(){
-//        return workTimeID;
-//    }
-
-//    public void addNewPanel(WorkTime workTime){
-//        Text address = new Text(workTime.getAddress());
-//        Text time = new Text(workTime.timeToStrikg());
-//        address.setTextAlignment(TextAlignment.CENTER);
-//        time.setTextAlignment(TextAlignment.CENTER);
-//
-//        TextFlow dataPane = new TextFlow();
-//        TextFlow timePane = new TextFlow();
-//        TextFlow buttonsEditPane = new TextFlow();
-//        TextFlow buttonsDeletePane = new TextFlow();
-//
-//        Button edit = new Button("E");
-//        Button delete = new Button("D");
-//        edit.setPrefSize(25,25);
-//        delete.setPrefSize(25,25);
-//
-//        buttonsEditPane.setTextAlignment(TextAlignment.CENTER);
-//        buttonsEditPane.setPrefSize(35, 39);
-//        buttonsEditPane.getChildren().add(edit);
-//        buttonsEditPane.setLayoutX(0);
-//        buttonsDeletePane.setLayoutX(35);
-//        buttonsEditPane.setPadding(new Insets(5,5,5,5));
-//
-//        buttonsDeletePane.setTextAlignment(TextAlignment.CENTER);
-//        buttonsDeletePane.setPrefSize(35, 39);
-//        buttonsDeletePane.getChildren().add(delete);
-//        buttonsDeletePane.setPadding(new Insets(5,5,5,5));
-//
-//        dataPane.setTextAlignment(TextAlignment.CENTER);
-//        dataPane.setPrefSize(215, 39);
-//        dataPane.getChildren().add(address);
-//        dataPane.setLayoutX(70);
-//        dataPane.setPadding(new Insets(5,5,5,5));
-//
-//        timePane.setTextAlignment(TextAlignment.CENTER);
-//        timePane.setPrefSize(94, 39);
-//        timePane.getChildren().add(time);
-//        timePane.setLayoutX(285);
-//        timePane.setPadding(new Insets(5,5,5,5));
-//
-//        Pane pane = new Pane();
-//        pane.setPrefWidth(380);
-//        pane.setPrefHeight(40);
-//        pane.getChildren().addAll(buttonsEditPane, buttonsDeletePane,dataPane, timePane);
-//
-//        pane.setStyle("-fx-border-color: grey;" +
-//                "-fx-border-style: solid none solid none;" +
-//                "-fx-border-width: 2;" +
-//                "-fx-background-color: lightgrey;");
-//
-//        dataPane.setStyle("-fx-border-color: grey;" +
-//                "-fx-border-style: hidden solid hidden solid;" +
-//                "-fx-border-width: 4;");
-//        edit.setOnMouseEntered(event ->{
-//            edit.setCursor(Cursor.HAND);
-//        });
-//        delete.setOnMouseEntered(event ->{
-//            delete.setCursor(Cursor.HAND);
-//        });
-//
-//        pane.setOnMouseEntered(event ->{
-//            pane.setStyle("-fx-border-color: lightgrey;" +
-//                    "-fx-border-style: solid none solid none;" +
-//                    "-fx-border-width: 2;" +
-//                    "-fx-background-color: grey;");
-////                pane.setCursor(Cursor.HAND);
-//        });
-//
-//        pane.setOnMouseExited(event ->{
-//            pane.setStyle("-fx-border-color: grey;" +
-//                    "-fx-border-style: solid none solid none;" +
-//                    "-fx-border-width: 2;" +
-//                    "-fx-background-color: lightgrey;");
-//            pane.setCursor(Cursor.DEFAULT);
-//        });
-//        workTimeDataPanel.getChildren().add(pane);
-//    }
-//    public void getDataOnClick(ActionEvent event){
-//
-//    }
-
-//    public Button returnButtonFire(){
-//        return refreshData;
-//    }
-
-//    public void testButtonFire(){
-//        LocalDate date = getDataTime();
-//        if(date == null)return;
-//        Person person = LoginPanelController.getPersonData();
-//        LoadWorkTimeData loadWorkTimeData = new LoadWorkTimeData();
-//        List<WorkTime> workTimeList = loadWorkTimeData.dbConnection(person.getId(), date);
-//        workTimeDataPanel.getChildren().clear();
-//        System.out.println("Window Clear!");
-//        for(WorkTime workTime : workTimeList) {
-//            Text address = new Text(workTime.getAddress());
-//            Text time = new Text(workTime.timeToStrikg());
-//            address.setTextAlignment(TextAlignment.CENTER);
-//            time.setTextAlignment(TextAlignment.CENTER);
-//
-//            TextFlow dataPane = new TextFlow();
-//            TextFlow timePane = new TextFlow();
-//
-//            dataPane.setTextAlignment(TextAlignment.CENTER);
-//            dataPane.setPrefSize(285, 39);
-//
-//            timePane.setTextAlignment(TextAlignment.CENTER);
-//            timePane.setPrefSize(95, 39);
-//
-//            dataPane.getChildren().add(address);
-//            dataPane.setLayoutX(0);
-//
-//            timePane.getChildren().add(time);
-//            timePane.setLayoutX(285);
-//
-//            Pane pane = new Pane();
-//            pane.setPrefWidth(380);
-//            pane.setPrefHeight(40);
-//            pane.getChildren().addAll(dataPane, timePane);
-//
-//            pane.setStyle("-fx-border-color: grey;" +
-//                    "-fx-border-style: solid none solid none;" +
-//                    "-fx-border-width: 2;");
-//
-//            dataPane.setStyle("-fx-border-color: grey;" +
-//                    "-fx-border-style: hidden solid hidden hidden;" +
-//                    "-fx-border-width: 4;");
-//
-//            workTimeDataPanel.getChildren().add(pane);
-//        }
-//        }
-
-
-    public void addWorkTimeCloseWindow(){
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("addWorkTime.fxml"));
-        AddWorkTime addWorkTime = fxmlLoader.getController();
-        Stage stage = (Stage) addWorkTime.addDataButton.getScene().getWindow();
-        stage.setOnHidden(ev -> {
-            changeColorVBox();
-            System.out.println("Close AddWorkTime mainMenu");
-        });
-//        Stage stage = (Stage) addDataButton.getScene().getWindow();
-
-    }
-
-
-    /*
-
-                FXMLLoader fxmlLoader = new FXMLLoader();
-                fxmlLoader.setLocation(getClass().getResource("editWorkTime.fxml"));
-                Scene secondScene;
-                try {
-                    secondScene = new Scene(fxmlLoader.load(), 300, 460);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-                Stage Secondstage = new Stage();
-                Secondstage.setScene(secondScene);
-                Secondstage.show();
-
-
-                startHour = workTime.getStart_time().getHour();
-                startMinuts = workTime.getStart_time().getMinute();
-                endHour = workTime.getEnd_time().getHour();
-                endMinuts = workTime.getEnd_time().getMinute();
-                id = workTime.getUser_id();
-
-                EditWorkTime editWorkTime = fxmlLoader.getController();
-                editWorkTime.setData(startHour, startMinuts, endHour, endMinuts, workTime.getAddress(), workTime.getComment());
-
-
-     */
-
-
-    @FXML
-    public void changeColor(){
-        workTimeDataPanel.setStyle("-fx-border-color: red;" +
-                "-fx-border-style: solid;" +
-                "-fx-border-width: 2;");
     }
 
     @FXML
@@ -748,39 +383,17 @@ public class MainPanel implements Initializable{
             Scene secondScene;
             secondScene = new Scene(fxmlLoader.load(), 312, 504);
             Stage Secondstage = new Stage();
+            Secondstage.setResizable(false);
+            Secondstage.initModality(Modality.APPLICATION_MODAL);
             Secondstage.setTitle("Add Work Time");
             Secondstage.setScene(secondScene);
             Secondstage.show();
 
             AddWorkTime addWorkTime = fxmlLoader.getController();
             addWorkTime.setMainPanelController(this);
-//            Secondstage.close();
-
-//            AddWorkTime workTime = new AddWorkTime();
-//            addWorkTime.datePicker = dateTime.getValue();
-
-
-//            workTime.setStage(stage);
-
-//            mainPanelVBox = workTimeDataPanel;
-//            addWorkTime.firstWindowVBox = workTimeDataPanel;
-//            addWorkTime.initData(workTimeDataPanel);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
-//        } catch (IOException e) {
-//            callendarError.setText("Select date");
-//            callendarError.setFill(Color.RED);
-//        }
-
-
-
-//        AddWorkTime workTimePanel = new AddWorkTime();
-//        getLocalDate = dateTime.getValue();
-////        workTimePanel.setDateText(getLocalDate.toString());
-////        System.out.println("get Date: " + getLocalDate.toString() );
-////        workTimePanel.setDateText("test");
-//        workTimePanel.addWorkTimeWindow(dateTime.getValue());
     }
 
 
@@ -788,17 +401,12 @@ public class MainPanel implements Initializable{
 
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
-//        addWorkTimeCloseWindow();
         Person person = LoginPanelController.getPersonData();
-//        System.out.println("getAdmin: " + person.getAdmin());
         if(person.getAdmin()){
             showAdminTest();
-//            System.out.println("Admin Test Visible!");
         }else{
             hideAdminTest();
-//            System.out.println("Admin Test Hidden!");
         }
-
         for (String month : months) {
             monthList.getItems().add(month);
         }
@@ -807,49 +415,29 @@ public class MainPanel implements Initializable{
     public void summaryOfTheMonth(){
         int month = 0;
         Person person = LoginPanelController.getPersonData();
-//        System.out.println("Person id: " + person.getId());
         LoadWorkTimeData loadWorkTimeData = new LoadWorkTimeData();
         List<WorkTime> workTimeList = loadWorkTimeData.getDataFromWorkTime(person.getId());
-//        System.out.println("id3: " + monthList.getValue());
         for (int i = 0; i < months.length; ++i){
             if(months[i].equals(monthList.getValue())){
                 ++i;
                 month=i;
-//                System.out.println("Month: " + i);
                 break;
             }
         }
         long SumOfHours = 0;
         for (WorkTime workTime : workTimeList) {
             if (workTime.getDate().getMonthValue() == month) {
-                LocalTime time1 = workTime.getStart_time();  // Pierwsza godzina
-                LocalTime time2 = workTime.getEnd_time();  // Druga godzina
+                LocalTime time1 = workTime.getStart_time();
+                LocalTime time2 = workTime.getEnd_time();
                 Duration duration = Duration.between(time1, time2);
-//                long hours = duration.toHours();  // Różnica w godzinach
-//                long minutes = duration.toMinutes() % 60;  // Różnica w minutach
-                SumOfHours += duration.toMinutes();  // Różnica w minutach
+                SumOfHours += duration.toMinutes();
             }
         }
         SalaryHours.setText("");
         SalaryHours.setText("Hours: " + SumOfHours/60 + "h " + SumOfHours%60 + "min");
         SalaryBrutto.setText("");
-        SalaryBrutto.setText("Brutto: " + (int)((SumOfHours/60)*person.getSalaryPerHour() + ((SumOfHours%60)/60)*person.getSalaryPerHour()) + " kr");
-//        SalaryNetto.setText("");
-//        float tax = 1 - (float)person.getTax()/100;
-////        System.out.println("PersonTax: " + person.getTax() + "\n tax: " + tax);
-//        SalaryNetto.setText("Netto: " +  (int)((SumOfHours/60)*person.getSalaryPerHour()*tax));
-//        taxText.setText("");
-//        taxText.setText("Tax: " + person.getTax()+"%");
-
-//        System.out.println("WorkTime data getMonthValue: " + workTimeList.get(0).getDate().getMonthValue());
-//        System.out.println("WorkTime work hours: " + hours + "h " + min + "min");
-//        System.out.println("WorkTime start time: " + workTimeList.get(0).getStart_time() + " | end time: "+ workTimeList.get(0).getEnd_time());
+        SalaryBrutto.setText("Brutto: " + (int)((SumOfHours/60)*person.getSalaryPerHour() + ((float)(SumOfHours%60)/60)*person.getSalaryPerHour()) + " kr");
     }
-
-//    public void addNewPane(Pane pane){
-//        workTimeDataPanel.getChildren().add(pane);
-//    }
-
 
     public void changePass() throws SQLException {
         String oldPassword = LoginPanelController.getMd5(oldPass.getText());
@@ -873,81 +461,24 @@ public class MainPanel implements Initializable{
                 passwordError.setText("Password changed!");
                 passwordError.setFill(Color.GREEN);
             }
-//            System.out.println("Password changed!");
         }else{
             passwordError.setText("The password cannot be the same as the old password!");
             passwordError.setFill(Color.RED);
-//            System.out.println("Wrong old password!");
         }
 
     }
 
-
-    public void updateData(){
-        System.out.println("Test if data are updated!");
-    }
-
     public void showWorkersList(){
-//        System.out.println("TEST CZY TO GÓWNO DZIAŁA!");
-//        DatabaseConnector connector = new DatabaseConnector();
-//
-//        int id;
-//        String login;
-//        String password = null;
-//        String firstName = null;
-//        String lastName = null;
-//        BigInteger pesel = null;
-//        int phoneNumber = 0;
-//        int SalaryPerHour = 0;
-//        boolean admin = false;
-////        Person user = null;
-//
-//        List<Person> personList = new ArrayList<>();
-//
-//        // SQL query
-////        String query = "SELECT * FROM workers";
-//        String query = "SELECT * FROM Persons.workers;";
-//
-//
-//        // Execute query and get result
-//        ResultSet resultSet = null;
-//        try {
-//            resultSet = connector.executeQuery(query);
-//            while (resultSet.next()) {
-//                id = resultSet.getInt("id");
-//                login = resultSet.getString("login");
-//                password = resultSet.getString("password");
-//                firstName = resultSet.getString("firstName");
-//                lastName = resultSet.getString("lastName");
-//                phoneNumber = resultSet.getInt("phoneNumber");
-//                pesel = BigInteger.valueOf(resultSet.getLong("pesel"));
-//                SalaryPerHour = resultSet.getInt("SalaryPerHour");
-//                admin = resultSet.getBoolean("admin");
-//
-//                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber, SalaryPerHour, admin);
-////                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber);
-//                personList.add(person);
-//            }
-//            resultSet.close();
-//            connector.close();
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
         Person listOfPerson = new Person();
         List<Person> personList = listOfPerson.getPersonList();
 
         for(Person person : personList){
             personID = person.getId();
             Text name = new Text(person.getFirstName() + " " + person.getLastName());
-//            Text time = new Text(workTime.timeToStrikg());
             name.setTextAlignment(TextAlignment.CENTER);
-//            time.setTextAlignment(TextAlignment.CENTER);
-
             TextFlow namePane = new TextFlow();
             TextFlow buttonPane = new TextFlow();
             TextFlow optionsPane = new TextFlow();
-//            TextFlow timePane = new TextFlow();
-//
             ImageView view = new ImageView(deleteImage);
             view.setFitHeight(10);
             view.setPreserveRatio(true);
@@ -968,35 +499,21 @@ public class MainPanel implements Initializable{
 
             optionsPane.getChildren().add(moreOptions);
             optionsPane.setLayoutX(30);
-//            buttonPane.setTextAlignment(TextAlignment.CENTER);
             optionsPane.setPadding(new Insets(8));
 
             buttonPane.getChildren().add(deleteWorker);
-//            buttonPane.setTextAlignment(TextAlignment.CENTER);
             buttonPane.setPadding(new Insets(8));
 
-//            namePane.setPrefSize(25,39);
             namePane.setTextAlignment(TextAlignment.CENTER);
             namePane.setPrefSize(400, 39);
-//            namePane.setLayoutX(25);
             namePane.getChildren().add(name);
             namePane.setLayoutX(0);
             namePane.setPadding(new Insets(12));
-
-
-
-//
-//            timePane.setTextAlignment(TextAlignment.CENTER);
-//            timePane.setPrefSize(94, 39);
-////            timePane.getChildren().add(time);
-//            timePane.setLayoutX(285);
-//            timePane.setPadding(new Insets(5,5,5,5));
 
             Pane pane = new Pane();
             pane.setPrefWidth(426);
             pane.setPrefHeight(40);
             pane.setLayoutY(pane.getLayoutY() + 3);
-//            HBox.setMargin(HBox.setPrefSize(100, 200),new Insets(0, 0, 0, 50));
 
             pane.getChildren().addAll(namePane, buttonPane, optionsPane);
 
@@ -1004,16 +521,6 @@ public class MainPanel implements Initializable{
                     "-fx-border-style: solid none solid none;" +
                     "-fx-border-width: 2;" +
                     "-fx-background-color: lightgrey;");
-
-//            dataPane.setStyle("-fx-border-color: grey;" +
-//                    "-fx-border-style: hidden solid hidden hidden;" +
-//                    "-fx-border-width: 4;");
-//            edit.setOnMouseEntered(event ->{
-//                edit.setCursor(Cursor.HAND);
-//            });
-//            delete.setOnMouseEntered(event ->{
-//                delete.setCursor(Cursor.HAND);
-//            });
 
             pane.setOnMouseEntered(event ->{
                 pane.setStyle("-fx-border-color: lightgrey;" +
@@ -1031,7 +538,6 @@ public class MainPanel implements Initializable{
                 pane.setCursor(Cursor.DEFAULT);
             });
 
-//            String finalFirstName = firstName;
             namePane.setOnMouseClicked(event -> {
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -1043,59 +549,81 @@ public class MainPanel implements Initializable{
                     throw new RuntimeException(e);
                 }
                 Stage Secondstage = new Stage();
+                Secondstage.setResizable(false);
                 Secondstage.setScene(secondScene);
                 Secondstage.show();
                 WorkerPanel workerPanel = fxmlLoader.getController();
                 workerPanel.setPersonID(person.getId());
                 workerPanel.setDataInPanel(person.getFirstName(), person.getLastName(), person.getPesel(), person.getPhoneNumber(), person.getSalaryPerHour(), person.getAdmin());
-//                workersVBox.getChildren().clear();
-//                anchorPane.setVisible(false);
                 workersPanelBack();
             });
 
             deleteWorker.setOnMouseClicked(event -> {
-                String url = "jdbc:mysql://localhost/persons";
-                String username = "root";
-                String passwordDb = "1234qwer";
+                Stage popupWindow = new Stage();
+                popupWindow.setResizable(false);
+                popupWindow.initModality(Modality.APPLICATION_MODAL);
+                popupWindow.setTitle("Delete Worker");
 
-                try {
-                    Connection connection = DriverManager.getConnection(url, username, passwordDb);
+                StackPane popupRoot = new StackPane();
+                VBox popupVBox = new VBox(10);
+                popupVBox.setPadding(new Insets(10));
 
-//                    System.out.println("second id workTime: " + person.getId());
-                    System.out.println("Person ID: " + person.getId());
-                    String sql = "DELETE FROM workers WHERE id = '" + person.getId() + "';";
-                    //            DELETE FROM address WHERE id = '" + addAddress.getID() + "';";
+                Label popupLabel = new Label("Do you want delete this worker?");
+                Button buttonYes = new Button("YES");
+                Button buttonNo = new Button("NO");
+                HBox buttonsHBox = new HBox(10);
+                popupVBox.getChildren().add(popupLabel);
+                popupVBox.setAlignment(Pos.CENTER);
+                buttonsHBox.getChildren().addAll(buttonYes, buttonNo);
+                buttonsHBox.setAlignment(Pos.CENTER);
 
-                    PreparedStatement statement = connection.prepareStatement(sql);
+                VBox popupPane = new VBox(10);
+                popupPane.getChildren().addAll(popupVBox, buttonsHBox);
+                popupPane.setAlignment(Pos.CENTER);
+
+                Scene popupScene = new Scene(popupPane, 300, 200);
+                popupWindow.setScene(popupScene);
+                popupWindow.show();
 
 
-                    statement.executeUpdate();
-//                    int rowsInserted = statement.executeUpdate();
-//                    if (rowsInserted > 0) {
-////                System.out.println("Dane zostały dodane do bazy.");
-//                    }
+                buttonYes.setOnMouseClicked(e -> {
+                    String url = "jdbc:mysql://localhost/persons";
+                    String username = "root";
+                    String passwordDb = "1234qwer";
 
-                    statement.close();
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                workersVBox.getChildren().clear();
-                showWorkersList();
+                    try {
+                        Connection connection = DriverManager.getConnection(url, username, passwordDb);
+
+                        String sql = "DELETE FROM workers WHERE id = '" + person.getId() + "';";
+
+                        PreparedStatement statement = connection.prepareStatement(sql);
+
+
+                        statement.executeUpdate();
+
+                        statement.close();
+                        connection.close();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                    }
+                    workersVBox.getChildren().clear();
+                    showWorkersList();
+                    popupWindow.close();
+                });
+
+                buttonNo.setOnMouseClicked(e-> popupWindow.close());
+
+
 
             });
 
 
             moreOptions.setOnMouseClicked(event -> {
-//                String selectedAddress = addressName.getText();
-
                 Stage popupWindow = new Stage();
+                popupWindow.setResizable(false);
                 popupWindow.initModality(Modality.APPLICATION_MODAL);
                 popupWindow.setTitle("Worker Raport");
 
-
-
-//                StackPane popupRoot = new StackPane();
                 VBox popupVBox = new VBox(10);
                 popupVBox.setPadding(new Insets(10));
 
@@ -1119,7 +647,6 @@ public class MainPanel implements Initializable{
                     int selectedMonth = monthsList.getSelectionModel().getSelectedIndex()+1;
                     String sql = null;
                     DatabaseConnector connect = new DatabaseConnector();
-                    System.out.println("SelectedMonth: " + selectedMonth);
                     if(selectedMonth == 4 || selectedMonth == 6 || selectedMonth == 9){
                         sql = "SELECT * FROM persons.workhours  WHERE (data >= '2023-0" + selectedMonth + "-01' AND data <= '2023-0" + selectedMonth + "-30') AND user_id = '" + person.getId() +"';";
                     }else if(selectedMonth == 1 || selectedMonth == 3 || selectedMonth == 5 || selectedMonth == 7 || selectedMonth == 8){
@@ -1136,50 +663,30 @@ public class MainPanel implements Initializable{
 
                     ResultSet result = null;
                     try {
-                        result = result = connect.executeQuery(sql);
+                        result = connect.executeQuery(sql);
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     }
-                    ;
-//                    Person listOfWorkers = new Person();
-//                    List<Person> personList = listOfPerson.getPersonList();
                     int idList = 1;
                     AddWorkTime addWorkTime = null;
                     addWorkTime = new AddWorkTime();
                     ArrayList<String> getAddressList = addWorkTime.addressList();
                     ArrayList<Integer> getWorkHour = new ArrayList<>(Collections.nCopies(getAddressList.size(), 0));
-//                    ArrayList<ArrayList<String>> sumWorkerHour = new ArrayList<>(getAddressList.size());
-//                    sumWorkerHour.add(getAddressList);
-//                    List<Duration> getWorkHour = new ArrayList<>();
                     try (FileWriter fileWriter = new FileWriter("WorkerRaport.txt");
                          PrintWriter printWriter = new PrintWriter(fileWriter)) {
                         printWriter.println(person.getFirstName() + " " + person.getLastName() + " | " + monthsList.getValue());
-//                        System.out.println("!!!!!Month: " + monthsList.getValue());
                         printWriter.println("ID | DATE | Address | Worker | WORK HOURS | Comment");
-//                        System.out.println("1!");
                         while (result.next()) {
-//                            int id = result.getInt("id");
                             String workDate = result.getString("data");
-//                            int userID = result.getInt("user_id");
-//                            System.out.println("User_ID: " + userID);
                             LocalTime startTime = result.getTime("start_time").toLocalTime();
                             LocalTime endTime = result.getTime("end_time").toLocalTime();
                             Duration workTime = Duration.between(startTime,  endTime);
                             int workTimeToInt = workTime.toMinutesPart();
-                            System.out.println("WorkTimeToInt: " + workTimeToInt);
                             String address = result.getString("address");
                             long hours = workTime.toHours();
                             long minuts = workTime.toMinutesPart()%60;
                             String comment = result.getString("comment");
-//                            System.out.println("WorkTime: " + hours + "h " + minuts+"Min");
-//                            Person worker = null;
-//                            for (Person user : personList){
-//                                if(user.getId() == userID){
-//                                    worker = user;
-//                                    break;
-//                                }
-//                            }
-//                            Person worker = personList.get(userID-1);
+
                             printWriter.println(idList + " | " + workDate + " | " + address + " | "+ person.getFirstName() + " " + person.getLastName() + " | " + hours + "h " + minuts+"Min" +" | "+ comment);
                             idList++;
                             for(int i = 0; i < getAddressList.size(); ++i){
@@ -1202,14 +709,9 @@ public class MainPanel implements Initializable{
 
                         result.close();
                         connect.close();
-//                        System.out.println("2!");
                     } catch (IOException | SQLException ex) {
                         throw new RuntimeException(ex);
                     }
-
-
-
-//                    System.out.println("Month: " + selectedMonth);
                 });
 
             });
@@ -1224,44 +726,13 @@ public class MainPanel implements Initializable{
 
     }
 
-    public void sumOfWorkHour(List<String> address, List<Duration> workHours){
-        List<String> addressList = removeDuplicates(address);
-
-
-    }
-
-    public List<String> removeDuplicates(List<String> list)
-    {
-
-        // Create a new ArrayList
-        List<String> newList = new ArrayList<>();
-
-        // Traverse through the first list
-        for (String element : list) {
-
-            // If this element is not present in newList
-            // then add it
-            if (!newList.contains(element)) {
-
-                newList.add(element);
-            }
-        }
-
-        // return the new list
-        return newList;
-    }
-
-    public void clearWorkersPanel(){
-        workersVBox.getChildren().clear();
-    }
-
     public void showAddNewWorkerPanel() throws IOException {
-
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("newWorkerPanel.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 462, 521);
         Stage stage = new Stage();
-        //E:/Nauka/Java/workApp/workAppJX/src/main/resources/
+        stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("Add New Worker");
         stage.setScene(scene);
         stage.show();
@@ -1270,28 +741,19 @@ public class MainPanel implements Initializable{
     public void showAddressList(){
         addressVBox.getChildren().clear();
         DatabaseConnector connector = new DatabaseConnector();
-//        System.out.println("Działą!");
         String address;
         int id;
         boolean active;
-
         List<AddNewAddress> addressList = new ArrayList<>();
-
-        // SQL query
-//        String query = "SELECT * FROM workers";
         String query = "SELECT * FROM Persons.address;";
-
-
         // Execute query and get result
         ResultSet resultSet = null;
         try {
-//            System.out.println("1!");
             resultSet = connector.executeQuery(query);
             while (resultSet.next()) {
                 id = resultSet.getInt("id");
                 address = resultSet.getString("address");
                 active = resultSet.getBoolean("active");
-
 
                 AddNewAddress newAddress = new AddNewAddress(id, address, active);
                 addressList.add(newAddress);
@@ -1299,27 +761,18 @@ public class MainPanel implements Initializable{
             }
             resultSet.close();
             connector.close();
-//            System.out.println("2!");
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
-//        System.out.println("3!");
         for(AddNewAddress addAddress : addressList) {
 
-            int addressID = addAddress.getID();
-//            System.out.println("address ID: " + addressID);
             Text addressName = new Text(addAddress.getAddress());
-//            Text time = new Text(workTime.timeToStrikg());
             addressName.setTextAlignment(TextAlignment.CENTER);
-//            time.setTextAlignment(TextAlignment.CENTER);
-
             TextFlow addressPane = new TextFlow();
             TextFlow deletePane = new TextFlow();
             TextFlow optionsPane = new TextFlow();
             TextFlow checkBoxPane = new TextFlow();
-//            TextFlow timePane = new TextFlow();
-//
             Separator separator = new Separator(Orientation.HORIZONTAL);
 
             ImageView deleteView = new ImageView(deleteImage);
@@ -1341,42 +794,28 @@ public class MainPanel implements Initializable{
             CheckBox activeAddress = new CheckBox("Active");
 
             deletePane.getChildren().add(deleteAddress);
-//            buttonPane.setTextAlignment(TextAlignment.CENTER);
             deletePane.setPadding(new Insets(8));
 
             optionsPane.getChildren().add(moreOptions);
             optionsPane.setLayoutX(30);
-//            buttonPane.setTextAlignment(TextAlignment.CENTER);
             optionsPane.setPadding(new Insets(8));
 
             checkBoxPane.getChildren().add(activeAddress);
             checkBoxPane.setLayoutX(330);
-//            buttonPane.setTextAlignment(TextAlignment.CENTER);
             checkBoxPane.setPadding(new Insets(8));
 
-//            addressPane.setPrefSize(25, 39);
             addressPane.setTextAlignment(TextAlignment.CENTER);
             addressPane.setPrefSize(300, 39);
-//            namePane.setLayoutX(25);
             addressPane.getChildren().add(addressName);
-//            addressPane.setTextAlignment(TextAlignment.JUSTIFY);
             addressPane.setLayoutX(0);
             addressPane.setPadding(new Insets(12));
-
-
-//
-//            timePane.setTextAlignment(TextAlignment.CENTER);
-//            timePane.setPrefSize(94, 39);
-////            timePane.getChildren().add(time);
-//            timePane.setLayoutX(285);
-//            timePane.setPadding(new Insets(5,5,5,5));
 
             Pane pane = new Pane();
             pane.setPrefWidth(426);
             pane.setPrefHeight(40);
             pane.setLayoutY(pane.getLayoutY() + 3);
             pane.getChildren().addAll(addressPane, deletePane, optionsPane, checkBoxPane);
-            if(addAddress.getActive()==false){
+            if(!addAddress.getActive()){
                 addressPane.setDisable(true);
                 activeAddress.setSelected(false);
                 pane.setStyle("-fx-border-color: lightgrey;" +
@@ -1384,18 +823,13 @@ public class MainPanel implements Initializable{
                         "-fx-border-width: 2;" +
                         "-fx-background-color: gainsboro;");
                 addressName.setFill(Color.GREY);
-                deleteAddress.setOnMouseEntered(event -> {
-                    deleteAddress.setCursor(Cursor.HAND);
-                });
+                deleteAddress.setOnMouseEntered(event -> deleteAddress.setCursor(Cursor.HAND));
 
-                deleteAddress.setOnMouseExited(event -> {
-                    deleteAddress.setCursor(Cursor.DEFAULT);
-                });
+                deleteAddress.setOnMouseExited(event -> deleteAddress.setCursor(Cursor.DEFAULT));
 
             }else{
                 addressPane.setDisable(false);
                 activeAddress.setSelected(true);
-//                System.out.println("TRUE: " + addressName.getText());
                 pane.setStyle("-fx-border-color: grey;" +
                         "-fx-border-style: solid none solid none;" +
                         "-fx-border-width: 2;" +
@@ -1424,9 +858,7 @@ public class MainPanel implements Initializable{
                 String url = "jdbc:mysql://localhost/persons";
                 String username = "root";
                 String passwordDb = "1234qwer";
-//                System.out.println("CLICKED!");
-                System.out.println("Active: " + activeAddress.isSelected());
-                int isActive = 0;
+                int isActive;
                 if(activeAddress.isSelected()){
                     isActive = 1;
                 }else{
@@ -1434,17 +866,9 @@ public class MainPanel implements Initializable{
                 }
                 try {
                     Connection connection = DriverManager.getConnection(url, username, passwordDb);
-
-//                    System.out.println("delete id address: " + addAddress.getID());
                     String sql = "UPDATE Persons.address SET active = '" + isActive + "' WHERE id = " + addAddress.getID() + ";";
-
                     PreparedStatement statement = connection.prepareStatement(sql);
-
-
                     int rowsInserted = statement.executeUpdate();
-                    if (rowsInserted > 0) {
-//                System.out.println("Dane zostały dodane do bazy.");
-                    }
 
                     statement.close();
                     connection.close();
@@ -1454,9 +878,7 @@ public class MainPanel implements Initializable{
 
                 showAddressPanel();
 
-                System.out.println("Active clicked! " + addressPane.isDisable());
                 addressPane.setDisable(!addressPane.isDisabled());
-                System.out.println("Active clicked 2! " + addressPane.isDisable());
                 if(addressPane.isDisable()){
                     addressPane.setDisable(true);
                     addAddress.setActive(false);
@@ -1466,44 +888,57 @@ public class MainPanel implements Initializable{
                 }
 
             });
-//            dataPane.setStyle("-fx-border-color: grey;" +
-//                    "-fx-border-style: hidden solid hidden hidden;" +
-//                    "-fx-border-width: 4;");
-//            edit.setOnMouseEntered(event ->{
-//                edit.setCursor(Cursor.HAND);
-//            });
-//            delete.setOnMouseEntered(event ->{
-//                delete.setCursor(Cursor.HAND);
-//            });
-
-
 
             deleteAddress.setOnMouseClicked(event -> {
-                String url = "jdbc:mysql://localhost/persons";
-                String username = "root";
-                String passwordDb = "1234qwer";
-//                System.out.println("CLICKED!");
-                try {
-                    Connection connection = DriverManager.getConnection(url, username, passwordDb);
+                Stage popupWindow = new Stage();
+                popupWindow.setResizable(false);
+                popupWindow.initModality(Modality.APPLICATION_MODAL);
+                popupWindow.setTitle("Delete Worker");
 
-//                    System.out.println("delete id address: " + addAddress.getID());
-                    String sql = "DELETE FROM address WHERE id = '" + addAddress.getID() + "';";
+                StackPane popupRoot = new StackPane();
+                VBox popupVBox = new VBox(10);
+                popupVBox.setPadding(new Insets(10));
 
-                    PreparedStatement statement = connection.prepareStatement(sql);
+                Label popupLabel = new Label("Do you want delete this address?");
+                Button buttonYes = new Button("YES");
+                Button buttonNo = new Button("NO");
+                HBox buttonsHBox = new HBox(10);
+                popupVBox.getChildren().add(popupLabel);
+                popupVBox.setAlignment(Pos.CENTER);
+                buttonsHBox.getChildren().addAll(buttonYes, buttonNo);
+                buttonsHBox.setAlignment(Pos.CENTER);
+
+                VBox popupPane = new VBox(10);
+                popupPane.getChildren().addAll(popupVBox, buttonsHBox);
+                popupPane.setAlignment(Pos.CENTER);
+
+                Scene popupScene = new Scene(popupPane, 300, 200);
+                popupWindow.setScene(popupScene);
+                popupWindow.show();
 
 
-                    int rowsInserted = statement.executeUpdate();
-                    if (rowsInserted > 0) {
-//                System.out.println("Dane zostały dodane do bazy.");
+                buttonYes.setOnMouseClicked(e ->{
+                    String url = "jdbc:mysql://localhost/persons";
+                    String username = "root";
+                    String passwordDb = "1234qwer";
+                    try {
+                        Connection connection = DriverManager.getConnection(url, username, passwordDb);
+                        String sql = "DELETE FROM address WHERE id = '" + addAddress.getID() + "';";
+                        PreparedStatement statement = connection.prepareStatement(sql);
+                        statement.executeUpdate();
+                        statement.close();
+                        connection.close();
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
                     }
+                    addressVBox.getChildren().clear();
+                    showAddressList();
+                    popupWindow.close();
+                });
 
-                    statement.close();
-                    connection.close();
-                } catch (SQLException e) {
-                    e.printStackTrace();
-                }
-                addressVBox.getChildren().clear();
-                showAddressList();
+                buttonNo.setOnMouseClicked(e -> popupWindow.close());
+
+
 
             });
 
@@ -1511,10 +946,9 @@ public class MainPanel implements Initializable{
                 String selectedAddress = addressName.getText();
 
                 Stage popupWindow = new Stage();
+                popupWindow.setResizable(false);
                 popupWindow.initModality(Modality.APPLICATION_MODAL);
                 popupWindow.setTitle("Address Raport");
-
-
 
                 StackPane popupRoot = new StackPane();
                 VBox popupVBox = new VBox(10);
@@ -1557,33 +991,28 @@ public class MainPanel implements Initializable{
 
                     ResultSet result = null;
                     try {
-                        result = result = connect.executeQuery(sql);
+                        result = connect.executeQuery(sql);
                     } catch (SQLException ex) {
                         throw new RuntimeException(ex);
                     }
-                    ;
+
                     Person listOfPerson = new Person();
                     List<Person> personList = listOfPerson.getPersonList();
                     int idList = 1;
                     try (FileWriter fileWriter = new FileWriter("AddressRaport.txt");
                          PrintWriter printWriter = new PrintWriter(fileWriter)) {
                         printWriter.println(selectedAddress + " | " + monthsList.getValue());
-//                        System.out.println("!!!!!Month: " + monthsList.getValue());
                         printWriter.println("ID | DATE | WORKER| WORK HOURS");
-//                        System.out.println("1!");
                         int sumOfHours = 0;
                         while (result.next()) {
-//                            int id = result.getInt("id");
                             String workDate = result.getString("data");
                             int userID = result.getInt("user_id");
-//                            System.out.println("User_ID: " + userID);
                             LocalTime startTime = result.getTime("start_time").toLocalTime();
                             LocalTime endTime = result.getTime("end_time").toLocalTime();
                             Duration workTime = Duration.between(startTime,  endTime);
                             sumOfHours += workTime.toMinutes();
                             long hours = workTime.toHours();
                             long minuts = workTime.toMinutesPart()%60;
-//                            System.out.println("WorkTime: " + hours + "h " + minuts+"Min");
                             Person worker = null;
                             for (Person person : personList){
                                 if(person.getId() == userID){
@@ -1591,7 +1020,7 @@ public class MainPanel implements Initializable{
                                     break;
                                 }
                             }
-//                            Person worker = personList.get(userID-1);
+                            assert worker != null;
                             printWriter.println(idList + " | " + workDate + " | " + worker.getFirstName() + " " + worker.getLastName() + " | " + hours + "h " + minuts+"Min");
                             idList++;
 
@@ -1601,34 +1030,18 @@ public class MainPanel implements Initializable{
                         printWriter.println(selectedAddress + ": " + sumOfHours/60 + "h " + sumOfHours%60 + "min");
                         result.close();
                         connect.close();
-//                        System.out.println("2!");
                     } catch (IOException | SQLException ex) {
                         throw new RuntimeException(ex);
                     }
-
-//                    System.out.println("Month: " + selectedMonth);
                 });
-
             });
-
-
-
-
-
-
             addressVBox.getChildren().addAll(separator,pane);
-
-
-
-
         }
-//        System.out.println("5!");
-
-
     }
 
     public void addNewAddress(){
         Stage popupWindow = new Stage();
+        popupWindow.setResizable(false);
         popupWindow.initModality(Modality.APPLICATION_MODAL);
         popupWindow.setTitle("Add New Address");
 
@@ -1642,7 +1055,6 @@ public class MainPanel implements Initializable{
 
         Text addressText = new Text("Address:");
 
-//        Label popupLabel = new Label("Do you want delete?");
         Button buttonSave = new Button("SAVE");
         buttonSave.setPrefSize(70,40);
         popupVBox.getChildren().addAll(addressText, addresField,addressActive ,buttonSave);
@@ -1662,26 +1074,24 @@ public class MainPanel implements Initializable{
             String username = "root";
             String dbPassword = "1234qwer";
             if(addresField.getText().isEmpty()){
+                addresField.setText("Address field can not be empty!");
+                addressText.setFill(Color.RED);
                 addresField.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
                 return;
             }else{
+                addressText.setFill(Color.BLACK);
                 addresField.setStyle("-fx-border-color: none ;");
             }
 
             try {
                 Connection connection = DriverManager.getConnection(url, username, dbPassword);
-//            LocalDate testLocalDate = worktime.getLocalDate();
-//            System.out.println("SaveTimeWorkData Data: " + testLocalDate);
-//            System.out.println("Start time: " + worktime.getStart_time());
                 String sql = "INSERT INTO address (address, active) VALUES (?, ?)";
 
                 PreparedStatement statement = connection.prepareStatement(sql);
                 statement.setString(1, addresField.getText());
                 statement.setBoolean(2, addressActive.isSelected());
 
-
                 statement.executeUpdate();
-//                int rowsInserted = statement.executeUpdate();
 
                 statement.close();
                 connection.close();
@@ -1693,9 +1103,4 @@ public class MainPanel implements Initializable{
             showAddressList();
         });
     }
-
-
-
 }
-
-

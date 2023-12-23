@@ -3,13 +3,13 @@ package com.example.workappjx;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.sql.SQLException;
 
@@ -44,7 +44,7 @@ public class LoginPanelController {
     public static String getMd5( String source ) {
         try {
             MessageDigest md = MessageDigest.getInstance( "MD5" );
-            byte[] bytes = md.digest( source.getBytes("UTF-8") );
+            byte[] bytes = md.digest( source.getBytes(StandardCharsets.UTF_8) );
             return getString( bytes );
         } catch( Exception e )  {
             e.printStackTrace();
@@ -53,9 +53,9 @@ public class LoginPanelController {
     }
 
     private static String getString( byte[] bytes ) {
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (byte b : bytes) {
-            String hex = Integer.toHexString((int) 0x00FF & b);
+            String hex = Integer.toHexString(0x00FF & b);
             if (hex.length() == 1) {
                 sb.append("0");
             }
@@ -74,63 +74,18 @@ public class LoginPanelController {
         String pass = getMd5(passwordField.getText());
         Person person = getPersonData.logInToApp(login, pass, errorText);
         if(person != null){
-            System.out.println("Login succesful!");
             personData = person;
-
-//            FXMLLoader fxmlLoader = new FXMLLoader();
-//            fxmlLoader.setLocation(getClass().getResource("mainPanel.fxml"));
-//            Scene secondScene;
-//            secondScene = new Scene(fxmlLoader.load(), 450, 400);
-//            Stage Secondstage = new Stage();
-//            Secondstage.setTitle("WorkApp");
-//            Secondstage.setScene(secondScene);
-//            Secondstage.show();
-//
-//            MainPanel mainPanel = fxmlLoader.getController();
-
             FXMLLoader loader = new FXMLLoader(getClass().getResource("mainPanel.fxml"));
             Parent root = loader.load();
             MainPanel createMainPanel = loader.getController();
-//            Scene mainScene = new Scene(loader.load(), 450, 400);
-//            Stage mainStage = new Stage();
-            //E:/Nauka/Java/workApp/workAppJX/src/main/resources/
-//            mainStage.setTitle("WorkApp");
-//            mainStage.setScene(mainScene);
-//            mainStage.show();
             Stage stage = (Stage) logInButton.getScene().getWindow();
             stage.close();
-//            mainStage.close();
             createMainPanel.createMainPanel();
         }else{
 
             errorText.setText("Invalid login or password!");
             errorText.setFill(Color.RED);
-            System.out.println("LogIn failed!");
         }
-//        List<Person> personList = getPersonData.dbConnection();
-
-//        System.out.println("Login: " + loginField.getText() + "\n Password: " + getMd5(passwordField.getText()));
-//        for (Person person : personList) {
-////            System.out.println("Person Login: " + person.getLogin() + "| Person Password: " + getMd5(person.getPassword()));
-//            if (person.getLogin().equals(loginField.getText()) && person.getPassword().equals(getMd5(passwordField.getText()))){
-//                System.out.println("Login succesful!");
-//                personData = person;
-////                System.out.println("ID: " + personData.getId());
-//
-////                MainPanel createMainPanel = new MainPanel();
-//                FXMLLoader loader = new FXMLLoader(getClass().getResource("mainPanel.fxml"));
-//                Parent root = loader.load();
-//                MainPanel createMainPanel = loader.getController();
-//                Stage stage = (Stage) logInButton.getScene().getWindow();
-//                stage.close();
-//                createMainPanel.mainPanel();
-//                break;
-//            }else{
-//                System.out.println("Login Failed!");
-//            }
-//        }
-
-
     }
 
 }

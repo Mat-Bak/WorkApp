@@ -41,16 +41,6 @@ public class Person {
 
     public int getId(){return id;}
 
-    public void setId(){this.id = id;}
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
     public String getPassword() {
         return password;
     }
@@ -63,40 +53,20 @@ public class Person {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
     public String getLastName() {
         return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
 
     public BigInteger getPesel() {
         return pesel;
     }
 
-    public void setPesel(BigInteger pesel) {
-        this.pesel = pesel;
-    }
-
     public int getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
     public int getSalaryPerHour() {
         return SalaryPerHour;
-    }
-
-    public void setSalaryPerHour(int salaryPerHour) {
-        SalaryPerHour = salaryPerHour;
     }
 
     public boolean getAdmin() {
@@ -119,12 +89,9 @@ public class Person {
         int phoneNumber = 0;
         int SalaryPerHour = 0;
         boolean admin = false;
-//        Person user = null;
 
         List<Person> personList = new ArrayList<>();
 
-        // SQL query
-//        String query = "SELECT * FROM workers";
         String query = "SELECT * FROM Persons.workers;";
 
 
@@ -144,7 +111,6 @@ public class Person {
                 admin = resultSet.getBoolean("admin");
 
                 Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber, SalaryPerHour, admin);
-//                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber);
                 personList.add(person);
             }
             resultSet.close();

@@ -34,8 +34,6 @@ public class LoadPersonData {
 
         List<Person> personList = new ArrayList<>();
 
-        // SQL query
-//        String query = "SELECT * FROM workers";
         String query = "SELECT * FROM Persons.workers;";
 
         try {
@@ -53,7 +51,6 @@ public class LoadPersonData {
                 admin = resultSet.getBoolean("admin");
 
                 Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber, SalaryPerHour, admin);
-//                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber);
                 personList.add(person);
             }
             resultSet.close();
@@ -82,15 +79,9 @@ public class LoadPersonData {
         int phoneNumber;
         int SalaryPerHour;
         boolean admin;
-//        Person user = null;
 
         List<Person> personList = new ArrayList<>();
-
-        // SQL query
-//        String query = "SELECT * FROM workers";
         String query = "SELECT * FROM Persons.workers WHERE login = '" + userLogin + "' AND password = '" + userPassword + "';";
-
-
             // Execute query and get result
             ResultSet resultSet = connector.executeQuery(query);
             if(resultSet.next()){
@@ -113,22 +104,6 @@ public class LoadPersonData {
                 return null;
             }
 
-//            while (resultSet.next()) {
-//                id = resultSet.getInt("id");
-//                login = resultSet.getString("login");
-//                password = resultSet.getString("password");
-//                firstName = resultSet.getString("firstName");
-//                lastName = resultSet.getString("lastName");
-//                phoneNumber = resultSet.getInt("phoneNumber");
-//                pesel = BigInteger.valueOf(resultSet.getLong("pesel"));
-//                SalaryPerHour = resultSet.getInt("SalaryPerHour");
-//                admin = resultSet.getBoolean("admin");
-//
-//                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber, SalaryPerHour, admin);
-////                Person person = new Person(id, login, password, firstName, lastName, pesel, phoneNumber);
-//                personList.add(person);
-//            }
-
     }
 
     public void changePassword(String pass, int id) throws SQLException {
@@ -136,16 +111,10 @@ public class LoadPersonData {
         String username = "root";
         String password = "1234qwer";
         Connection connection = DriverManager.getConnection(url, username, password);
-//        DatabaseConnector connector = new DatabaseConnector();
         String query = "UPDATE Persons.workers SET password = '" + pass + "' WHERE id = " + id + ";";
         PreparedStatement statement = connection.prepareStatement(query);
         int rowsInserted = statement.executeUpdate();
-        if (rowsInserted > 0) {
-//                System.out.println("Dane zostały dodane do bazy.");
-        }
         statement.close();
         connection.close();
     }
-
-
 }

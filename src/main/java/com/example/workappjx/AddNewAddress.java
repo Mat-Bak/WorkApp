@@ -1,7 +1,5 @@
 package com.example.workappjx;
 
-import java.util.ArrayList;
-
 public class AddNewAddress {
     int id;
     String address;
