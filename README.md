@@ -16,7 +16,7 @@
 <h1 align="center">Work App</h1>
 <h2>
 <ol>
-<li>About the application </li>
+<li>About the application</li>
 <li>System requirements</li>
 <li>Instalation and lunching</li>
 <li>File structure</li>
@@ -134,7 +134,7 @@ Now you can open IDE (for example IntelliJ), open project, comile and run it.
 			<li> getDataFromWorkTime(int userID) </li>
 		</ul>
 	</li>
-	<li id="login-optional-fields">
+	<li>
 	LoginPanelController
 		<ul>
 			<li> getMd5( String source ) </li>
