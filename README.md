@@ -30,7 +30,7 @@
 </h2>
 <hr>
 
-<h2 id="#About">1. About the application</h2>
+<h2 id="About">1. About the application</h2>
 <p>
 The main idea of writing this program was to develop my programming skills and learn something new. The idea to create such an application arose when I came home from work every day and had to record my working hours in Excel. saving all the data manually was a bit frustrating, so I decided to create an app where I could save my data more easily. When writing the code, I thought about developing this program so that it would be used not only by me, but also by other employees and people running their own businesses. Over time, new ideas for the development of the application appeared, which allowed me to expand my knowledge, but at the same time extended the time spent working on it.  
 <br>
