@@ -12,6 +12,19 @@
 11. Przykładowe użycie  
 
 
+# WorkApp
+
+1. <span style="font-size:20px;"> [About the application](#test) </span>
+1. <span style="font-size:20px;">System requirements</span>
+1. Instalation and lunching
+1. File structure
+1. Application functionality
+1. Database integration
+1. Error handling
+1. Testing
+1. Security
+1. Example usage
+
 
 <h1 align="center">Work App</h1>
 <h2>
@@ -143,4 +156,98 @@ Now you can open IDE (for example IntelliJ), open project, comile and run it.
 			<li> logIn() </li>
 		</ul>
 	</li>
+	<li>
+	MainPanel
+		<ul>
+			<li> MainPanel() </li>
+			<li> createMainPanel() </li>
+			<li> getScene() </li>
+			<li> showAdminTest() </li>
+			<li> hideAdminTest() </li>
+			<li> showPersonInfo() </li>
+			<li> personPanelBack() </li>
+			<li> showWorkPanel() </li>
+			<li> showWorkersPanel() </li>
+			<li> workersPanelBack() </li>
+			<li> workPanelBack() </li>
+			<li> showSalaryPanel() </li>
+			<li> salaryPanelBack() </li>
+			<li> showSettingsPanel() </li>
+			<li> settingPanelBack() </li>
+			<li> showAddressPanel() </li>
+			<li> addressPanelBack() </li>
+			<li> setPersonData() </li>
+			<li> getDataTime() </li>
+			<li> showWorkTimeData() </li>
+			<li> createWorkPanel() </li>
+			<li> initialize(URL arg0, ResourceBundle arg1) </li>
+			<li> summaryOfTheMonth() </li>
+			<li> changePass() </li>
+			<li> showWorkersList() </li>
+			<li> showAddNewWorkerPanel() </li>
+			<li> showAddressList() </li>
+			<li> addNewAddress() </li>
+		</ul>
+	</li>
+	<li>
+	Person
+		<ul>
+			<li> Person(int id, String login, String password, String firstName, String lastName, BigInteger pesel, int phoneNumber, int SalaryPerHour, boolean admin) </li>
+			<li> Person() </li>
+			<li> getId() </li>
+			<li> getPassword() </li>
+			<li> setPassword(String password) </li>
+			<li> getFirstName() </li>
+			<li> getLastName() </li>
+			<li> getPesel() </li>
+			<li> getPhoneNumber() </li>
+			<li> getSalaryPerHour() </li>
+			<li> getAdmin() </li>
+			<li> setAdmin(boolean admin) </li>
+			<li> getPersonList() </li>
+		</ul>
+	</li>
+	<li>
+	SaveWorkTimeData
+		<ul>
+			<li>  connectWorkTimeDatabase(WorkTime worktime) </li>
+			<li> removeDataFromDataBase(int id) </li>
+		</ul>
+	</li>
+	<li>
+	WorkApp
+		<ul>
+			<li> start(Stage primaryStage) </li>
+			<li> main(String[] args) </li>
+		</ul>
+	</li>
+	<li>
+	WorkerPanel
+		<ul>
+			<li> setDataInPanel(String firstName, String lastName, BigInteger pesel, int phoneNumber, int salary, boolean admin) </li>
+			<li> setPersonID(int id) </li>
+			<li> updateWorkerData() </li>
+		</ul>
+	</li>
+	<li>
+	WorkTime
+		<ul>
+			<li> WorkTime() </li>
+			<li> WorkTime(String address, LocalDate date, LocalTime start_time, LocalTime end_time, String comment, int user_id) </li>
+			<li> WorkTime(int id, String address, LocalDate date, LocalTime start_time, LocalTime end_time, String comment, int user_id) </li>
+			<li> getId() </li>
+			<li> getAddress() </li>
+			<li> setAddress(String address) </li>
+			<li> getDate() </li>
+			<li> getStart_time() </li>
+			<li> getEnd_time() </li>
+			<li> getComment() </li>
+			<li> getUser_id() </li>
+			<li> getHoursWork() </li>
+			<li> timeToStrikg() </li>
+		</ul>
+	</li>
 </ol>
+
+<h2 id="test">5. Application functionality </h2>
+<!-- # test >
