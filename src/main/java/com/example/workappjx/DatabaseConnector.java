@@ -17,9 +17,6 @@ public class DatabaseConnector {
     private Connection connection;
     private Statement statement;
 
-
-
-
     public DatabaseConnector() {
         try {
             // connect to database
