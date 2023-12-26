@@ -461,6 +461,7 @@ public class MainPanel implements Initializable{
     }
 
     public void showWorkersList(){
+        workersVBox.getChildren().clear();
         Person listOfPerson = new Person();
         List<Person> personList = listOfPerson.getPersonList();
 
@@ -579,7 +580,7 @@ public class MainPanel implements Initializable{
 
 
                 buttonYes.setOnMouseClicked(e -> {
-                    String url = "jdbc:mysql://localhost/persons";
+                    String url = "jdbc:mysql://localhost/Persons";
                     String username = "root";
                     String passwordDb = "1234qwer";
 
@@ -587,6 +588,7 @@ public class MainPanel implements Initializable{
                         Connection connection = DriverManager.getConnection(url, username, passwordDb);
 
                         String sql = "DELETE FROM workers WHERE id = '" + person.getId() + "';";
+                        System.out.println("Person id: " + person.getId());
 
                         PreparedStatement statement = connection.prepareStatement(sql);
 
@@ -722,6 +724,8 @@ public class MainPanel implements Initializable{
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("newWorkerPanel.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 462, 521);
+        AddNewWorker addNewWorker = fxmlLoader.getController();
+        addNewWorker.setMainPanel(this);
         Stage stage = new Stage();
         stage.setResizable(false);
         stage.initModality(Modality.APPLICATION_MODAL);

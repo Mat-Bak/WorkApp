@@ -45,6 +45,12 @@ public class AddNewWorker {
     @FXML
     public Text newWorkerError;
 
+    public MainPanel mainPanel;
+
+    public void setMainPanel(MainPanel mainPanel){
+        this.mainPanel = mainPanel;
+    }
+
     public void createNewWorker() throws SQLException {
         String login = loginField.getText();
         String password = passwordField.getText();
@@ -113,13 +119,15 @@ public class AddNewWorker {
             statement.setBoolean(8, admin);
 
 
-            int rowsInserted = statement.executeUpdate();
+
+            statement.executeUpdate();
 
             statement.close();
             connection.close();
             Stage stage = (Stage) confirmButton.getScene().getWindow();
 
             stage.close();
+            mainPanel.showWorkersList();
         } catch (SQLException e) {
             e.printStackTrace();
         }
