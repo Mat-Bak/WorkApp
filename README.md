@@ -9,24 +9,21 @@
 8. Obsługa błędów 
 9. Testowanie
 10. Bezpieczeństwo
-11. Przykładowe użycie  
 
 
-# WorkApp
+<h1 align="center" style="font-size:40px" >WorkApp</h1>
 
-1. <span style="font-size:20px;"> [About the application](#test) </span>
-1. <span style="font-size:20px;">System requirements</span>
-1. Instalation and lunching
-1. File structure
+1. <span style="font-size:20px;"> [About the application](#About) </span>
+1. <span style="font-size:20px;">[System requirements](#requirements)</span>
+1. <span style="font-size:20px;">[Instalation and lunching](#insalation)</span>
+1. <span style="font-size:20px;">[File structure](#structure)</span>
 1. Application functionality
 1. Database integration
 1. Error handling
 1. Testing
 1. Security
-1. Example usage
 
 
-<h1 align="center">Work App</h1>
 <h2>
 <ol>
 <li>About the application</li>
@@ -43,14 +40,30 @@
 </h2>
 <hr>
 
-<h2>1. About the application</h2>
+<h2 id="About">1. About the application</h2>
 <p>
-The main idea of writing this program was to develop my programming skills and learn something new. The idea to create such an application arose when I came home from work every day and had to record my working hours in Excel. saving all the data manually was a bit frustrating, so I decided to create an app where I could save my data more easily. When writing the code, I thought about developing this program so that it would be used not only by me, but also by other employees and people running their own businesses. Over time, new ideas for the development of the application appeared, which allowed me to expand my knowledge, but at the same time extended the time spent working on it.  
+The application was created for companiens that needs to menage employees and the workplaces in which currently work. Thanks to this application, the employee can easily record his working hours at a given address and the employer has easy control over the emplyees and their work. 
 <br>
-The program was written in the Java programming language using the javafx tool, which helps create a user interface and a mySQL database in which all employees' data and working times are stored.
-</p>
+The program was written in the Java programming language using the JavaFX framework to create user interface. This project was created using the dependency management tool, Maven, which allowed for easier library management and project building. Additionaly the project uses a MySQL database to store informations about employees and their working hours. The application allows to login to the main panel where, depending on user's permissions, he has access to various functions. The employee has access to to functions such as:
+<ul>
+	<li> Panel with personal data, where the user can check his data 
+	</li>
+	<li>A panel with working hours, where the user can view saved working hours or add new ones by selecting a date in the calendar
+	</li>  
+	<li> Password change pannel where the user can change the password for his account
+	</li>
+	<li>Earnings panel, where the user selecting a given month, will receive information about the number of hours worked and the amount of gross remuneration he will receive for the hours worked.
+	</li>
+</ul>
+There are also two additional panels that can only be seen by a user with "admin" permision:
+<ul>
+	<li>Panel with employees, where you can view list of all employees, change their data, generate a report of hours worked in a given month and add new employees. 
+	</li>
+	<li>Panel with addresses, where you can view addresses of workplaces, generate a report for a given month or add new address.
+	</li>
+</ul>
 
-<h2>2. System requirements</h2>
+<h2 id="requirements">2. System requirements</h2>
 <p>
 <ul>
 <li> Java: 20.0.1  </li>
@@ -60,7 +73,7 @@ The program was written in the Java programming language using the javafx tool, 
 </ul>
 </p>
 
-<h2>3. Instalation and lunching</h2>
+<h2 id="insalation">3. Instalation and lunching</h2>
 <ul>
 <li>
 <p>
@@ -82,7 +95,7 @@ Now you can open IDE (for example IntelliJ), open project, comile and run it.
 </li>
 </ul>
 </p>
-<h2>4. File structure</h2>
+<h2 id="structure">4. File structure</h2>
 <p>The programm consist of 14 classes</p>
 <ol>
 	<li>
@@ -250,4 +263,4 @@ Now you can open IDE (for example IntelliJ), open project, comile and run it.
 </ol>
 
 <h2 id="test">5. Application functionality </h2>
-<!-- # test >
+

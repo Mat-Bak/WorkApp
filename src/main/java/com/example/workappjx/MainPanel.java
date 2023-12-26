@@ -175,10 +175,6 @@ public class MainPanel implements Initializable{
     }
 
 
-    public void showAdminTest(){
-        testAdmin.setVisible(true);
-    }
-
     public void hideAdminTest(){
         testAdmin.setVisible(false);
     }
@@ -402,11 +398,7 @@ public class MainPanel implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         Person person = LoginPanelController.getPersonData();
-        if(person.getAdmin()){
-            showAdminTest();
-        }else{
-            hideAdminTest();
-        }
+
         for (String month : months) {
             monthList.getItems().add(month);
         }
@@ -555,7 +547,7 @@ public class MainPanel implements Initializable{
                 WorkerPanel workerPanel = fxmlLoader.getController();
                 workerPanel.setPersonID(person.getId());
                 workerPanel.setDataInPanel(person.getFirstName(), person.getLastName(), person.getPesel(), person.getPhoneNumber(), person.getSalaryPerHour(), person.getAdmin());
-                workersPanelBack();
+//                workersPanelBack();
             });
 
             deleteWorker.setOnMouseClicked(event -> {

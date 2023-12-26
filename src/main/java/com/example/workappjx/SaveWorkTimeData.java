@@ -13,7 +13,7 @@ Methods:
 public class SaveWorkTimeData {
 
     public void connectWorkTimeDatabase(WorkTime worktime){
-        String url = "jdbc:mysql://localhost/persons";
+        String url = "jdbc:mysql://localhost/Persons";
         String username = "root";
         String password = "1234qwer";
 
@@ -29,7 +29,7 @@ public class SaveWorkTimeData {
             statement.setString(5, worktime.getComment());
             statement.setInt(6, worktime.getUser_id());
 
-
+            statement.executeUpdate();
             statement.close();
             connection.close();
         } catch (SQLException e) {
@@ -50,7 +50,7 @@ public class SaveWorkTimeData {
             PreparedStatement statement = connection.prepareStatement(sql);
 
 
-
+            statement.executeUpdate();
             statement.close();
             connection.close();
         } catch (SQLException e) {

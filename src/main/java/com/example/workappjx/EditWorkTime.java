@@ -129,6 +129,7 @@ public class EditWorkTime implements Initializable {
         WorkTime workTime = new WorkTime(address,localDate,startWork, endWork,comment,user_id);
         SaveWorkTimeData saveTimeWorkData = new SaveWorkTimeData();
         saveTimeWorkData.connectWorkTimeDatabase(workTime);
+        mainPanel.showWorkTimeData();
 
         // close panel after add new data to database
         Stage stage = (Stage) deleteData.getScene().getWindow();
@@ -172,6 +173,7 @@ public class EditWorkTime implements Initializable {
             popupWindow.close();
             Stage stage = (Stage) deleteData.getScene().getWindow();
             stage.close();
+            mainPanel.showWorkTimeData();
         });
     }
 
@@ -183,8 +185,8 @@ public class EditWorkTime implements Initializable {
         addNewWorkTime();
         SaveWorkTimeData saveWorkTimeData = new SaveWorkTimeData();
         int id = MainPanel.workTimeID;
-        mainPanel.showWorkTimeData();
         saveWorkTimeData.removeDataFromDataBase(id);
+        mainPanel.showWorkTimeData();
         Stage stage = (Stage) saveData.getScene().getWindow();
         stage.close();
     }

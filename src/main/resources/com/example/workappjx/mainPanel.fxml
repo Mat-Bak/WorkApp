@@ -63,11 +63,6 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Text fx:id="testAdmin" layoutX="150.0" layoutY="375.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADMIN" visible="false">
-               <font>
-                  <Font size="46.0" />
-               </font>
-            </Text>
             <Button fx:id="addressPanelButton" alignment="CENTER" contentDisplay="CENTER" layoutX="325.0" layoutY="177.0" mnemonicParsing="false" onAction="#showAddressPanel" prefHeight="100.0" prefWidth="100.0" textAlignment="CENTER">
                <graphic>
                   <ImageView fitHeight="70.0" fitWidth="70.0" pickOnBounds="true" preserveRatio="true" translateY="-10.0">
