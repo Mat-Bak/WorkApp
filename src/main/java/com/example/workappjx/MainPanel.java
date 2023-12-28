@@ -467,6 +467,8 @@ public class MainPanel implements Initializable{
 
         for(Person person : personList){
             personID = person.getId();
+            Person loggedWorker = LoginPanelController.getPersonData();
+
             Text name = new Text(person.getFirstName() + " " + person.getLastName());
             name.setTextAlignment(TextAlignment.CENTER);
             TextFlow namePane = new TextFlow();
@@ -485,6 +487,10 @@ public class MainPanel implements Initializable{
             Button deleteWorker = new Button();
             deleteWorker.setGraphic(view);
             deleteWorker.setPrefSize(10,10);
+
+            if(personID == loggedWorker.getId()){
+                deleteWorker.setDisable(true);
+            }
 
             Button moreOptions = new Button();
             moreOptions.setGraphic(optionsView);

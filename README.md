@@ -263,4 +263,45 @@ Now you can open IDE (for example IntelliJ), open project, comile and run it.
 </ol>
 
 <h2 id="test">5. Application functionality </h2>
+<p>
+Aplikacaj została zaprojektowania w taki sposób aby była przejżysta i łatwa w użyciu. Po uruchomieniu aplikacji pojawia się panel z logowaniem gdzie użytkownik po wpisaniu loginu i hasła może zalogować się do swojego konta.
+<br>
+[tutaj będzie zdzjęcie panelu logowania wraz z opisem wszystkich elementów]
+</p>
+<p>
+Po zalogowaniu się pojawi się okno z panelem głównym w którym znajduja sie kafelki pozwalające na przełączanie sie pomiędzy konkretnymi panelami. Każdy kafelek posiada ikonę oraz podpis dzięki czemu użytkownik jest informowany o funkcjach danego przycisku.
+<br>
+[Tutaj będzie panel główny dla zwykłego użytkownika]
+<br>
+Aplikacja posiada dwa dodatkowe kafelki które widoczne są tylko wyłącznie gdy do aplikacji zaloguje się użytkownik z uprawnieniami "admin".
+<br>
+[Tutaj panel główny dla użytkownika z uprawnieniami "admin"]
+</p>
+<p>
+Pierwszym z dostepnych paneli w menu głównym jest panel "About Me". Po kliknięciu na ten kafelek panel główny zostanie przełączony do apanelu w którym użytkownik może sprawdzić infromacje takie jak:
+<ul>
+	<li> Imię </li>
+	<li> Nazwisko </li>
+	<li> Pesel </li>
+	<li> Numer telefonu </li>
+	<li> wynagrodzenie na godzinę </li>
+</ul>
+W dolnej części panelu znajduje się przycisk "Back" pozwalający na powrót do panelu głównego.
+<br>
+[Tutaj zdjęcie panelu z informacjami o użytkowniku]
+</p>
+<p>
+	Kolejnym kafelkiem dostepnym w panelu głównym jest "WorkTime", pozwalający na sprawdzenie lub dodwanie nowych godzin pracy. Klikając go użytkownik przechodzi do okna w którym znajduje się pole z mozliwościa wyboru daty, przycisk "Add new", pole w którym przechowywane są godziny pracy oraz przycisk "Back" pozwalający na powrót do menu głównego.
+	<br>
+	[Tutaj zdjęcie panelu worktime]
+	<br>
+	Po kliknięciu w pole kalendarza wyskoczy panel z kalendarzem w którym użytkownik może wybrać dokładną dane. Po wyborze jeżeli w danym dniu isnieją zapisane odziny pracy sotaną one wyświetlone w panelu poniżej.
+	<br>
+	Przycisk "Add new" pozwala na dodanie nowych godzin w wybranym dniu. Po kliknięciu pojawi się nowe okno z polami do wypełnienia, oraz przyciskien "save" pozwalającym na zapisanie wpisanych danych.
+	<br>
+	[Tutaj zdjęcie z panelem dodawania godzin]
+	Po zamisaniu, nowo stworzone godziny pracy zostaną automatycznie dodane do pola z godzinami pracy.
+	<br>
+	
+</p>
 
