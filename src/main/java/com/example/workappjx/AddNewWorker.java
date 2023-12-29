@@ -1,6 +1,7 @@
 package com.example.workappjx;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
@@ -9,8 +10,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
+import java.net.URL;
 import java.sql.*;
-public class AddNewWorker {
+import java.util.ResourceBundle;
+
+public class AddNewWorker implements Initializable {
 
     @FXML
     public TextField loginField;
@@ -49,6 +53,11 @@ public class AddNewWorker {
 
     public void setMainPanel(MainPanel mainPanel){
         this.mainPanel = mainPanel;
+    }
+
+    @Override
+    public void initialize(URL arg0, ResourceBundle arg1){
+        newWorkerError.setText("");
     }
 
     public void createNewWorker() throws SQLException {

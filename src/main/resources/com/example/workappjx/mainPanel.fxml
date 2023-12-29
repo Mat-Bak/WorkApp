@@ -92,12 +92,12 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <Text layoutX="191.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WORKERS">
+            <Text fx:id="workersText" layoutX="191.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WORKERS">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <Text layoutX="344.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADDRESS">
+            <Text fx:id="addressText" layoutX="344.0" layoutY="269.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADDRESS">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>

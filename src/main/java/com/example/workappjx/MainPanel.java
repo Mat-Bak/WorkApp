@@ -28,10 +28,8 @@ import java.sql.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.time.chrono.HijrahChronology;
+import java.util.*;
 
 /*
 
@@ -149,6 +147,18 @@ public class MainPanel implements Initializable{
 
     public static VBox mainPanelVBox;
 
+    @FXML
+    public Button workersPanelButton;
+
+    @FXML
+    public Button addressPanelButton;
+
+    @FXML
+    public Text workersText;
+
+    @FXML
+    public Text addressText;
+
     public Image deleteImage = new Image("file:src/main/resources/com/example/workappjx/images/delete.png");
     public Image optionsImage = new Image("file:src/main/resources/com/example/workappjx/images/raport.png");
 
@@ -196,7 +206,7 @@ public class MainPanel implements Initializable{
     //show work panel
     public void showWorkPanel() {
         workTimeDataPanel.getChildren().clear();
-        dateTime.setValue(null);
+        dateTime.setValue(LocalDate.now());
         mainPanel.setVisible(false);
         workPanel.setVisible(true);
     }
@@ -373,6 +383,7 @@ public class MainPanel implements Initializable{
 
         try {
             callendarError.setText("");
+            callendarError.setFill(Color.BLACK);
 
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("addWorkTime.fxml"));
@@ -388,6 +399,8 @@ public class MainPanel implements Initializable{
             AddWorkTime addWorkTime = fxmlLoader.getController();
             addWorkTime.setMainPanelController(this);
         } catch (Exception e) {
+            callendarError.setText("Select date!");
+            callendarError.setFill(Color.RED);
             throw new RuntimeException(e);
         }
     }
@@ -398,7 +411,17 @@ public class MainPanel implements Initializable{
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         Person person = LoginPanelController.getPersonData();
-
+        if (!person.getAdmin()){
+            workersPanelButton.setVisible(false);
+            addressPanelButton.setVisible(false);
+            workersText.setVisible(false);
+            addressText.setVisible(false);
+        }else{
+            workersPanelButton.setVisible(true);
+            addressPanelButton.setVisible(true);
+            workersText.setVisible(true);
+            addressText.setVisible(true);
+        }
         for (String month : months) {
             monthList.getItems().add(month);
         }
@@ -712,6 +735,7 @@ public class MainPanel implements Initializable{
                     } catch (IOException | SQLException ex) {
                         throw new RuntimeException(ex);
                     }
+                    popupWindow.close();
                 });
 
             });

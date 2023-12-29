@@ -8,8 +8,21 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="521.0" prefWidth="462.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workappjx.AddNewWorker">
+<AnchorPane prefHeight="521.0" prefWidth="462.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.workappjx.AddNewWorker">
    <children>
+      <TextField fx:id="loginField" layoutX="43.0" layoutY="70.0" prefHeight="25.0" prefWidth="180.0" />
+      <PasswordField fx:id="passwordField" layoutX="239.0" layoutY="70.0" prefHeight="25.0" prefWidth="180.0" />
+      <PasswordField fx:id="rePasswordField" layoutX="239.0" layoutY="131.0" prefHeight="25.0" prefWidth="180.0" />
+      <TextField fx:id="nameField" layoutX="36.0" layoutY="200.0" prefHeight="25.0" prefWidth="180.0" />
+      <TextField fx:id="surnameField" layoutX="239.0" layoutY="200.0" prefHeight="25.0" prefWidth="180.0" />
+      <TextField fx:id="phoneField" layoutX="37.0" layoutY="276.0" prefHeight="25.0" prefWidth="180.0" />
+      <TextField fx:id="peselField" layoutX="239.0" layoutY="276.0" prefHeight="25.0" prefWidth="180.0" />
+      <TextField fx:id="salaryField" layoutX="36.0" layoutY="350.0" prefHeight="25.0" prefWidth="180.0" />
+      <CheckBox fx:id="adminCheckBox" layoutX="291.0" layoutY="350.0" mnemonicParsing="false" text="Admin">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </CheckBox>
       <Text layoutX="107.0" layoutY="110.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Login">
          <font>
             <Font size="16.0" />
@@ -45,22 +58,11 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <CheckBox fx:id="adminCheckBox" layoutX="291.0" layoutY="350.0" mnemonicParsing="false" text="Admin">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </CheckBox>
       <Text layoutX="105.0" layoutY="392.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Salary">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="loginField" layoutX="43.0" layoutY="70.0" prefHeight="25.0" prefWidth="180.0" />
-      <TextField fx:id="surnameField" layoutX="239.0" layoutY="200.0" prefHeight="25.0" prefWidth="180.0" />
-      <TextField fx:id="nameField" layoutX="36.0" layoutY="200.0" prefHeight="25.0" prefWidth="180.0" />
-      <TextField fx:id="phoneField" layoutX="37.0" layoutY="276.0" prefHeight="25.0" prefWidth="180.0" />
-      <TextField fx:id="peselField" layoutX="239.0" layoutY="276.0" prefHeight="25.0" prefWidth="180.0" />
-      <TextField fx:id="salaryField" layoutX="36.0" layoutY="350.0" prefHeight="25.0" prefWidth="180.0" />
       <Button fx:id="confirmButton" layoutX="183.0" layoutY="463.0" mnemonicParsing="false" onAction="#createNewWorker" prefHeight="35.0" prefWidth="97.0" text="Confimr">
          <font>
             <Font size="16.0" />
@@ -71,8 +73,6 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Text>
-      <PasswordField fx:id="passwordField" layoutX="239.0" layoutY="70.0" prefHeight="25.0" prefWidth="180.0" />
-      <PasswordField fx:id="rePasswordField" layoutX="239.0" layoutY="131.0" prefHeight="25.0" prefWidth="180.0" />
-      <Text fx:id="newWorkerError" layoutX="7.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="450.13671875" />
+      <Text fx:id="newWorkerError" layoutX="7.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="450.13671875" />
    </children>
 </AnchorPane>

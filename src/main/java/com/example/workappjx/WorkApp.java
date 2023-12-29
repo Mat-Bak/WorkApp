@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.util.Locale;
 
 /*
 
@@ -24,6 +25,8 @@ public class WorkApp extends Application {
         primaryStage.setTitle("WorkApp");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+        Locale.setDefault(Locale.ENGLISH);
 
         //Connect to DB
         LoadPersonData personData = new LoadPersonData();
