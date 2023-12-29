@@ -82,7 +82,7 @@
                   <Font name="System Bold" size="14.0" />
                </font>
             </Text>
-            <Text layoutX="342.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="SETTINGS">
+            <Text layoutX="342.0" layoutY="141.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PASSWORD">
                <font>
                   <Font name="System Bold" size="14.0" />
                </font>
