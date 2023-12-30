@@ -267,19 +267,16 @@ Now you can open IDE (for example IntelliJ), open project, comile and run it.
 The application has been designed to be transparent and user-friendly. Upon launching the application, a login panel appears, where the user can enter their username and password to log into their account.
 <br>
 <br>
-[tutaj będzie zdzjęcie panelu logowania wraz z opisem wszystkich elementów]
+<img src="./src/main/resources/com/example/workappjx/images/loginPanel.png" style="display:block; margin-left: auto; margin-right:auto">
+<i style="display:block; text-align:center;"> 1. Login panel </i>
 </p>
 <p>
 After logging in, a main window will appear with a panel containing tiles that allow switching between specific sections. Each tile is equipped with an icon and a label, providing the user with information about the functions of each button.
 <br>
 <br>
-[Tutaj będzie panel główny dla zwykłego użytkownika]
-<br>
-<br>
-The application features two additional tiles that are visible exclusively when a user with "admin" privileges logs into the application.
-<br>
-<br>
-[Tutaj panel główny dla użytkownika z uprawnieniami "admin"]
+<img src="./src/main/resources/com/example/workappjx/images/mainPanel.png" style="display:block; margin-left: auto; margin-right:auto">
+<i style="display:block; text-align:center;"> 2. Main menu panel </i>
+
 </p>
 <p>
 The first available panel in the main menu is the "Profile" panel. Upon clicking on this tile, the main panel will switch to a section where the user can check information such as:
@@ -293,42 +290,47 @@ The first available panel in the main menu is the "Profile" panel. Upon clicking
 At the bottom of the panel, there is a "Back" button allowing the user to return to the main panel.
 <br>
 <br>
-[Tutaj zdjęcie panelu z informacjami o użytkowniku]
+<img src="./src/main/resources/com/example/workappjx/images/AboutPanel.png" style="display:block; margin-left: auto; margin-right:auto; width:60%">
+<i style="display:block; text-align:center;"> 3. About user </i>
+
 </p>
 <p>
 	The next tile available in the main panel is "Work Time", allowing users to check or add new working hours. Clicking on it takes the user to a window with a field for selecting a date, an "Add+" button, a field for storing working hours, and a "Back" button enabling a return to the main menu
 	<br>
 	<br>
-	[Tutaj zdjęcie panelu worktime]
-	<br>
+	<img src="./src/main/resources/com/example/workappjx/images/workHoursPanel.png" style="display:block; margin-left: auto; margin-right:auto; width:80%">
+	<i style="display:block; text-align:center;"> 4. Work hours </i>
 	<br>
 	After clicking on the calendar field, a panel with a calendar will appear, allowing the user to choose the exact date. Upon selection, if there are recorded working hours for that day, they will be displayed in the panel below.
 	<br>
 	The "Add+" button allows users to add new hours on the selected day. After clicking, a new window will appear with fields to fill in, and a "Save" button allowing the user to save the entered data.
 	<br>
 	<br>
-	[Tutaj zdjęcie z panelem dodawania godzin]
-	<br>
+	<img src="./src/main/resources/com/example/workappjx/images/addWorkTime.png" style="display:block; margin-left: auto; margin-right:auto; width:80%">
+	<i style="display:block; text-align:center;"> 5. Add new work time </i>
 	<br>
 	After saving, the newly created working hour will be automatically added to the field displaying the working hours.
 	<br>
 	The added panels with working hours also have the option to edit them by clicking on a specific panel. Upon clicking, a window appears with fields filled with information about the selected working hours, along with two buttons: "Save" to save the changes made, and "Delete" to remove the selected working hours from the panel.
 	<br>
 	<br>
-	[Tutaj zdjęcie panelu z edycją godzin pracy]
+	<img src="./src/main/resources/com/example/workappjx/images/editWorkTime.png" style="display:block; margin-left: auto; margin-right:auto; width:80%">	
+	<i style="display:block; text-align:center;"> 6. Edit work time </i>
 	<br>
 </p>
 <p>
 	The third tile available in the main panel is the "Password" option, allowing the user to change their account password by providing the old password, entering a new password, and confirming the new password
 	<br>
-	<br>
-	[tutaj zdjęcie zmiany hasła]  
+	<br>	
+	<img src="./src/main/resources/com/example/workappjx/images/changePasword.png" style="display:block; margin-left: auto; margin-right:auto; width:80%">  
+	<i style="display:block; text-align:center;"> 7. Change password</i>
 </p>
 <p>
 	The last tile available for regular users is the "Salary" panel, where the user, after selecting a month from the available list, can check the number of hours worked in the chosen month and the corresponding compensation for those hours.
 	<br>
 	<br>
-	[tutaj zdjęcie okienka z wynagrodzeniami]
+	<img src="./src/main/resources/com/example/workappjx/images/salaryPanel.png" style="display:block; margin-left: auto; margin-right:auto; width:80%">
+	<i style="display:block; text-align:center;"> 8. Summary of Salary and work time </i>
 </p>
 <p>
 	The next two panels are available exclusively for logged-in users with 'admin' privileges.
@@ -338,20 +340,22 @@ At the bottom of the panel, there is a "Back" button allowing the user to return
 	This window contains a panel with a list of all employees and two buttons: "New," which allows the addition of new users, and a "Back" button to return to the main panel.
 	<br>
 	<br>
-	[Tutaj zdjęcie panelu z listą pracowników]
+	<img src="./src/main/resources/com/example/workappjx/images/usersPanel.png" style="display:block; margin-left: auto; margin-right:auto; width:80%">
+	<i style="display:block; text-align:center;"> 9. List of users </i>
 </p>
 <p>
 	After clicking the 'New' button, a new window will appear, allowing the addition of a new user by filling out all the fields and then pressing the 'Save' button located at the bottom of the panel. 
 	<br>
 	<br>
-	[Tutaj zdjęcie dodawania nowego użytkownika]
+	<img src="./src/main/resources/com/example/workappjx/images/addNewWorker.png" style="display:block; margin-left: auto; margin-right:auto; width:60%">
+	<i style="display:block; text-align:center;"> 10. Add new user </i>
 </p>
 <p>
 	The panel with the list of users also provides the option to edit a specific user by clicking on their entry. After clicking, a new window will appear with fields pre-filled with the selected user's information, along with a 'Save' button to save the changes made.
 	<br>
 	<br>
-	[Tutaj zdjęcie edycji użytkownika]
-	<br>
+	<img src="./src/main/resources/com/example/workappjx/images/editUser.png" style="display:block; margin-left: auto; margin-right:auto; width:50%">
+	<i style="display:block; text-align:center;"> 11. Edit user </i>
 	<br>
 	Another option is the ability to delete users by clicking the 'X' button located in the panel of the user you wish to remove.
 	<br>
@@ -360,27 +364,32 @@ At the bottom of the panel, there is a "Back" button allowing the user to return
 	After clicking, a window will appear with the option to choose a month from the available list. Subsequently, clicking the 'GET REPORT' button will save the report of the selected user for the chosen month to a file.
 	<br>
 	<br>
-	[Tutaj zdjęcie z generowania raportu oraz zdjęcie raportu]   
+	<img src="./src/main/resources/com/example/workappjx/images/workerRaport.png" style="display:block; margin-left: auto; margin-right:auto; width:60%">
+	<i style="display:block; text-align:center;"> 12. Generate a user report </i>
+	<br>
+	<img src="./src/main/resources/com/example/workappjx/images/workerReportTxt.png" style="display:block; margin-left: auto; margin-right:auto; width:80%">   
+	<i style="display:block; text-align:center;"> 13. Sample generated user report</i>	
 </p>
 <p> 
 	The final option in the main panel for users with 'admin' privileges is the 'Address' panel. This panel displays a list of available addresses, a 'New' button for adding a new address, and a 'Back' button to return to the main panel. 
 	<br>
 	<br>
-	[Tutaj zdjęcie z panelu z adresami]
+	<img src="./src/main/resources/com/example/workappjx/images/addressPanel.png" style="display:block; margin-left: auto; margin-right:auto; width:80%">
+	<i style="display:block; text-align:center;"> 14. List of address </i>
+	<br>
+	After clicking the 'New' button, a new window will appear with a field to enter the address and a 'Save' button to save the entered address.
 	<br>
 	<br>
-	PAfter clicking the 'New' button, a new window will appear with a field to enter the address and a 'Save' button to save the entered address.
-	<br>
-	<br>
-	[Tutaj zdjęcie dodawania adresu]
-	<br>
+	<img src="./src/main/resources/com/example/workappjx/images/addNewAddress.png" style="display:block; margin-left: auto; margin-right:auto; width:80%">
+	<i style="display:block; text-align:center;"> 15. Add new address</i>
 	<br>
 	Each added address has two buttons in its panel. The first button, 'X,' allows for the deletion of the selected address, and the button with a document icon allows the generation of a report for that address.
 Upon clicking the report button in the address panel, a window appears with the option to choose a month from the available list and a 'GET REPORT' button for generating a report in .txt format.
 The generated report contains information about all employees and their working hours who worked at the selected address, along with the total hours worked at that address.
 	<br>
 	<br>
-	[Tutaj zdjęcie panelu z generowaniem raportu oraz zdjęcie raportu]  
+	<img src="./src/main/resources/com/example/workappjx/images/addressReportTxt.png" style="display:block; margin-left: auto; margin-right:auto; width:60%">  
+	<i style="display:block; text-align:center;"> 16. Sample generated address report</i>
 </p>
 <h2 id="database">6. Database integration </h2>
 <p>

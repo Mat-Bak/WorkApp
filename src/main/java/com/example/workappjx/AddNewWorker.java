@@ -1,14 +1,14 @@
 package com.example.workappjx;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.util.converter.IntegerStringConverter;
 
 import java.net.URL;
 import java.sql.*;
@@ -58,7 +58,31 @@ public class AddNewWorker implements Initializable {
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         newWorkerError.setText("");
+
+
+        phoneField.textProperty().addListener((observable, oldValue, newValue) -> {
+                String filteredValue = newValue.replaceAll("[^\\d]", "");
+                if (filteredValue.length() > 9) {
+                    filteredValue = filteredValue.substring(0, 9);
+                }
+                phoneField.setText(filteredValue);
+        });
+
+        peselField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String filteredValue = newValue.replaceAll("[^\\d]", "");
+            if (filteredValue.length() > 11) {
+                filteredValue = filteredValue.substring(0, 11);
+            }
+            peselField.setText(filteredValue);
+        });
+
+
+        salaryField.textProperty().addListener((observable, oldValue, newValue) -> {
+            String filteredValue = newValue.replaceAll("[^\\d]", "");
+            salaryField.setText(filteredValue);
+        });
     }
+
 
     public void createNewWorker() throws SQLException {
         String login = loginField.getText();
@@ -76,10 +100,19 @@ public class AddNewWorker implements Initializable {
         String phoneNumber = phoneField.getText();
         String pesel = peselField.getText();
         String salary = salaryField.getText();
+        if(phoneNumber.length()<9){
+            newWorkerError.setText("The phone number must be 9 long");
+            return;
+        }
+        if(pesel.length()<11){
+            newWorkerError.setText("The pesel must be 11 long");
+            return;
+        }
         boolean admin = adminCheckBox.isSelected();
 
         if(login.isEmpty() || password.isEmpty() || rePassword.isEmpty() || name.isEmpty() || lastName.isEmpty() || phoneNumber.isEmpty() || pesel.isEmpty() || salary.isEmpty()){
             newWorkerError.setText("Fields cannot be empty!");
+            return;
         }
 
         String url = "jdbc:mysql://localhost/persons";

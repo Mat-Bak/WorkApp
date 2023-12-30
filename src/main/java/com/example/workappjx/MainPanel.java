@@ -571,10 +571,12 @@ public class MainPanel implements Initializable{
                     throw new RuntimeException(e);
                 }
                 Stage Secondstage = new Stage();
+                Secondstage.initModality(Modality.APPLICATION_MODAL);
                 Secondstage.setResizable(false);
                 Secondstage.setScene(secondScene);
                 Secondstage.show();
                 WorkerPanel workerPanel = fxmlLoader.getController();
+                workerPanel.setMainPanel(this);
                 workerPanel.setPersonID(person.getId());
                 workerPanel.setDataInPanel(person.getFirstName(), person.getLastName(), person.getPesel(), person.getPhoneNumber(), person.getSalaryPerHour(), person.getAdmin());
 //                workersPanelBack();
