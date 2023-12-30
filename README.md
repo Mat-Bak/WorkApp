@@ -1,13 +1,13 @@
 <h1 align="center" style="font-size:40px" >WorkApp</h1>
 
-1. <span>[About the application](#About)</span>
-1. [System requirements](#requirements)
-1. [Instalation and lunching](#insalation)
-1. [File structure](#structure)
-1. [Application functionality](#functionality)
-1. <span>[Database integration](#database)</span>
-1. [Security](#security)
-1. [Conclusion](#conclusion)
+[## 1. About the application](#About)
+[## 2. System requirements](#requirements)
+[## 3. Instalation and lunching](#insalation)
+[## 4. File structure](#structure)
+[## 5. Application functionality](#functionality)
+[## 6. Database integration](#database)
+[## 7. Security](#security)
+[## 8. Conclusion](#conclusion)
 
 <hr>
 
