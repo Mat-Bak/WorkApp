@@ -1,42 +1,14 @@
-1. Ogólny opis
-	-krótki opis programu i jego celu
-2. Wymagania systemowe (java, mysql itp)
-3. instalacja
-4. Struktura projektu
-5. Uruchamianie aplikacji
-6. Funkcjonalność aplikacji 
-7. integracja z bazą danych (tabelki)
-8. Obsługa błędów 
-9. Testowanie
-10. Bezpieczeństwo
-
-
 <h1 align="center" style="font-size:40px" >WorkApp</h1>
 
-1. <span style="font-size:20px;"> [About the application](#About) </span>
-1. <span style="font-size:20px;">[System requirements](#requirements)</span>
-1. <span style="font-size:20px;">[Instalation and lunching](#insalation)</span>
-1. <span style="font-size:20px;">[File structure](#structure)</span>
-1. <span style="font-size:20px;">[Application functionality](#functionality)</span>
-1. <span style="font-size:20px;">[Database integration](#database)</span>
-1. <span style="font-size:20px;">[Security](#security)</span>
-1. <span style="font-size:20px;">[Conclusion](#conclusion)</span>
+1. <span>[About the application](#About)</span>
+1. [System requirements](#requirements)
+1. [Instalation and lunching](#insalation)
+1. [File structure](#structure)
+1. [Application functionality](#functionality)
+1. <span>[Database integration](#database)</span>
+1. [Security](#security)
+1. [Conclusion](#conclusion)
 
-
-<h2>
-<ol>
-<li>About the application</li>
-<li>System requirements</li>
-<li>Instalation and lunching</li>
-<li>File structure</li>
-<li>Application functionality</li>
-<li>Database integration</li>
-<li>Error handling</li>
-<li>Testing</li>
-<li>Security</li>
-
-</ol>
-</h2>
 <hr>
 
 <h2 id="About">1. About the application</h2>
