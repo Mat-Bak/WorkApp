@@ -2,7 +2,7 @@
 
 ## [1. About the application](#About)
 ## [2. System requirements](#requirements)
-##[3. Instalation and lunching](#insalation)
+## [3. Instalation and lunching](#insalation)
 ## [4. File structure](#structure)
 ## [5. Application functionality](#functionality)
 ## [6. Database integration](#database)
