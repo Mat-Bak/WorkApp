@@ -49,7 +49,7 @@ There are also two additional panels that can only be seen by a user with "admin
 <li>
 <p>
 Before start program is needed create database and import data to it. To do this open terminal and create database using this command <i style="background-color:#262626; padding:1px 10px">mysql -u 'user_name' -p -e "CREATE DATABASE persons;</i> 
-You will be prompted to enter the password. The password is: <i style="background-color:#262626; padding:1px 10px">1234qwer</i>.
+After entering this command, you will be prompted for the password associated with the specified user.
 <br>
 Where <i>user_name</i> is name of computer user and <i>persons</i> is name of database (It can be change becase the same name is implemented in code) 
 </li>
@@ -64,6 +64,22 @@ After that you have database with every important data to start using applicatio
 <br>
 <li>
 Now you can open IDE (for example IntelliJ), open project, comile and run it. 
+<br>
+</li>
+<li>
+In the database, two accounts have been created: an administrator account with elevated privileges and an account without these permissions. Below is login and password that can be used to log in to each respective account.
+<br>
+<br>
+<h3><b> Admin account: </b></h3>
+<b>Login:</b> <i>admin</i>
+<br>
+<b>Password:</b> <i>admin</i>
+<br>
+<br>
+<h3><b> User account: </b></h3>
+<b>Login:</b> <i>user</i>
+<br>
+<b>Password:</b> <i>user</i>
 </li>
 </ul>
 </p>
