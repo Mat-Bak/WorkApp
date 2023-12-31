@@ -1,5 +1,0 @@
-Another address | May
-ID | DATE | WORKER| WORK HOURS
-1 | 2023-05-20 | Admin Root | 8h 3Min
-2 | 2023-05-05 | user user | 8h 5Min
-3 | 2023-05-09 | Admin Root | 7h 1Min

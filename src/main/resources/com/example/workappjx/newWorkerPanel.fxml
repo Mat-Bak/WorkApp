@@ -63,7 +63,7 @@
             <Font size="16.0" />
          </font>
       </Text>
-      <Button fx:id="confirmButton" layoutX="183.0" layoutY="463.0" mnemonicParsing="false" onAction="#createNewWorker" prefHeight="35.0" prefWidth="97.0" text="Confimr">
+      <Button fx:id="confirmButton" layoutX="183.0" layoutY="463.0" mnemonicParsing="false" onAction="#createNewWorker" prefHeight="35.0" prefWidth="97.0" text="Confirm">
          <font>
             <Font size="16.0" />
          </font>

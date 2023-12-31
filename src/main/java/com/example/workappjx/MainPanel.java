@@ -205,7 +205,7 @@ public class MainPanel implements Initializable{
 
     //show work panel
     public void showWorkPanel() {
-        workTimeDataPanel.getChildren().clear();
+        showWorkTimeData();
         dateTime.setValue(LocalDate.now());
         mainPanel.setVisible(false);
         workPanel.setVisible(true);
@@ -706,14 +706,16 @@ public class MainPanel implements Initializable{
                             LocalTime startTime = result.getTime("start_time").toLocalTime();
                             LocalTime endTime = result.getTime("end_time").toLocalTime();
                             Duration workTime = Duration.between(startTime,  endTime);
-                            int workTimeToInt = workTime.toMinutesPart();
+
                             String address = result.getString("address");
                             long hours = workTime.toHours();
                             long minuts = workTime.toMinutesPart()%60;
+                            int workTimeToInt = (int)(hours*60 + minuts);
                             String comment = result.getString("comment");
 
                             printWriter.println(idList + " | " + workDate + " | " + address + " | "+ person.getFirstName() + " " + person.getLastName() + " | " + hours + "h " + minuts+"Min" +" | "+ comment);
                             idList++;
+
                             for(int i = 0; i < getAddressList.size(); ++i){
                                 if(getAddressList.get(i).equals(address)){
                                     getWorkHour.set(i, getWorkHour.get(i) + workTimeToInt);
@@ -728,7 +730,7 @@ public class MainPanel implements Initializable{
                             if(getWorkHour.get(j) == 0){
                                 continue;
                             }
-                            printWriter.println(idWorkHour + " | " + getAddressList.get(j) + " | " + getWorkHour.get(j));
+                            printWriter.println(idWorkHour + " | " + getAddressList.get(j) + " | " + getWorkHour.get(j)/60 + "h " + getWorkHour.get(j)%60 + "min");
                             idWorkHour++;
                         }
 
@@ -1061,6 +1063,7 @@ public class MainPanel implements Initializable{
                     } catch (IOException | SQLException ex) {
                         throw new RuntimeException(ex);
                     }
+                    popupWindow.close();
                 });
             });
             addressVBox.getChildren().addAll(separator,pane);

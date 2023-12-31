@@ -169,17 +169,18 @@
             <Button fx:id="SalaryPanelBack" layoutX="159.0" layoutY="335.0" mnemonicParsing="false" onAction="#salaryPanelBack" prefHeight="40.0" prefWidth="139.0" text="Back" />
          </children>
       </Pane>
-      <Pane fx:id="settingsPanel" disable="true" layoutX="4.0" layoutY="8.0" prefHeight="413.0" prefWidth="456.0" visible="false">
+      <Pane fx:id="settingsPanel" layoutX="4.0" layoutY="8.0" prefHeight="413.0" prefWidth="456.0" visible="false">
          <children>
-            <Button fx:id="SalaryPanelBack1" layoutX="249.0" layoutY="335.0" mnemonicParsing="false" onAction="#settingPanelBack" prefHeight="40.0" prefWidth="139.0" text="Back" />
+            <PasswordField fx:id="oldPass" layoutX="69.0" layoutY="55.0" prefHeight="48.0" prefWidth="318.0" />
+            <PasswordField fx:id="newPass" layoutX="69.0" layoutY="157.0" prefHeight="48.0" prefWidth="318.0" />
+            <PasswordField fx:id="reNewPass" layoutX="69.0" layoutY="250.0" prefHeight="48.0" prefWidth="318.0" />
+            <Button fx:id="SalaryPanelBack1" layoutX="249.0" layoutY="328.0" mnemonicParsing="false" onAction="#settingPanelBack" prefHeight="40.0" prefWidth="139.0" text="Back" />
             <Text layoutX="138.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Old Password">
                <font>
                   <Font size="30.0" />
                </font>
             </Text>
-            <PasswordField fx:id="oldPass" layoutX="69.0" layoutY="55.0" prefHeight="48.0" prefWidth="318.0" />
-            <PasswordField fx:id="newPass" layoutX="69.0" layoutY="157.0" prefHeight="48.0" prefWidth="318.0" />
-            <Button fx:id="savePass" layoutX="69.0" layoutY="335.0" mnemonicParsing="false" onAction="#changePass" prefHeight="40.0" prefWidth="139.0" text="Save" />
+            <Button fx:id="savePass" layoutX="69.0" layoutY="329.0" mnemonicParsing="false" onAction="#changePass" prefHeight="40.0" prefWidth="139.0" text="Save" />
             <Text layoutX="121.0" layoutY="241.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Repeat Password">
                <font>
                   <Font size="30.0" />
@@ -191,7 +192,6 @@
                </font>
             </Text>
             <Text fx:id="passwordError" layoutX="-2.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" textAlignment="CENTER" wrappingWidth="460.0" />
-            <PasswordField fx:id="reNewPass" layoutX="69.0" layoutY="250.0" prefHeight="48.0" prefWidth="318.0" />
          </children>
       </Pane>
       <Pane fx:id="workersPane" prefHeight="421.0" prefWidth="460.0" visible="false">

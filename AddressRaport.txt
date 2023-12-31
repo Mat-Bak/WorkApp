@@ -1,12 +1,8 @@
-Kolejny adres | September
+Test address | December
 ID | DATE | WORKER| WORK HOURS
-1 | 2023-09-16 | Admin Root | 8h 12Min
-2 | 2023-09-22 | Admin Root | 2h 9Min
-3 | 2023-09-23 | Admin Root | 9h 54Min
-4 | 2023-09-23 | Admin Root | 1h 0Min
-5 | 2023-09-29 | Admin Root | 5h 57Min
-6 | 2023-09-12 | Admin Root | 1h 3Min
-7 | 2023-09-29 | Admin Root | 5h 59Min
-8 | 2023-09-30 | Admin Root | 11h 7Min
+1 | 2023-12-31 | User Employee | 9h 0Min
+2 | 2023-12-31 | Admin Root | 7h 59Min
+3 | 2023-12-31 | Admin Root | 10h 6Min
+4 | 2023-12-31 | Admin Root | 8h 4Min
 ---------------------------------- WORK HOURS SUM ----------------------------------
-Kolejny adres: 45h 21min
+Test address: 35h 9min

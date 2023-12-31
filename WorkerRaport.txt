@@ -1,15 +1,11 @@
 Admin Root | December
 ID | DATE | Address | Worker | WORK HOURS | Comment
-1 | 2023-12-21 | test | Admin Root | 4h 59Min | test comment
-2 | 2023-12-28 | Another address | Admin Root | 10h 2Min | another address comment
-3 | 2023-12-28 | test | Admin Root | 7h 7Min | test comment
-4 | 2023-12-16 | test | Admin Root | 18h 57Min | test comment
-5 | 2023-12-11 | test | Admin Root | 6h 4Min | test comment
+1 | 2023-12-31 | Test address | Admin Root | 7h 59Min | fasfsafa
+2 | 2023-12-31 | Test address | Admin Root | 10h 6Min | comment
+3 | 2023-12-31 | Another address | Admin Root | 11h 1Min | comment
+4 | 2023-12-31 | Test address | Admin Root | 8h 4Min | test comm
 -------------------------------------------- 
  Work Hours Address Summary 
  --------------------------------------------
-1 | test | 127
-2 | Another address | 2
-
-
-
+1 | Test address | 26h 9min
+2 | Another address | 11h 1min

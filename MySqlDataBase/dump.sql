@@ -38,7 +38,7 @@ CREATE TABLE `address` (
 
 LOCK TABLES `address` WRITE;
 /*!40000 ALTER TABLE `address` DISABLE KEYS */;
-INSERT INTO `address` VALUES (3,'Kolejny adres',1),(6,'test',1),(7,'nowy adres',0),(9,'testowy nowy adress',0);
+INSERT INTO `address` VALUES (1,'Test address',1),(2,'Another address',1),(3,'Banana street',0);
 /*!40000 ALTER TABLE `address` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -71,7 +71,7 @@ CREATE TABLE `workers` (
 
 LOCK TABLES `workers` WRITE;
 /*!40000 ALTER TABLE `workers` DISABLE KEYS */;
-INSERT INTO `workers` VALUES (1,'admin','098f6bcd4621d373cade4e832627b4f6','Admin','Root',999888666,11122233345,195,1);
+INSERT INTO `workers` VALUES (1,'admin','f6fdffe48c908deb0f4c3bd36c032e72','Admin','Root',123456789,12345678910,195,1),(2,'user','5cc32e366c87c4cb49e4309b75f57d64','User','Employee',987654321,01987654321,120,0);
 /*!40000 ALTER TABLE `workers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -102,7 +102,7 @@ CREATE TABLE `workhours` (
 
 LOCK TABLES `workhours` WRITE;
 /*!40000 ALTER TABLE `workhours` DISABLE KEYS */;
-INSERT INTO `workhours` VALUES (30,'Kolejny adres','2023-05-20','02:10:00','10:13:00','tdhdfghdfg',1);
+INSERT INTO `workhours` VALUES (1,'Test address','2023-05-20','02:10:00','10:13:00','This is comment',1);
 /*!40000 ALTER TABLE `workhours` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

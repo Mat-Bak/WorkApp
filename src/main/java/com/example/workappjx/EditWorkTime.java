@@ -9,6 +9,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -47,6 +48,9 @@ public class EditWorkTime implements Initializable {
 
     public MainPanel mainPanel;
 
+    @FXML
+    public Text workTimeError;
+
     @Override
     public void initialize(URL arg0, ResourceBundle arg1){
         for(int i = 0; i < 13; ++i){
@@ -80,7 +84,7 @@ public class EditWorkTime implements Initializable {
 
         List<String> addressList = new ArrayList<>();
 
-        String query = "SELECT * FROM Persons.address;";
+        String query = "SELECT * FROM Persons.address WHERE active = 1";
 
         try {
             // Execute query and get result
@@ -104,37 +108,51 @@ public class EditWorkTime implements Initializable {
 
     }
 
-    public void addNewWorkTime(){
+    public boolean addNewWorkTime(){
         int startH = (int) startHourBox.getValue();
         int startM = (int) startMinutsBox.getValue();
         int endH = (int) endHourBox.getValue();
         int endM = (int) endMinutsBox.getValue();
+        boolean dataCorrect = true;
 
-        //  temporarily set address
-        String address = (String)addressComboBox.getValue();
-        // get comment from panel
-        String comment = commentField.getText();
-        // get selected date
-        LocalDate localDate = MainPanel.getLocalDate;
+        if(startH > endH || (startH == endH && startM >= endM) || (startH == endH && startM == endM)){
+            workTimeError.setText("Wrong work time!");
+            workTimeError.setFill(Color.RED);
+            dataCorrect = false;
+        }else if(addressComboBox.getValue()==null){
+            workTimeError.setText("Select address!");
+            workTimeError.setFill(Color.RED);
+            dataCorrect = false;
+        }
 
-        // get user id
-        Person person = LoginPanelController.getPersonData();
-        int user_id = person.getId();
+        if(dataCorrect){
+            //  temporarily set address
+            String address = (String)addressComboBox.getValue();
+            // get comment from panel
+            String comment = commentField.getText();
+            // get selected date
+            LocalDate localDate = MainPanel.getLocalDate;
 
-        // transform time from panel to LocalTime
-        LocalTime startWork = LocalTime.of(startH, startM);
-        LocalTime endWork = LocalTime.of(endH, endM);
+            // get user id
+            Person person = LoginPanelController.getPersonData();
+            int user_id = person.getId();
 
-        // create new WorkTime from data and save it to database
-        WorkTime workTime = new WorkTime(address,localDate,startWork, endWork,comment,user_id);
-        SaveWorkTimeData saveTimeWorkData = new SaveWorkTimeData();
-        saveTimeWorkData.connectWorkTimeDatabase(workTime);
-        mainPanel.showWorkTimeData();
+            // transform time from panel to LocalTime
+            LocalTime startWork = LocalTime.of(startH, startM);
+            LocalTime endWork = LocalTime.of(endH, endM);
 
-        // close panel after add new data to database
-        Stage stage = (Stage) deleteData.getScene().getWindow();
+            // create new WorkTime from data and save it to database
+            WorkTime workTime = new WorkTime(address,localDate,startWork, endWork,comment,user_id);
+            SaveWorkTimeData saveTimeWorkData = new SaveWorkTimeData();
+            saveTimeWorkData.connectWorkTimeDatabase(workTime);
+            mainPanel.showWorkTimeData();
 
-        stage.close();
+            // close panel after add new data to database
+            Stage stage = (Stage) deleteData.getScene().getWindow();
+
+            stage.close();
+        }
+        return dataCorrect;
     }
 
     public void deleteWorkTime(){
@@ -182,12 +200,14 @@ public class EditWorkTime implements Initializable {
     }
 
     public void editWorkTimeData(){
-        addNewWorkTime();
-        SaveWorkTimeData saveWorkTimeData = new SaveWorkTimeData();
-        int id = MainPanel.workTimeID;
-        saveWorkTimeData.removeDataFromDataBase(id);
-        mainPanel.showWorkTimeData();
-        Stage stage = (Stage) saveData.getScene().getWindow();
-        stage.close();
+        if(addNewWorkTime()){
+            SaveWorkTimeData saveWorkTimeData = new SaveWorkTimeData();
+            int id = MainPanel.workTimeID;
+            saveWorkTimeData.removeDataFromDataBase(id);
+            mainPanel.showWorkTimeData();
+            Stage stage = (Stage) saveData.getScene().getWindow();
+            stage.close();
+        }
+
     }
 }

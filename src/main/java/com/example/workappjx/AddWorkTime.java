@@ -158,7 +158,7 @@ public class AddWorkTime implements Initializable {
         int endM = (int) endMinutsBox.getValue();
         boolean dataCorrect = true;
 
-        if(startH > endH || (startH == endH && startM >= endM)){
+        if(startH > endH || (startH == endH && startM >= endM) || (startH == endH && startM == endM)){
             workTimeError.setText("Wrong work time!");
             workTimeError.setFill(Color.RED);
             dataCorrect = false;
@@ -169,6 +169,7 @@ public class AddWorkTime implements Initializable {
         }
 
         if (dataCorrect){
+            System.out.println("create work time!");
             //  temporarily set address
             String address = (String)addressComboBox.getValue();
             // get comment from panel
