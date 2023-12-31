@@ -1,19 +1,10 @@
 package com.example.workappjx;
 
 import javafx.scene.text.Text;
-
 import java.math.BigInteger;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-
-/*
-Methods:
-    * List<Person> dbConnection() - Connect to employers database and get every person data from this base
-
-The class contains only one method that allows you to connect to the database where the employer's data is located
-
- */
 
 public class LoadPersonData {
 

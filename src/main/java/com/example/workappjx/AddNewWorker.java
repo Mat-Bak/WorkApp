@@ -1,15 +1,11 @@
 package com.example.workappjx;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.util.converter.IntegerStringConverter;
-
 import java.net.URL;
 import java.sql.*;
 import java.util.ResourceBundle;
@@ -84,6 +80,7 @@ public class AddNewWorker implements Initializable {
     }
 
 
+    // Create new user and add it to the database
     public void createNewWorker() throws SQLException {
         String login = loginField.getText();
         String password = passwordField.getText();
@@ -119,6 +116,7 @@ public class AddNewWorker implements Initializable {
         String username = "root";
         String dbPassword = "1234qwer";
         Connection connection = DriverManager.getConnection(url, username, dbPassword);
+        // Chceck if user with this login exist. If exist then don't create new user
         try{
             String sql = "SELECT * FROM workers WHERE login = " + login + ";";
             PreparedStatement statement = connection.prepareStatement(sql);
@@ -132,6 +130,7 @@ public class AddNewWorker implements Initializable {
         } catch (SQLException ignored) {
         }
 
+        // Check if user with this pesel exist. If exist then don't create new user
         try{
             String sql = "SELECT * FROM workers WHERE pesel = " + pesel + ";";
             PreparedStatement statement = connection.prepareStatement(sql);

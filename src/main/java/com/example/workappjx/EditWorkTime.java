@@ -75,9 +75,9 @@ public class EditWorkTime implements Initializable {
         endMinutsBox.setValue(endM);
         addressComboBox.setValue(address);
         commentField.setText(comm);
-
     }
 
+    // Get every address from database
     public List<String> addressList(){
         DatabaseConnector databaseConnector = new DatabaseConnector();
         String address;
@@ -108,6 +108,7 @@ public class EditWorkTime implements Initializable {
 
     }
 
+    // Add new working time if every data are correct
     public boolean addNewWorkTime(){
         int startH = (int) startHourBox.getValue();
         int startM = (int) startMinutsBox.getValue();
@@ -155,6 +156,7 @@ public class EditWorkTime implements Initializable {
         return dataCorrect;
     }
 
+    // Delete working data from database
     public void deleteWorkTime(){
         Stage popupWindow = new Stage();
         popupWindow.setResizable(false);
@@ -199,6 +201,7 @@ public class EditWorkTime implements Initializable {
         this.mainPanel = mainPanel;
     }
 
+    // Delete the selected working time and add a new one with changed data
     public void editWorkTimeData(){
         if(addNewWorkTime()){
             SaveWorkTimeData saveWorkTimeData = new SaveWorkTimeData();

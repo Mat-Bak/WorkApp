@@ -2,17 +2,6 @@ package com.example.workappjx;
 
 import java.sql.*;
 
-/*
-
-Methids:
-    * Constructor DatabaseConnector() - this constructor allow to connect to database
-    * ResultSet executeQuery(String query) - allow to execute query and get result of this query
-    * Void close() - just close statement and connection
-
-A simple class that is a connector to the employer database
-
- */
-
 public class DatabaseConnector {
     private Connection connection;
     private Statement statement;

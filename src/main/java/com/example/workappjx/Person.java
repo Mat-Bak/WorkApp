@@ -6,11 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-
-The class is made to create new person. In this class exist getters and setters for every data.
-
- */
 
 public class Person {
     int id;

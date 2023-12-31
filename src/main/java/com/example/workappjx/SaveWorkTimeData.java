@@ -1,14 +1,6 @@
 package com.example.workappjx;
 
 import java.sql.*;
-import java.time.LocalDate;
-
-/*
-
-Methods:
-    * void connectWorkTimeDatabase(WorkTime) - the method is to connect with work time database. The method get one WorkTime argument which are used to get data from this class.
-
- */
 
 public class SaveWorkTimeData {
 
@@ -37,6 +29,7 @@ public class SaveWorkTimeData {
         }
     }
 
+    // Remove workHours from database where id is equal this id;
     public void removeDataFromDataBase(int id){
         String url = "jdbc:mysql://localhost/persons";
         String username = "root";

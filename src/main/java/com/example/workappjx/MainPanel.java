@@ -19,7 +19,6 @@ import javafx.scene.text.TextAlignment;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,26 +27,7 @@ import java.sql.*;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.chrono.HijrahChronology;
 import java.util.*;
-
-/*
-
-Methods:
-    * void mainPanel() - create main menu panel with general options
-    * void showPersonInfo() - set person info panel visible and hide main menu panel
-    * void personPanelBack() - hide person info panel and show main menu panel
-    * void showWorkPanel() - show panel with calendar and work data, hide main menu panel
-    * void workPanelBack() - hide work data panel and show main menu panel
-    * void setPersonData() - set user data to info panel
-    * void getDataTime() - get selected data time from calendar
-    * void showWorkTimeData() - show every work data for selected data time and selected user
-    * void createWorkPanel() - create new work panel where user can add new work time data
-
-The class manages main menu where user can switch between: main panel, user info panel, work time panel (in the future will be more panels).
-
- */
-
 
 public class MainPanel implements Initializable{
     @FXML
@@ -185,11 +165,6 @@ public class MainPanel implements Initializable{
     }
 
 
-    public void hideAdminTest(){
-        testAdmin.setVisible(false);
-    }
-
-    // Show panel with person info
     public void showPersonInfo() {
         mainPanel.setVisible(false);
         personInfoPanel.setVisible(true);
@@ -197,13 +172,13 @@ public class MainPanel implements Initializable{
 
     }
 
-    // back to main panel from person info panel
+
     public void personPanelBack(){
         mainPanel.setVisible(true);
         personInfoPanel.setVisible(false);
     }
 
-    //show work panel
+
     public void showWorkPanel() {
         showWorkTimeData();
         dateTime.setValue(LocalDate.now());
@@ -223,14 +198,12 @@ public class MainPanel implements Initializable{
         workersPane.setVisible(false);
     }
 
-    // back to main panel from work panel
     public void workPanelBack(){
         mainPanel.setVisible(true);
         workPanel.setVisible(false);
     }
 
     public void showSalaryPanel(){
-
         monthList.setValue(null);
         SalaryHours.setText("Hours: ");
         SalaryBrutto.setText("Brutto: ");
@@ -267,7 +240,6 @@ public class MainPanel implements Initializable{
         addressPane.setVisible(false);
     }
 
-    // set data in person info panel
     public void setPersonData() {
         Person person = LoginPanelController.getPersonData();
          firstNameLabel.setText("First Name: " + person.getFirstName());
@@ -275,8 +247,6 @@ public class MainPanel implements Initializable{
          phoneNumberLabel.setText("Phone Number: " + person.getPhoneNumber());
          peselLabel.setText("Pesel: " + person.getPesel());
         salaryLabel.setText("Salary per hour: " + person.getSalaryPerHour());
-
-
     }
 
     public LocalDate getDataTime(){
@@ -284,6 +254,7 @@ public class MainPanel implements Initializable{
         return getLocalDate;
     }
 
+    // Show work times data in panel from selected date in datePicker for logged user
     public void showWorkTimeData(){
         Person person = LoginPanelController.getPersonData();
         LocalDate localDate = getDataTime();
@@ -344,6 +315,7 @@ public class MainPanel implements Initializable{
                 pane.setCursor(Cursor.DEFAULT);
             });
 
+            // open edit work time when clicked on work time panel
             pane.setOnMouseClicked(event -> {
                 FXMLLoader fxmlLoader = new FXMLLoader();
                 fxmlLoader.setLocation(getClass().getResource("editWorkTime.fxml"));
@@ -377,6 +349,7 @@ public class MainPanel implements Initializable{
 
         }
     }
+
 
     @FXML
     public void createWorkPanel() {
@@ -427,6 +400,7 @@ public class MainPanel implements Initializable{
         }
     }
 
+    // Get summary of worked hours and salary brutto in selected month
     public void summaryOfTheMonth(){
         int month = 0;
         Person person = LoginPanelController.getPersonData();
@@ -483,6 +457,7 @@ public class MainPanel implements Initializable{
 
     }
 
+    // get workers list from database and add it to the panel
     public void showWorkersList(){
         workersVBox.getChildren().clear();
         Person listOfPerson = new Person();
@@ -560,6 +535,7 @@ public class MainPanel implements Initializable{
                 pane.setCursor(Cursor.DEFAULT);
             });
 
+            // Open edit user panel when click on user panel on the list
             namePane.setOnMouseClicked(event -> {
 
                 FXMLLoader fxmlLoader = new FXMLLoader();
@@ -582,6 +558,7 @@ public class MainPanel implements Initializable{
 //                workersPanelBack();
             });
 
+            // delete selected user on click
             deleteWorker.setOnMouseClicked(event -> {
                 Stage popupWindow = new Stage();
                 popupWindow.setResizable(false);
@@ -642,7 +619,7 @@ public class MainPanel implements Initializable{
 
             });
 
-
+            // get report from selected user in selected month and save it to the WorkerRaport.txt
             moreOptions.setOnMouseClicked(event -> {
                 Stage popupWindow = new Stage();
                 popupWindow.setResizable(false);
@@ -754,6 +731,7 @@ public class MainPanel implements Initializable{
 
     }
 
+
     public void showAddNewWorkerPanel() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("newWorkerPanel.fxml"));
@@ -768,6 +746,7 @@ public class MainPanel implements Initializable{
         stage.show();
     }
 
+    // get list of address from database and add them to the panel
     public void showAddressList(){
         addressVBox.getChildren().clear();
         DatabaseConnector connector = new DatabaseConnector();
@@ -883,6 +862,7 @@ public class MainPanel implements Initializable{
                 });
             }
 
+            // change address between enable and disable
             activeAddress.setOnMouseClicked(e -> {
 
                 String url = "jdbc:mysql://localhost/persons";
@@ -919,6 +899,7 @@ public class MainPanel implements Initializable{
 
             });
 
+            // remove address from database
             deleteAddress.setOnMouseClicked(event -> {
                 Stage popupWindow = new Stage();
                 popupWindow.setResizable(false);
@@ -972,6 +953,7 @@ public class MainPanel implements Initializable{
 
             });
 
+            // get report from selected addres in selected month and save it to the AddressRaport.txt
             moreOptions.setOnMouseClicked(event -> {
                 String selectedAddress = addressName.getText();
 
@@ -1070,6 +1052,7 @@ public class MainPanel implements Initializable{
         }
     }
 
+    // Add new addres in database
     public void addNewAddress(){
         Stage popupWindow = new Stage();
         popupWindow.setResizable(false);

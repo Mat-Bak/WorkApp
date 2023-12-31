@@ -9,8 +9,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
-import java.io.IOException;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,16 +17,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
-/*
-Methods:
-    * Void initialize() - Initialize time numbers in panel where user can add new work time
-    * Void addWorkTimeWindow() - Create panel where user can add work time
-    * Void getWorkTime() - Get data from panel and add it to database
-
-Main functionality of this class is created new panel where user can set work time (start and end) on selected date and add this data to database
-
- */
 
 public class AddWorkTime implements Initializable {
 
@@ -83,6 +71,8 @@ public class AddWorkTime implements Initializable {
         datePicker = MainPanel.getLocalDate;
         firstWindowVBox = MainPanel.mainPanelVBox;
     }
+
+    // Get list with acive address from database
     public List<String> ActiveAddressList(){
         DatabaseConnector databaseConnector = new DatabaseConnector();
         String address;
@@ -113,6 +103,7 @@ public class AddWorkTime implements Initializable {
 
     }
 
+    // Get every address from database
     public ArrayList<String> addressList(){
         DatabaseConnector databaseConnector = new DatabaseConnector();
         String address;
@@ -148,6 +139,7 @@ public class AddWorkTime implements Initializable {
         this.mainPanel = mainPanel;
     }
 
+    // Add new working time when submit button is clicked and if every data are correct
     @FXML
     private void submitButton() {
 

@@ -7,14 +7,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
-
-Methods:
-    * List<WorkTime> dbConnection(int userID) - get work time of specific user
-
-This class is made to connect with work time database and get data for specific user
-
- */
 
 public class LoadWorkTimeData {
 

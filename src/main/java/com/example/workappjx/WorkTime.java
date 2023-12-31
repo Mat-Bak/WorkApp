@@ -4,13 +4,6 @@ import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-/*
-
-The class allow to create new object with work time data.
-The class contain getters and setters for every data. It's also contain getLocalDate() method that return LocalTime from mainPanel and getHoursWork() that return Duration time between start and end work time
-
- */
-
 public class WorkTime {
 
     private int id;

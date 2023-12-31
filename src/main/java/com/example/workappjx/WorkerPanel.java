@@ -83,6 +83,7 @@ public class WorkerPanel implements Initializable {
         personId = id;
     }
 
+    // update user data in database
     public void updateWorkerData() throws SQLException {
         String firstName = nameField.getText();
         String lastName = surnameField.getText();

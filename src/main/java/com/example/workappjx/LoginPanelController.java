@@ -7,23 +7,10 @@ import javafx.scene.control.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.sql.SQLException;
-
-/*
-
-Methods:
-    * String getMd5(String source) - (Message Digest Algorithm 5) encryption method String to bytes. It is helpful in encrypting passwords
-    * String getString( byte[] bytes ) - convert byte array to String
-    * Person getPersonData() - just return person data
-    * void logIn() - get data from the login panel and check whether these data exist in the employee database. If it exists and everything is OK, log into the system
-
-The main task of this class is logging into the system using the data from the fields of the login panel. It also uses MDA5 to encrypt the password, making it harder to break
-
- */
 
 public class LoginPanelController {
     @FXML
@@ -39,8 +26,8 @@ public class LoginPanelController {
 
 
     public static Person personData;
-//    public int user_id;
 
+    // Change string to MD5 password
     public static String getMd5( String source ) {
         try {
             MessageDigest md = MessageDigest.getInstance( "MD5" );
@@ -52,6 +39,7 @@ public class LoginPanelController {
         }
     }
 
+    // Change MD5 password to String
     private static String getString( byte[] bytes ) {
         StringBuilder sb = new StringBuilder();
         for (byte b : bytes) {
